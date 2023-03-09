@@ -1,0 +1,11 @@
+
+.Dropdown-control{
+  border:none!important;
+  margin-left:0;
+  padding-left:0;
+}
+.Dropdown-placeholder{
+    text-align:left;
+    color:theme('colors.green.800');
+    font-weight:bold;
+}
