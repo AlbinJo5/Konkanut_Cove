@@ -1,5 +1,5 @@
 import { convertToPixels } from "../utils/convert-pixels";
-import { createRef, useState, useEffect, useRef } from "react";
+import { createRef, useState, useEffect, useRef, useCallback } from "react";
 
 export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
     
@@ -8,9 +8,10 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
     const [index, setIndex] = useState(0);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [scrollDirection, setScrollDirection] = useState(null);
+    const heightRef = useRef(height);
 
-    const handleScroll  = ()=>{
-        height=convertToPixels(height)
+    const handleScroll  = useCallback(()=>{
+        const height=convertToPixels(heightRef.current)
         console.log(refs,index)
         const ref = refs[index];
         if (ref.current===null)return;
@@ -35,12 +36,12 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
             setIndex(index-1);
         }
 
-    }
+    },[index,prevScrollPos, scrollDirection,n,refs])
 
     useEffect(()=>{
         window.addEventListener('scroll',handleScroll);
         return ()=>window.removeEventListener('scroll',handleScroll);
-    },[index,prevScrollPos, scrollDirection])
+    },[handleScroll])
 
     return(
         <div className="flex flex-col justify-center h-full">

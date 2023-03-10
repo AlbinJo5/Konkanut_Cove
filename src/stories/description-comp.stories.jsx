@@ -1,6 +1,7 @@
 import React from 'react';
 import StoryWrapper from './components/story_wrapper';
 import DescriptionComp from '../components/description-comp';
+
 export default {
   title: 'Example/DescriptionComp',
   component: DescriptionComp,

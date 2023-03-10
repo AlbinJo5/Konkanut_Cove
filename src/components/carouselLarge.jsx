@@ -71,7 +71,7 @@ const CarouselLarge = ({ data,isLeft=false }) => {
 
         <div className={"absolute w-full sm:max-w-[60%] sm:bottom-[15%] z-0 "+(isLeft?"sm:left-[30%]":"sm:left-[10%]")}>
           <div className="flex flex-col max-sm:p-3">
-             <div className="text-4xl text-bold text-white mb-5 ">{data[currentSlide].title}</div>
+             <div className="text-4xl font-bold text-white mb-5 ">{data[currentSlide].title}</div>
              <div className={"text-sm text-white mb-4 break-all "+(isLeft?"sm:max-w-[50%]":"sm:max-w-[70%]")}>{data[currentSlide].desc}</div>
               <div className="flex w-min">
                   {data.map((element, index) => {

@@ -1,6 +1,7 @@
 import MainHeader, { MainText, MainTitle } from '../components/main-header';
 import React from 'react';
 import StoryWrapper from './components/story_wrapper';
+
 export default {
   title: 'Example/MainHeader',
   component: MainHeader,

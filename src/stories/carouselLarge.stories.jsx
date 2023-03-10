@@ -46,7 +46,7 @@ const CarouselData = [
 ];
 
 export default {
-  desc: 'Example/CarouselLarge',
+  desc: 'Page-2/CarouselLarge',
   component: CarouselLarge,
   argTypes: {
   },

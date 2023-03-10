@@ -14,26 +14,20 @@ module.exports = {
     "builder": "@storybook/builder-webpack5"
   },
   "webpackFinal": async (config) => {
+    config.resolve.modules.push(path.resolve(__dirname, '../public'));
     config.module.rules.push({
-      test: /\.svg$/,
+      test: /\.(png|jpe?g|gif|svg)$/i,
       use: [
         {
-          loader: '@svgr/webpack',
+          loader: 'file-loader',
           options: {
-            // svgoConfig: {
-            //   plugins: [
-            //     // List of SVGO plugins to include
-            //     // Example plugin that removes the viewbox attribute
-            //     { removeViewBox: false },
-            //   ],
-            // },
+            publicPath: '/',
+            name: '[name].[ext]',
+            outputPath: 'images/',
           },
         },
-        {
-          loader: 'svg-inline-loader',
-        },
       ],
-      include: path.resolve(__dirname, '../'),
+      include: path.resolve(__dirname, '../public'), // Add the public folder
     });
     config.module.rules.push({
       test: /\.css$/i,
