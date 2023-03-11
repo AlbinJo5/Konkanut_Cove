@@ -5,4 +5,23 @@
   .apply-gradient{
     background: linear-gradient(180deg, #0E5347 -151.57%, rgba(255, 255, 255, 0.5) 144.56%);
   }
+
+.option-enter {
+  transform: translateX(100%);
+}
+
+.option-enter-active {
+  transform: translateX(0%);
+  transition: transform 500ms;
+}
+
+.option-exit {
+  transform: translateX(-100%);
+}
+
+.option-exit-active {
+  transform: translateX(0%);
+  transition: transform 500ms;
+}
+
 }

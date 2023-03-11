@@ -1,6 +1,8 @@
 export default function Page3Panel({title,includedList,title2,desc}){
     return(
-        <div className="flex flex-col bg-[url('/assets/images/back3.png')] bg-repeat">
+        <div className="flex flex-col bg-repeat" style={{
+            background:"url('/assets/images/back-3.png')"
+        }}>
             <div className="flex w-[75%] sm:w-[60%]">
                 <div className="w-full bg-green-800 text-white text-lg font-bold flex justify-center items-center">{title}</div>
                 <div className="w-0 h-0 

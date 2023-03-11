@@ -8,7 +8,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-
+    
       fontFamily: {
         sans: ['Lora', 'Helvetica', 'Arial', 'sans-serif'],
         sansation: ['Sansation', 'Helvetica', 'Arial', 'sans-serif'],
