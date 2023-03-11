@@ -54,4 +54,5 @@ module.exports = {
     require('tailwindcss-ripple')(),
     require("flowbite/plugin")
   ],
+  
 }
