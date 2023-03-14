@@ -33,7 +33,7 @@ export const Cancellations = ({until,after,refund1="100%",refund2="No"})=>{
 
   return(
     <div className="flex flex-col">
-      <div className="flex">
+      <div className="flex mb-2">
         <div className="bg-green-400 w-2 h-full mr-4"></div>
         <div className="flex flex-col">
           <div className="text-md">Until {untilDate}</div>
@@ -53,9 +53,9 @@ export const Cancellations = ({until,after,refund1="100%",refund2="No"})=>{
 
 const BedTypePanel = ({bedTypes})=>{
   return(
-    <div className="flex w-full rounded-md mt-4 overflow-hidden border-[1px] border-gray-400">
+    <div className="flex w-full rounded-md mt-4 overflow-hidden border-[1px] border-gray-200 box-border">
       {bedTypes.slice(0,3).map(({image,type,view,ViewIcon,beds,BedIcon,desc},ind)=>
-        <div className="flex flex-col p-2" key={ind}>
+        <div className="flex flex-col p-2 border-[1px] border-gray-200" key={ind}>
           <Image src={image} width="414" height="200" alt=""/>
           <p className="text-md font-bold py-1">{type}</p>
           <div className="flex mb-2">
@@ -75,6 +75,15 @@ export default function Page4Panel1 ({images,hotelName,address,until,after,impor
     if (images.length<7)throw Error("Not enough images!")
   return(
       <div className="flex flex-col border-[1px] border-gray-200 shadow-2xl py-5 rounded-lg px-10">
+
+          <div className="flex">
+            <div className="flex flex-col">
+              <p className="text-sm text-gray-500">CHECK-IN</p>
+              <div className="bg-green-500 text-green-800 px-1 py-3"></div>
+            </div>
+            <div className="flex flex-col"></div>
+          </div>
+
           <div className="grid grid-rows-2 grid-flow-col gap-4 w-full h-[250px]">
             <div className="row-span-2 col-span-3 relative"><Image src={images[0].image} alt="grid pictures" fill className="rounded-md"/></div>
             {images.slice(1,images.length).map(({image},index)=>
