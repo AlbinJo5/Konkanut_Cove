@@ -1,0 +1,8 @@
+diff a/tailwind.config.js b/tailwind.config.js	(rejected hunks)
+@@ -54,4 +54,5 @@
+     require('tailwindcss-ripple')(),
+     require("flowbite/plugin")
+   ],
++  
+ }
+\ No newline at end of file

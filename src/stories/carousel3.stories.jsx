@@ -12,6 +12,7 @@ Object.defineProperty(NextImage, "default", {
   configurable: true,
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 });
+// eslint-disable-next-line import/no-anonymous-default-export
 
 const data=[
   {
