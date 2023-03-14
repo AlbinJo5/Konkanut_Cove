@@ -35,7 +35,7 @@ const data=[
     logo: Vector4
   },
 ]
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'Example/Carousel3',
   component: Carousel3,
