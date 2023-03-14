@@ -54,9 +54,9 @@ export const Cancellations = ({until,after,refund1="100%",refund2="No"})=>{
 const BedTypePanel = ({bedTypes})=>{
   return(
     <div className="flex w-full rounded-md mt-4 overflow-hidden border-[1px] border-gray-400">
-      {bedTypes.slice(0,3).map(({image,type,view,ViewIcon,beds,BedIcon,desc})=>
-        <div className="flex flex-col p-2">
-          <Image src={image} width="414" height="200"/>
+      {bedTypes.slice(0,3).map(({image,type,view,ViewIcon,beds,BedIcon,desc},ind)=>
+        <div className="flex flex-col p-2" key={ind}>
+          <Image src={image} width="414" height="200" alt=""/>
           <p className="text-md font-bold py-1">{type}</p>
           <div className="flex mb-2">
             <ViewIcon/>
@@ -105,7 +105,7 @@ export default function Page4Panel1 ({images,hotelName,address,until,after,impor
                         {options.map((option,ind)=>{
                             const Icon = option.icon;
                           return( 
-                            <li className="mx-2 flex flex-col justify-center items-center grow">
+                            <li key={ind} className="mx-2 flex flex-col justify-center items-center grow">
                               <div key={ind} className="border-gray-400 border-[1px] rounded-lg px-3 py-2">
                                     <Icon size="24" className="stroke-current text-gray-400 "/>
                               </div>
