@@ -1,6 +1,7 @@
 import Page4Slider from '../components/page4-slider';
 import React from 'react';
 import MainHeader, { MainTitle,MainText } from '../components/main-header';
+import { Wrapper } from './components/wrapper';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -9,7 +10,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   decorator:[
     (Story)=>{
-      return <div className="absolute flex"><Story/></div>
+      return <div className="p-20 w-min flex"><Story/></div>
     }
   ],
   argTypes: {
@@ -17,14 +18,14 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Page4Slider {...args} />;
+const Template = (args) => <Wrapper {...args} />;
 
 export const Default = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   widthTitle:600,
   widthText:800,
-  widthSlider:400,
+  widthSlider:100,
   ratioSlider:60,
   titleSize:"48px",
   title:"Enjoy Your Dream Vacation",
