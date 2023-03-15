@@ -10,7 +10,6 @@ Object.defineProperty(NextImage, "default", {
   configurable: true,
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 });
-
 const CarouselData = [
   {
     title: "Sample Title 1",
@@ -44,7 +43,7 @@ const CarouselData = [
       desc:"Donut icing macaroon cheesecake sesame snaps powder. Shortbread chocolate bar pie powder jujubes topping bonbon pie cupcake. Fruitcake cookie jelly cake toffee chocolate bar. Macaroon apple pie tootsie roll sweet roll sugar plum brownie."
   },
 ];
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   desc: 'Page-2/CarouselLarge',
   component: CarouselLarge,

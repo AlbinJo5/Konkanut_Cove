@@ -2,6 +2,7 @@ import MainHeader, { MainText, MainTitle } from '../components/main-header';
 import React from 'react';
 import StoryWrapper from './components/story_wrapper';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'Example/MainHeader',
   component: MainHeader,

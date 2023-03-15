@@ -11,7 +11,7 @@ Object.defineProperty(NextImage, "default", {
   configurable: true,
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 });
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'PAGE-3/Page3Panel3',
   component: Page3Panel3,
