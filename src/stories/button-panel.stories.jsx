@@ -20,14 +20,16 @@ export default {
   decorators:[
     (Story)=>
       <StoryWrapper>
-        <div className='p-5'><Story/></div>
+        <div className='py-5 sm:p-9'><Story/></div>
       </StoryWrapper>
   ]
 };
+
+const optionList=['Accommodation', 'Activities', 'Transport'];
 
 const Template = (args) => <ButtonPanel {...args}/>;
 
 export const Default = Template.bind({});
 Default.args = {
-
+  optionList,
 };
