@@ -3,7 +3,7 @@ import StoryWrapper from './components/story_wrapper';
 import DescriptionComp from '../components/description-comp';
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/DescriptionComp',
+  title: 'Page-1/DescriptionComp',
   component: DescriptionComp,
   argTypes: {
     heading:{control:"text"},

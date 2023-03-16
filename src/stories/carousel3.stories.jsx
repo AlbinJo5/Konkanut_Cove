@@ -37,7 +37,7 @@ const data=[
 ]
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/Carousel3',
+  title: 'Page-1/Carousel3',
   component: Carousel3,
   argTypes: {
   },

@@ -13,7 +13,7 @@ Object.defineProperty(NextImage, "default", {
 });
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/Page1Form',
+  title: 'Page-1/Page1Form',
   component: Page1Form,
   argTypes: {
   },

@@ -13,7 +13,7 @@ Object.defineProperty(NextImage, "default", {
 });
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/SearchBar',
+  title: 'Page-1/SearchBar',
   component: SearchBar,
   argTypes: {
   },

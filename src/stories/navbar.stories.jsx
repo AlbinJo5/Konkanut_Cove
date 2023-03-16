@@ -12,7 +12,7 @@ Object.defineProperty(NextImage, "default", {
 });
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/Navbar',
+  title: 'Page-1/Navbar',
   component: Navbar,
   argTypes: {
     buttonNames: { control: 'array' },

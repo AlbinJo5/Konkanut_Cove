@@ -1806,6 +1806,23 @@
     prop-types "^15.7.2"
     regenerator-runtime "^0.13.7"
 
+"@storybook/addon-viewport@^6.5.16":
+  version "6.5.16"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-6.5.16.tgz#226aa0ab93df68264269eb31adb104e7e48f6c68"
+  integrity sha512-1Vyqf1U6Qng6TXlf4SdqUKyizlw1Wn6+qW8YeA2q1lbkJqn3UlnHXIp8Q0t/5q1dK5BFtREox3+jkGwbJrzkmA==
+  dependencies:
+    "@storybook/addons" "6.5.16"
+    "@storybook/api" "6.5.16"
+    "@storybook/client-logger" "6.5.16"
+    "@storybook/components" "6.5.16"
+    "@storybook/core-events" "6.5.16"
+    "@storybook/theming" "6.5.16"
+    core-js "^3.8.2"
+    global "^4.4.0"
+    memoizerific "^1.11.3"
+    prop-types "^15.7.2"
+    regenerator-runtime "^0.13.7"
+
 "@storybook/addons@6.5.16":
   version "6.5.16"
   resolved "https://registry.npmjs.org/@storybook/addons/-/addons-6.5.16.tgz"
@@ -4383,12 +4400,7 @@ clsx@1.1.0:
   resolved "https://registry.npmjs.org/clsx/-/clsx-1.1.0.tgz"
   integrity sha512-3avwM37fSK5oP6M5rQ9CNe99lwxhXDOeSWVPAOYF6OazUTgZCMb0yWlJpmdD74REy1gkEaFiub2ULv4fq9GUhA==
 
-clsx@^1.0.4:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz"
-  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
-
-clsx@^1.2.1:
+clsx@^1.0.4, clsx@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
   integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==

@@ -14,7 +14,7 @@ Object.defineProperty(NextImage, "default", {
 });
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/Footer',
+  title: 'Page-1/Footer',
   component: Footer,
   argTypes: {
   },

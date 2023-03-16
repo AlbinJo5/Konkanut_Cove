@@ -35,14 +35,14 @@ const CarouselData = [
 ];
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: 'Example/Carousel1',
+  title: 'Page-1/Carousel1',
   component: Carousel1,
   argTypes: {
   },
   decorators:[
     (Story)=>
       <StoryWrapper>
-        <div className='p-5'><Story/></div>
+        <div className=''><Story/></div>
       </StoryWrapper>
   ]
 };

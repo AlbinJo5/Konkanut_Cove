@@ -32,7 +32,7 @@ const Carousel1 = ({ data }) => {
   
   return (
     <div className="mt-8">
-      <div className="max-w-lg h-[370px] xs:w-[512px] xs:h-[370px] sm:h-72 flex overflow-hidden relative">
+      <div className="max-w-lg h-[370px] xs:w-[512px] xs:h-[370px] sm:h-[200px] md:h-72 flex overflow-hidden relative">
       
         <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
           {data.map((slide, index) => {
