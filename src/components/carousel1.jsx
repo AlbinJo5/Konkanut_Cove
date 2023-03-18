@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Swipe from "react-easy-swipe";
 import { LeftC, RightC } from "@icon-park/react";
 import Image from "next/image";
+import clsx from "clsx";
 
-const Carousel1 = ({ data }) => {
+const Carousel1 = ({ data,scale=false }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -32,7 +33,7 @@ const Carousel1 = ({ data }) => {
   
   return (
     <div className="mt-8">
-      <div className="max-w-lg h-[370px] xs:w-[512px] xs:h-[370px] sm:h-[200px] md:h-72 flex overflow-hidden relative">
+      <div className="flex w-full h-72 sm:w-[400px] lg:w-[512px] lg:h-[360px] overflow-hidden relative">
       
         <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
           {data.map((slide, index) => {
@@ -42,11 +43,13 @@ const Carousel1 = ({ data }) => {
                     fill
                     alt="This is a carousel slide"
                     key={index}
-                    className={
+                    className={clsx(
                       index === currentSlide
                         ? "rounded-md block w-full h-auto object-cover"
-                        : "hidden"
-                    }
+                        : "hidden",
+                      "object-fit",
+                      "h-[unset]"
+                    )}
                     onMouseEnter={() => {
                       setPaused(true);
                     }}

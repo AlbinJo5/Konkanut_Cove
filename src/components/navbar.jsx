@@ -47,7 +47,7 @@ export default function Navbar({buttonList,selectedIndex=0}) {
                       )}
                     </ul>
                   </div>
-                  <div className="fixed inset-0 z-0 w-full h-full bg-red-500 bg-opacity-25" onClick={handleOverlayClick}></div>
+                  <div className="fixed inset-0 z-0 w-full h-full bg-black bg-opacity-25" onClick={handleOverlayClick}></div>
                 </>
               }
             </div>

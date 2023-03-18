@@ -152,4 +152,6 @@ Default.args = {
     "As a complementary benefit, your stay is now insured by Acho"
   ],
   bedTypes:bedTypes,
+  checkIn:Date(2,3,23),
+  checkOut:(4,3,23),
 }

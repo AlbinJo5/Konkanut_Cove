@@ -42,7 +42,7 @@ export default {
   decorators:[
     (Story)=>
       <StoryWrapper>
-        <div className=''><Story/></div>
+        <div className='sm:p-5 p-2'><Story/></div>
       </StoryWrapper>
   ]
 };

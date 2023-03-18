@@ -4,7 +4,6 @@ const SvgSlider1 = ({clicked=true,tillSm,setClicked,...props}) => (
     width={482.7}
     height={58.56}    fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    transform={tillSm?"scale(0.6,1)":"none"}
     {...props}
   >
     

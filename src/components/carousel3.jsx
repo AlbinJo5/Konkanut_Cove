@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import Swipe from "react-easy-swipe";
@@ -33,22 +34,23 @@ const Carousel3 = ({ data }) => {
   console.log(data)
   return (
     <div className="mt-8">
-      <div className="max-w-lg h-[370px] xs:w-[512px] xs:h-[370px] flex overflow-hidden relative">
+      <div className="max-w-lg flex relative">
       
-        <div className="max-w-lg w-[512px] h-72 flex overflow-hidden relative">
+        <div className="max-w-lg h-72 max-xs:h-64 flex overflow-hidden">
             <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
               {data.map((slide, index) => {
                 return (
                   <Image
                     src={slide.image}
-                    fill
+                    width="288"
+                    height="288"
                     alt="This is a carousel slide"
                     key={index}
-                    className={
+                    className={clsx(
                       index === currentSlide
                         ? "rounded-md block w-full h-auto object-cover"
-                        : "hidden"
-                    }
+                        : "hidden",
+                    )}
                     onMouseEnter={() => {
                       setPaused(true);
                     }}
@@ -61,7 +63,7 @@ const Carousel3 = ({ data }) => {
             </Swipe>
         </div>
 
-        <div className="absolute w-full items-center flex justify-between bottom-0">
+        <div className="absolute w-full items-center flex justify-between xs:bottom-[-20%] bottom-0">
           {data.map((element, index) => {
             const Logo=vectors[index];
             return (

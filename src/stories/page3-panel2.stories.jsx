@@ -19,7 +19,7 @@ export default {
   },
   decorators:[
     (Story)=>
-      <div className='w-full sm:w-[1000px]'>
+      <div className='w-full sm:max-w-[600px]'>
         <div className='p-5'><Story/></div>
       </div>
   ]
@@ -29,6 +29,7 @@ const Template = (args) => <Page3Panel2 {...args}/>;
 
 export const Default = Template.bind({});
 Default.args = {
+  selected:true,
   image:"https://images.unsplash.com/photo-1546768292-fb12f6c92568?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
   title: 'Luxury Resort',
   location: 'Maldives',

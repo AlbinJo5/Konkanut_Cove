@@ -45,7 +45,7 @@ const CarouselData = [
 ];
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  desc: 'Page-2/CarouselLarge',
+  desc: 'Page-2/Carousel-Large',
   component: CarouselLarge,
   argTypes: {
   },

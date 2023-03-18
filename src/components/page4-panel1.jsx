@@ -105,8 +105,8 @@ const PanelCarousel = ({ data }) => {
 };
 
 export default function Page4Panel1 ({subPanelDatas}) {
-  const showMd = useMediaQuery(0,Size.md)
- const showFull = useMediaQuery(Size.md+1,Infinity);
+  const showMd = useMediaQuery(0,Size.md+120)
+ const showFull = useMediaQuery(Size.md+121,Infinity);
  console.log("-----",showFull)
   return (
     <div className="flex max-xs:flex-col max-xs:items-center border-[1px] border-gray-100 shadow-2xl w-full py-5 pt-10">

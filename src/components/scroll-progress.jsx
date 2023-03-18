@@ -14,12 +14,11 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
         const height=convertToPixels(heightRef.current)
         console.log(refs,index)
         const ref = refs[index];
-        if (ref.current===null)return;
+        if (!ref?.current)return;
 
         const scrollTop = window.pageYOffset+window.innerHeight * 0.05;
         const elementTop = ref.current.offsetTop;
         const distance = elementTop - scrollTop;
-        console.log(distance)
          // Determine scroll direction
         const currentScrollPos = window.pageYOffset;
         if (currentScrollPos > prevScrollPos) {
@@ -31,9 +30,9 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
 
         // Update index based on scroll direction
         if (distance < 0 && index <= n && scrollDirection === 'down') {
-            setIndex(index+1);
+            setIndex(index+1<=n?index+1:n);
         } else if (distance > (height+25) && index > 0 && scrollDirection === 'up') {
-            setIndex(index-1);
+            setIndex(index-1<=n?index-1:n);
         }
 
     },[index,prevScrollPos, scrollDirection,n,refs])
@@ -42,7 +41,7 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
         window.addEventListener('scroll',handleScroll);
         return ()=>window.removeEventListener('scroll',handleScroll);
     },[handleScroll])
-
+    console.log(index)
     return(
         <div className="flex flex-col justify-center h-full">
             {Array(n).fill(0).map((_,ind)=>

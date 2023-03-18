@@ -8,6 +8,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+
+      colors:{
+        footer:"#F4F4F4",
+      },
     
       fontFamily: {
         sans: ['Lora', 'Helvetica', 'Arial', 'sans-serif'],

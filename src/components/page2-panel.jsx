@@ -25,16 +25,14 @@ const ImagePanel = ({image,width})=>{
     return(
     <>
         <div className="xs:hidden">
-            <Image src={image} width={imgWidth} height={imgHeight} alt="" className="shadow-md mb-2 rounded-md"/>
+            <Image src={image} width={imgWidth} height={imgHeight} alt="" className="shadow-md mb-2 rounded-md object-fit"/>
         </div>
         <div className={`flex flex-col relative w-full max-xs:hidden w-[${IMG_PROP*100}%]`}>
-            <div className="absolute top-1 border-2 border-green-800 text-green-800 rounded-sm text-md text-center px-2 "
-            style={{left:leftWidth}}>2N</div>
             <div className="absolute bottom-[35%]">
                 <Image src={image} width={imgWidth} height={imgHeight} alt="" className="shadow-md mb-2 rounded-md"/>
             </div>
     
-            <ul className="absolute bottom-0 shadow-md rounded-md flex w-full">
+            <ul className="absolute bottom-0 shadow-md rounded-md flex" style={{width:width*IMG_PROP}}>
                 {options.map((option,ind)=>{
                     const Icon = option.icon;
                    return( <li key={ind} className="px-3 py-2 text-green-800 flex flex-col justify-center items-center grow cursor-pointer
@@ -55,7 +53,10 @@ export default  function Page2Panel({image,title,duration,desc,discounted_rate,a
             <ImagePanel image={image} width={width}/>
             <div className="grow"></div>
             <div className="flex flex-col text-green-800 sm:w-[40%] sm:pr-4 mt-2">
-                <div className="font-bold text-xl mb-3">{title}</div>
+                <div className="flex">
+                    <div className="font-bold text-xl mb-3 grow">{title}</div>
+                    <div className="border-[1px] border-green-800 w-min h-min px-2">{n}N</div>
+                </div>
                 <div className="font-bold text-lg mb-2">{duration}</div>
                 <div className="text-md">{desc}</div>
                 <div className="text-lg">{"\u20b9"}{discounted_rate}</div>

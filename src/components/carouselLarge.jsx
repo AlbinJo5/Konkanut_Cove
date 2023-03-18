@@ -60,7 +60,7 @@ const CarouselLarge = ({ data,isLeft=false }) => {
         </Swipe>
         <div className={"absolute h-full z-50 "+(isLeft?"sm:left-[-20px] left-[-10px]":"sm:right-[-20px] right-[-10px]")}>
             <div className={"flex items-end sm:items-center h-full "+(isLeft?"justify-start":"justify-end")}>
-                <Link href="/" className=" p-2 sm:p-5 rounded-md sm:rounded-full bg-blue-500">
+                <Link href="/" className=" p-2 sm:p-5 rounded-md sm:rounded-full bg-green-500">
                     {isLeft?
                         <ArrowLeft size="30" fill="white"/>:
                         <ArrowRight size="30" fill="white"/>
@@ -68,8 +68,10 @@ const CarouselLarge = ({ data,isLeft=false }) => {
                 </Link>
             </div>
         </div>
+        
+        <div className="absolute z-[5] w-full h-full bg-black bg-opacity-40 rounded-md"></div>
 
-        <div className={"absolute w-full sm:max-w-[60%] sm:bottom-[15%] z-0 "+(isLeft?"sm:left-[30%]":"sm:left-[10%]")}>
+        <div className={"absolute w-full sm:max-w-[60%] sm:bottom-[15%] z-10 "+(isLeft?"sm:left-[30%]":"sm:left-[10%]")}>
           <div className="flex flex-col max-sm:p-3 px-5">
              <div className="text-4xl font-bold text-white mb-5 ">{data[currentSlide].title}</div>
              <div className={"text-sm text-white mb-4 break-all max-xs:grow"+(isLeft?"sm:max-w-[70%]":"sm:max-w-[70%]")}>{data[currentSlide].desc}</div>
