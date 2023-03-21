@@ -13,12 +13,16 @@ Object.defineProperty(NextImage, "default", {
 
 const ImageData = [
   {
-    image:"/assets/images/photo-gallery-1/image_4.png"
+    image:"/assets/images/gallery/image_5.png"
   },{
-    image:"/assets/images/photo-gallery-1/image_5.png"
+    image:"/assets/images/gallery/image_6.png"
   },{
-    image:"/assets/images/photo-gallery-1/image_6.png"
-  },
+    image:"/assets/images/gallery/image_8.png"
+  },{
+    image:"/assets/images/gallery/image_10.png"
+  },{
+    image:"/assets/images/gallery/image_11.png"
+  }
   ];
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

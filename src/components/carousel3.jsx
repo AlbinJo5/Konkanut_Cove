@@ -31,12 +31,11 @@ const Carousel3 = ({ data }) => {
       currentSlide === 0 ? data.length - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
   };
-  console.log(data)
   return (
     <div className="mt-8">
-      <div className="max-w-lg flex relative">
+      <div className="max-w-lg flex relative flex-col">
       
-        <div className="max-w-lg h-72 max-xs:h-64 flex overflow-hidden">
+        <div className="max-w-lg h-full mb-5 max-xs:h-64 flex overflow-hidden">
             <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
               {data.map((slide, index) => {
                 return (
@@ -50,6 +49,7 @@ const Carousel3 = ({ data }) => {
                       index === currentSlide
                         ? "rounded-md block w-full h-auto object-cover"
                         : "hidden",
+                        "min-w-[350px] min-h-[28px] max-w-[350px] max-h-[288px]"
                     )}
                     onMouseEnter={() => {
                       setPaused(true);
@@ -63,7 +63,7 @@ const Carousel3 = ({ data }) => {
             </Swipe>
         </div>
 
-        <div className="absolute w-full items-center flex justify-between xs:bottom-[-20%] bottom-0">
+        <div className="w-full items-center flex justify-center">
           {data.map((element, index) => {
             const Logo=vectors[index];
             return (

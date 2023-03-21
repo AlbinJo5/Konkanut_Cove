@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, } from "@icon-park/react";
 import Image from "next/image";
 import Link from "next/link";
 
-const CarouselLarge = ({ data,isLeft=false }) => {
+const CarouselLarge = ({ data,isLeft=false,title,desc }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -73,8 +73,8 @@ const CarouselLarge = ({ data,isLeft=false }) => {
 
         <div className={"absolute w-full sm:max-w-[60%] sm:bottom-[15%] z-10 "+(isLeft?"sm:left-[30%]":"sm:left-[10%]")}>
           <div className="flex flex-col max-sm:p-3 px-5">
-             <div className="text-4xl font-bold text-white mb-5 ">{data[currentSlide].title}</div>
-             <div className={"text-sm text-white mb-4 break-all max-xs:grow"+(isLeft?"sm:max-w-[70%]":"sm:max-w-[70%]")}>{data[currentSlide].desc}</div>
+             <div className="text-4xl font-bold text-white mb-5 ">{title}</div>
+             <div className={"text-sm text-white mb-4 break-all max-xs:grow"+(isLeft?"sm:max-w-[70%]":"sm:max-w-[70%]")}>{desc}</div>
               <div className="flex w-min">
                   {data.map((element, index) => {
                     return (

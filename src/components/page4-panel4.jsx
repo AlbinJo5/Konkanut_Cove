@@ -63,7 +63,7 @@ export default function Page4Panel4 ({images,hotelName,address,until,after,landm
               </div>
               <div className="flex flex-col items-center justify-center">
                 <OptionGrid options={options}/>
-                <button className="bg-green-800 h-[50px] min-w-[200px] font-bold text-white px-5 py-2 rounded-md hover:transition-transform hover:scale-110 hover:duration-750">Know More</button>
+                <button className="bg-green-800 hover:bg-green-600 h-[50px] min-w-[200px] font-bold text-white px-5 py-2 rounded-md hover:transition-transform hover:scale-110 hover:duration-750">Know More</button>
             </div>
             </div>
 

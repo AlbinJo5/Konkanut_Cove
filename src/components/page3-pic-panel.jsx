@@ -8,7 +8,7 @@ export default function Page3PicPanel({duration,images:{image1,image2,image3,ima
         }}>
             <div className="flex px-12 mt-6">
                 <div className="text-green-800 font-bold text-md grow">{duration}</div>
-                <button className="text-green-800 font-bold text-sm">Change</button>
+                <button className="text-green-800 hover:bg-green-600 font-bold text-sm">Change</button>
             </div>
             <div className="grid grid-rows-2 grid-flow-col gap-2 sm:gap-4 w-full h-[250px] sm:h-[400px] sm:px-10">
                 <div className="row-span-2 max-lg:col-span-2 relative"><Image src={image6} alt="grid pictures" fill className="rounded-md"/></div>
@@ -18,7 +18,7 @@ export default function Page3PicPanel({duration,images:{image1,image2,image3,ima
                 <div className="row-span-1 relative max-lg:hidden"><Image src={image1} alt="grid pictures" fill className="rounded-md"/></div>
                 <div className="col-span-1 relative overflow-hidden">
                 <div style={{borderRadius: '5px', overflow: 'hidden'}}>
-                    <Image src={image5} alt="grid pictures" fill className="rounded-md overflow-hidden" style={{objectFit:'cover'}}/>
+                    <Image src={image5} alt="grid pictures" fill className="rounded-md overflow-hidden object-fit"/>
                 </div>
                     <div className="absolute w-full h-full z-10">
                         <div className="flex w-full h-full text-4xl text-white font-bold justify-center items-center">+{imagesRemaining}</div> 

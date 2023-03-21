@@ -18,13 +18,16 @@
     "eslint-config-next": "13.2.3",
     "flowbite": "^1.6.3",
     "flowbite-react": "^0.4.2",
+    "isomorphic-dompurify": "^1.2.0",
     "moment": "^2.29.4",
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropdown": "^1.11.0",
     "react-easy-swipe": "^0.0.23",
-    "react-transition-group": "^4.4.5"
+    "react-reveal": "^1.2.2",
+    "react-transition-group": "^4.4.5",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",

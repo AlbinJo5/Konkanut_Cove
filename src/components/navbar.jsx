@@ -1,6 +1,11 @@
 import { HamburgerButton } from '@icon-park/react';
 import Image from 'next/image';
+import { buttonList } from '../constants/navbar'
+
+import Link from 'next/link';
 import { useState } from 'react';
+
+
 
 export default function Navbar({buttonList,selectedIndex=0}) {
 
@@ -42,7 +47,7 @@ export default function Navbar({buttonList,selectedIndex=0}) {
                     <ul class="w-48">
                     {buttonList.map(({name,url},ind)=>
                       <li className={` p-3 flex items-center justify-center px-4 sm:mr-4 lg:mr-10 text-sm font-sans hover:bg-green-500 hover:text-slate-100 hover:bg-opacity-70  ${selectedIndex===ind && selectedIndexSmall}`} key={ind}>
-                        <a href={url}>{name}</a>
+                        <Link href={url}>{name}</Link>
                       </li>
                       )}
                     </ul>

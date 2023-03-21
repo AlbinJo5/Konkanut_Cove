@@ -9,7 +9,7 @@ export default function Page3Panel2({selected,image,imageWidth=150,imageHeight=1
   const fromDateFmt = moment(fromDate).format("MMM Do YY");
   const toDateFmt = moment(toDate).format("MMM Do YY");
   return (
-    <div className="flex max-sm:flex-col items-start bg-white border-[1px] shadow-xl border-gray-200 px-5 py-3 rounded-md max-sm:w-fit">
+    <div className="flex max-sm:flex-col items-center bg-white border-[1px] shadow-xl border-gray-200 px-5 py-3 rounded-md max-sm:w-fit">
             <Image src={image} alt="picture" width={""+imageWidth} height={""+imageHeight} className="rounded-md"/>
         <div className="flex flex-col ml-3 mt-3">
             <div className="flex">

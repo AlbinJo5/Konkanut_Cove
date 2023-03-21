@@ -10,7 +10,7 @@ export default function Page3Panel3({image,imageWidth,imageHeight,carType,seats,
                 <div className="flex text-md grow">{carType}</div>
                 <div className="flex text-sm">{seats} seaters</div>
             </div>
-            <button className="mx-5 mb-5 rounded-lg py-3 bg-green-800 text-white font-bold disabled:bg-slate-500" disabled={selectionStatus===Select.SELECT_DISABLED}>{selectionStatus===Select.SELECTED?"Selected":"Select"}</button>
+            <button className="mx-5 mb-5 rounded-lg py-3 bg-green-800 hover:bg-green-600 text-white font-bold disabled:bg-slate-500" disabled={selectionStatus===Select.SELECT_DISABLED}>{selectionStatus===Select.SELECTED?"Selected":"Select"}</button>
         </div>
     )
 }

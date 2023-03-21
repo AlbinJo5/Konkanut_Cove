@@ -34,9 +34,9 @@ const Carousel2 = ({ data }) => {
 
   return (
     <div className="mt-8 flex justify-center">
-      <div className="max-w-lg w-full relative" >
+      <div className="max-w-lg w-full relative flex flex-col"  >
       
-        <div className="max-w-lg w-full h-72 max-xs:h-64 flex overflow-hidden">
+        <div className="max-w-lg h-full mb-5 max-xs:h-64 flex overflow-hidden">
             <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
               {data.map((slide, index) => {
                 return (
@@ -48,10 +48,10 @@ const Carousel2 = ({ data }) => {
                       index === currentSlide
                         ? "rounded-md block w-full h-auto object-cover"
                         : "hidden",
-                        "object-fit"
+                        "object-fit min-w-[350px] min-h-[28px] max-w-[350px] max-h-[288px]"
                     )}
-                    height="288"
-                    width="288"
+                   width="288"
+                   height="288"
                     onMouseEnter={() => {
                       setPaused(true);
                     }}
@@ -64,14 +64,14 @@ const Carousel2 = ({ data }) => {
             </Swipe>
         </div>
 
-        <div className="absolute w-full items-center flex justify-between xs:bottom-[-30%] bottom-[0%]">
+        <div className="w-full items-center flex justify-between ">
           {data.map((element, index) => {
             return (
               <div
                 className={clsx(
                   index === currentSlide
-                    ? "border-blue-700 border-4 mb-3 cursor-pointer w-[80px] h-[60px] xs:w-[80px] xs:h-[60px] relative rounded-sm overflow-hidden"
-                    : "border-none mb-3 cursor-pointer w-[80px] h-[60px] xs:w-[80px] xs:h-[60px] relative rounded-md overflow-hidden",
+                    ? "border-blue-700 border-4 mb-3 cursor-pointer w-[60px] h-[40px] relative rounded-sm overflow-hidden"
+                    : "border-none mb-3 cursor-pointer w-[60px] h-[40px] relative rounded-md overflow-hidden",
                     "object-fit"
                 )}
                 key={index}

@@ -1,8 +1,5 @@
 import ReactDatePicker from 'react-datepicker';
 import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
-import '../styles/react-dropdown.css'
-import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import { Calendar } from '@icon-park/react';
 
@@ -15,7 +12,7 @@ export default function SearchBar({locationOptions=[],checkInOptions,width="100%
     const [startDate, setStartDate] = useState(new Date());
     const [index,setIndex] = useState(null);
     return(
-        <div className="grid grid-cols-2 max-md:grid-rows-3 md:grid-cols-6 bg-white max-md:max-w-[400px] rounded-md justify-items-center gap-0 px-1 py-5">
+        <div className="grid grid-cols-2 shadow-2xl max-md:grid-rows-3 md:grid-cols-6 bg-white w-full rounded-md justify-items-center gap-0 px-1 py-5">
             {dropdowns.map((dd,ind)=>
                 (()=>{
                     if(["Check In","Check Out"].includes(dd)) return(
@@ -49,7 +46,7 @@ export default function SearchBar({locationOptions=[],checkInOptions,width="100%
                  })()
             )}
             <div className="flex w-full justify-start items-center">
-                <button className="max-sm:mx-5 max-sm:mt-4 bg-green-800 rounded-lg font-bold text-white h-min px-5 py-2">Search</button>
+                <button className="max-sm:mx-5 max-sm:mt-4 bg-green-800 hover:bg-green-600 rounded-lg font-bold text-white h-min px-5 py-2">Search</button>
             </div>
             
         </div>

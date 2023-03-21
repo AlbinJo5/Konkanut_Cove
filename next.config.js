@@ -3,7 +3,7 @@
 const withSVGR = require('next-plugin-svgr');
 
 module.exports = withSVGR({
-  reactStrictMode: true,
+  reactStrictMode: false,
   images:{
     domains:["images.unsplash.com"]
   }

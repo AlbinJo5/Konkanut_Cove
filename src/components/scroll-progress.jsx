@@ -4,7 +4,6 @@ import { createRef, useState, useEffect, useRef, useCallback } from "react";
 export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
     
     const refs = Array(n+1).fill(0).map(() => createRef());
-    console.log(refs)
     const [index, setIndex] = useState(0);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [scrollDirection, setScrollDirection] = useState(null);
@@ -12,7 +11,7 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
 
     const handleScroll  = useCallback(()=>{
         const height=convertToPixels(heightRef.current)
-        console.log(refs,index)
+        
         const ref = refs[index];
         if (!ref?.current)return;
 
@@ -41,13 +40,13 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
         window.addEventListener('scroll',handleScroll);
         return ()=>window.removeEventListener('scroll',handleScroll);
     },[handleScroll])
-    console.log(index)
+    
     return(
         <div className="flex flex-col justify-center h-full">
             {Array(n).fill(0).map((_,ind)=>
-                <div className="flex flex-col justify-center items-center" style={{minHeight:height}} key={ind}>
+                <div className="flex flex-col justify-center items-center overflow-hidden" style={{minHeight:height,maxHeight:height}} key={ind}>
                     <div className={"rounded-full border-4 border-green-800 w-5 h-5 "+(index===ind && "bg-green-800")} ref={refs[ind]}></div>
-                    <div className="w-1 bg-green-800" style={{height:height}}></div>
+                    <div className="w-1 bg-green-800 h-full" style={{height}}></div>
                 </div>
             )}
             <div className="flex flex-col justify-center items-center">

@@ -12,7 +12,7 @@ export default function ImageModal({images,showModal,setShowModal}){
     if(!showModal)return null;
     return(
         <div className="fixed z-50 inset-0 flex justify-center items-center px-1 bg-black bg-opacity-25" onClick={closeModal}>
-            <div className="max-sm:w-[100vh]" ref={ref}><Carousel1 data={images} scale/></div>
+            <div className="max-sm:w-[100vh]" ref={ref}><Carousel1 data={images} width="450" height="350" scale/></div>
         </div>
     )
 }

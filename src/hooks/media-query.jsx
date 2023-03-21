@@ -3,17 +3,17 @@ import { useState, useEffect, useLayoutEffect, useCallback } from "react";
 export const useMediaQuery = (minWidth,maxWidth) => {
   const [matches, setMatches] = useState(false);
   const query = `(min-width:${minWidth}px)${maxWidth===Infinity ?"": ` and (max-width:${maxWidth}px)`}`
-  console.log(query)
-  const media = window.matchMedia(query);
     
   const listener = useCallback(() => {
+    const media = window.matchMedia(query);
     if (media.matches !== matches) {
       setMatches(media.matches);
     }
     setMatches(media.matches);
-  },[matches,media.matches])
+  },[matches,query])
 
   useEffect(() => {
+    
     listener();
     window.addEventListener("resize", listener);
     return () => {

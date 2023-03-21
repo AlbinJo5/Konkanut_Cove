@@ -12,7 +12,6 @@ export default function Page3Panel({title,includedList,title2,desc}){
     }
 
     const handleTransitionEnd = (e)=>{
-        console.log(e.target)
         if(collapse){
             e.target.classList.add("w-0","h-0","overflow-hidden");
         }else{

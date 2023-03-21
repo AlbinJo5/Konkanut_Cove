@@ -10,10 +10,10 @@ const IconText = ({Icon,text})=>{
     );
 }
 
-export default function page1Form(){
+export default function Page1Form(){
     const classTextInput="border-b-1 border-x-0 border-t-0 border-gray-600 focus:ring-0 placeholder:text-gray-300 mb-2";
   return (
-    <div className="flex max-sm:flex-col bg-white max-sm:justify-center w-min max-sm:w-full">
+    <div className="flex max-md:flex-col bg-white max-sm:justify-center w-min max-sm:w-full scale-[0.9] md:scale-[0.7] sm:scale-[0.6]">
         <form action="" className="flex flex-col max-sm:px-5 sm:pl-16 w-full sm:w-[350px] sm:mr-20 my-12 sm:my-16">
             <div className="text-2xl font-bold mb-2 text-center">Send Message</div>
             <div className='grid grid-rows-4 sm:grid-cols-2 sm:grid-rows-3 sm:gap-2'>

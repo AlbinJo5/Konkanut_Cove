@@ -14,7 +14,7 @@ export default function Page5Panel3({image,iwidth=600,iheight=500,heading,title,
                 <p className={"text-black mb-5 "+textAlign} key={ind}>{para}</p>
             )}
             {children && <div className={"text-black mb-5"+textAlign}>{children}</div>}
-            <button className={"mt-5 py-3 px-5 text-white bg-green-800 font-mullish text-sm rounded-md font-bold ripple-bg-green-700 "+textAlign} onClick={button.onClick}>{button.name}</button>
+            <button className={"mt-5 py-3 px-5 text-white bg-green-800 hover:bg-green-600 font-mullish text-sm rounded-md font-bold ripple-bg-green-700 "+textAlign} onClick={button.onClick}>{button.name}</button>
         </div>
         <Image alt="" src={image} width={iwidth+""} height={iheight+""} className="max-md:hidden"/>
     </div>

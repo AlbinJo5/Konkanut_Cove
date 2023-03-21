@@ -1,3 +1,5 @@
+import SvgDoubleBed from "@/svgrs/double-bed"
+import SvgNoView from "@/svgrs/svgr-no-view"
 import { Calendar, LocalTwo } from "@icon-park/react"
 import clsx from "clsx"
 import moment from "moment"
@@ -55,7 +57,7 @@ export const Cancellations = ({until,after,refund1="100%",refund2="No"})=>{
 }
 
 export const ImageGrid = ({images,setShowModal,hotelName,address,children,noCol=false})=>{
-  console.log(noCol,clsx("flex items-start mt-4",noCol && "max-sm:flex-col"))
+  
   return(
     <>
       <div className="grid sm:grid-rows-2 sm:grid-flow-col sm:gap-4 w-full h-[250px]">
@@ -87,9 +89,9 @@ const BedTypePanel = ({bedTypes})=>{
           <Image src={image} width="414" height="200" alt=""/>
           <p className="text-md font-bold py-1">{type}</p>
           <div className="flex mb-2">
-            <ViewIcon/>
+            <SvgNoView/>
             <p className="text-sm text-gray-400 mr-5">{view}</p>
-            <BedIcon/>
+            <SvgDoubleBed/>
             <p className="text-sm text-gray-400">{beds}</p>
           </div>
           <p className="text-xs text-gray-400">{desc}</p>
