@@ -1,7 +1,7 @@
 import Layout from '@/components/layout'
 import MainHeader, { MainText, MainTitle } from '@/components/main-header';
 import SearchBar from '@/components/search-bar';
-import { routes } from '../../routes';
+import { routes } from '@/routes';
 import React, { useEffect, useRef } from 'react'
 import { Fade } from 'react-reveal';
 import Page2Panel from '@/components/page2-panel';
