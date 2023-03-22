@@ -6,7 +6,7 @@ import { Vector0,Vector1,Vector2,Vector3,Vector4 } from '../svgrs/carousels';
 
 const vectors=[Vector0,Vector1,Vector2,Vector3,Vector4]
 
-const Carousel3 = ({ data }) => {
+const Carousel3 = ({ data,scale }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -32,8 +32,8 @@ const Carousel3 = ({ data }) => {
     setCurrentSlide(newSlide);
   };
   return (
-    <div className="mt-8">
-      <div className="max-w-lg flex relative flex-col">
+    <div className={clsx("mt-8",scale)}>
+      <div className={clsx("max-w-lg flex relative flex-col")}>
       
         <div className="max-w-lg h-full mb-5 max-xs:h-64 flex overflow-hidden">
             <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>

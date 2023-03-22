@@ -4,7 +4,7 @@ import { LeftC, RightC } from "@icon-park/react";
 import Image from "next/image";
 import clsx from "clsx";
 
-const Carousel1 = ({ data,scale=false,width="288",height="288" }) => {
+const Carousel1 = ({ data,width="288",height="288",scale=null }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -32,8 +32,8 @@ const Carousel1 = ({ data,scale=false,width="288",height="288" }) => {
   };
   
   return (
-    <div className="mt-8">
-      <div className="flex justify-center h-full mb-5 max-xs:h-64 overflow-hidden relative">
+    <div className={clsx("mt-8",scale)}>
+      <div className={clsx("flex justify-center h-full mb-5 max-xs:h-64 overflow-hidden relative")}>
       
         <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
           <ul className="flex justify-center">

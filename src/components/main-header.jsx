@@ -4,6 +4,10 @@ import { useMediaQuery } from "../hooks/media-query";
 
 export function MainTitle({size="72px",mt=0,mb=0,children,width="100%"}){
     const isMobileorTablet = useMediaQuery(0,768)
+    console.log( isMobileorTablet ?{
+        width:'100%',
+        fontSize:'48px',
+    } : {maxWidth: width,fontSize: size});
     const styleSize = isMobileorTablet ?{
         width:'100%',
         fontSize:'48px',

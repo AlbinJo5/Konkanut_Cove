@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Swipe from "react-easy-swipe";
 import { Size } from "../constants/size";
 
-const Carousel2 = ({ data }) => {
+const Carousel2 = ({ data,scale=null }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const isXS = useMediaQuery(0,Size.xs)
@@ -33,8 +33,8 @@ const Carousel2 = ({ data }) => {
   };
 
   return (
-    <div className="mt-8 flex justify-center">
-      <div className="max-w-lg w-full relative flex flex-col"  >
+    <div className={clsx("mt-8 flex justify-center",scale)}>
+      <div className={clsx("max-w-lg w-full relative flex flex-col")}  >
       
         <div className="max-w-lg h-full mb-5 max-xs:h-64 flex overflow-hidden">
             <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>

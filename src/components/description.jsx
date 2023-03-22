@@ -10,9 +10,7 @@ import ScrollProgress from "./scroll-progress";
 const DescriptionSmall = ({sections})=>{
     return(
         <div className="flex">
-            <Fade bottom>
                 <ScrollProgress height="450px" n={sections.length*2}/>
-            </Fade>
             
             <div className="flex flex-col grow">
                 {sections.map(({desc,carousel},index)=>{
@@ -21,14 +19,14 @@ const DescriptionSmall = ({sections})=>{
                                      (ctype===2)?Carousel2:
                                                  Carousel3;
 
-                    return(<Fade right key={index}><div className="flex flex-col w-full">
+                    return(<div className="flex flex-col w-full"key={index}>
                         <div className="flex items-center min-h-[450px]" >
                             <DescriptionComp {...desc} button={{ name:"View Packages",onClick:()=>alert("hi") }} classNames={["ml-5"]} alignLeft={true}/>
                         </div>
                         <div className="flex items-center min-h-[450px] w-full" >
                             <Carousel data={carousel.images}/>
                         </div>
-                    </div></Fade>
+                    </div>
                     )
                 })}
             </div>
@@ -49,13 +47,13 @@ const DescriptionLarge = ({sections})=>{
                                                 Carousel3;
 
                 if(i%2===0) return(
-                    <Fade left key={i}>
+                    <Fade bottom key={i}>
                         <li className="flex items-center min-h-[450px]">
                             <DescriptionComp {...desc} button={{ name:"View Packages",onClick:()=>alert("hi") }} classNames={["ml-5"]} alignLeft={true}/>
                         </li>
                     </Fade>)
                 else return (
-                    <Fade right key={i}>
+                    <Fade bottom key={i}>
                         <li className="flex items-center min-h-[450px] w-full" >
                             <Carousel data={carousel.images}/>
                         </li>
@@ -77,13 +75,13 @@ const DescriptionLarge = ({sections})=>{
                                                 Carousel3;
 
                 if(i%2!==0) return(
-                    <Fade left>
+                    <Fade bottom>
                         <li className="flex items-center min-h-[450px]" >
                             <DescriptionComp {...desc} button={{ name:"View Packages",onClick:()=>alert("hi") }} classNames={["ml-5"]} alignLeft={false}/>
                         </li>
                     </Fade>)
                 else return (
-                    <Fade right>
+                    <Fade bottom>
                         <li className="flex items-center min-h-[450px] w-full" >
                             <Carousel data={carousel.images}/>
                         </li>

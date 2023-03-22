@@ -57,6 +57,7 @@ export default function Home({mainTitle,mainText,widthText,widthTitle,sections})
     <Layout>
       <Head>
         <title>Welcome to Konkanut Cove!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       </Head>
         <FormModal showModal={modal} setShowModal={showModal}/>
         <div className="w-full relative h-[850vh] sm:h-[550vh]">
