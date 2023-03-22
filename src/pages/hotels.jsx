@@ -7,7 +7,7 @@ import React from 'react'
 import { Fade } from 'react-reveal'
 import {  ClothesCardigan, Fitness, ForkSpoon, Parking, SwimmingPool,  Wifi } from "@icon-park/react"
 import Page4Slider from '@/components/page4-slider'
-import { routes } from '@/routes'
+import routes from '@/routes'
 
 const options=[
     {
