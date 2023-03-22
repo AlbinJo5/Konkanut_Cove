@@ -11,14 +11,8 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
 
     const handleScroll  = useCallback(()=>{
         const height=convertToPixels(heightRef.current)
-        
-        const ref = refs[index];
-        if (!ref?.current)return;
-
-        const scrollTop = window.pageYOffset+window.innerHeight * 0.05;
-        const elementTop = ref.current.offsetTop;
-        const distance = elementTop - scrollTop;
-         // Determine scroll direction
+    
+        const scrollTop = window.pageYOffset-window.innerHeight * 0.5;
         const currentScrollPos = window.pageYOffset;
         if (currentScrollPos > prevScrollPos) {
         setScrollDirection('down');
@@ -27,14 +21,17 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
         }
         setPrevScrollPos(currentScrollPos);
 
-        // Update index based on scroll direction
-        if (distance < 0 && index <= n && scrollDirection === 'down') {
-            setIndex(index+1<=n?index+1:n);
-        } else if (distance > (height+25) && index > 0 && scrollDirection === 'up') {
-            setIndex(index-1<=n?index-1:n );
-        }
+        const nearestRefIndex = refs.reduce((minIndex, ref, currentIndex, array) =>{
+            if(!ref?.current)return currentIndex;
+            const elementTop = ref.current.offsetTop;
+            const prevTop = array[minIndex].current.offsetTop
+            const scrollTop = window.pageYOffset+window.innerHeight * 0.5;            
+            //const distance = Math.abs(elementTop - scrollTop);
+            console.log(currentIndex,elementTop,scrollTop);
+           return Math.abs(elementTop - scrollTop)<Math.abs(elementTop - prevTop)?minIndex:currentIndex}, 0);
+           setIndex(nearestRefIndex)
 
-    },[index,prevScrollPos, scrollDirection,n,refs])
+    },[prevScrollPos, refs])
 
     useEffect(()=>{
         window.addEventListener('scroll',handleScroll);
