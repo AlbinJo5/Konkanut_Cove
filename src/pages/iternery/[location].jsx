@@ -6,7 +6,7 @@ import Page3Panel3 from '@/components/page3-panel3';
 import Page3PicPanel from '@/components/page3-pic-panel';
 import { Airplane, Car, Hotel } from '@icon-park/react';
 import React, { useState } from 'react'
-import routes from "@/routes";
+import {routes} from "@/routes";
 const includedList=[
     {
       title:"Airport",
