@@ -31,7 +31,7 @@ export  default function ScrollProgress({n=6,height="200px",fromAbove=15}){
         if (distance < 0 && index <= n && scrollDirection === 'down') {
             setIndex(index+1<=n?index+1:n);
         } else if (distance > (height+25) && index > 0 && scrollDirection === 'up') {
-            setIndex(index-1<=n?index-1:n);
+            setIndex(index-1<=n?index-1:n );
         }
 
     },[index,prevScrollPos, scrollDirection,n,refs])
