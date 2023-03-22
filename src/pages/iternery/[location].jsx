@@ -114,7 +114,7 @@ export default function Iternery ({panel1,travelSteps,accomodation,activities,tr
 
 export async function getServerSideProps(context){
     const {location} = context.params
-    const res = await fetch("http://localhost:3000/api/v1/iternery/"+location);
+    const res = await fetch(process.env.URL+"/api/v1/iternery/"+location);
     if(!res.ok)return{
         redirect: {
             destination: routes.page404,

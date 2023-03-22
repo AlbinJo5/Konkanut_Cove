@@ -67,7 +67,7 @@ export default function Hotels({subPanelDatas,imageDatas,title,desc}) {
 
 
 export async function getStaticProps(){
-    const res = await fetch('http://localhost:3000/api/v1/hotels');
+    const res = await fetch(process.env.URL+'/api/v1/hotels');
     if(!res.ok){
         return {
             redirect: {
