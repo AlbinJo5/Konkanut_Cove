@@ -4,16 +4,15 @@ import { LeftC, RightC } from "@icon-park/react";
 import Image from "next/image";
 import clsx from "clsx";
 
-const Carousel1 = ({ data,width="288",height="288",scale=null }) => {
+const Carousel1 = ({ data, width = "288", height = "288", scale = null }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  const CarouselData=data;
+  const CarouselData = data;
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (!paused) {
-        let newSlide =
-          currentSlide === data.length - 1 ? 0 : currentSlide + 1;
+        let newSlide = currentSlide === data.length - 1 ? 0 : currentSlide + 1;
         setCurrentSlide(newSlide);
       }
     }, 3000);
@@ -26,39 +25,41 @@ const Carousel1 = ({ data,width="288",height="288",scale=null }) => {
   };
 
   const prevSlide = () => {
-    let newSlide =
-      currentSlide === 0 ? data.length - 1 : currentSlide - 1;
+    let newSlide = currentSlide === 0 ? data.length - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
   };
-  
+
   return (
-    <div className={clsx("mt-8",scale)}>
-      <div className={clsx("flex justify-center h-full mb-5 max-xs:h-64 overflow-hidden relative")}>
-      
+    <div className={clsx("mt-8 max-w-[500px]")}>
+      <div
+        className={clsx(
+          "flex justify-center h-full mb-5 max-xs:h-64 overflow-hidden relative"
+        )}
+      >
         <Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
           <ul className="flex justify-center">
             {data.map((slide, index) => {
               return (
                 <Image
-                      src={slide.image}
-                      width="288"
-                      height="288"
-                      alt="This is a carousel slide"
-                      key={index}
-                      className={clsx(
-                        index === currentSlide
-                          ? "rounded-md block w-full h-auto"
-                          : "hidden",
-                        "object-fit",
-                        "min-w-[350px] min-h-[28px] max-w-[350px] max-h-[288px]"
-                      )}
-                      onMouseEnter={() => {
-                        setPaused(true);
-                      }}
-                      onMouseLeave={() => {
-                        setPaused(false);
-                      }}
-                    />
+                  src={slide.image}
+                  width="288"
+                  height="288"
+                  alt="This is a carousel slide"
+                  key={index}
+                  className={clsx(
+                    index === currentSlide
+                      ? "rounded-md block w-full h-auto"
+                      : "hidden",
+                    "object-fit",
+                    "min-w-[350px] min-h-[28px] max-w-[350px] max-h-[288px]"
+                  )}
+                  onMouseEnter={() => {
+                    setPaused(true);
+                  }}
+                  onMouseLeave={() => {
+                    setPaused(false);
+                  }}
+                />
               );
             })}
           </ul>

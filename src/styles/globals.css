@@ -1,29 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer components{
-  .apply-gradient{
-    background: linear-gradient(180deg, #0E5347 -151.57%, rgba(255, 255, 255, 0.5) 144.56%);
+@layer components {
+  .apply-gradient {
+    background: linear-gradient(
+      180deg,
+      #0e5347 -151.57%,
+      rgba(255, 255, 255, 0.5) 144.56%
+    );
   }
 
+  .slant {
+    position: relative;
+    background: maroon;
+    display: inline-block;
+    color: white;
+    padding: 0.24em 0.3em 0.25em;
+  }
 
-  .slant{
-  position: relative;
-  background: maroon;
-  display: inline-block;
-  color: white;
-  padding: .24em .3em .25em;
+  .slant::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    right: -10%;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: inherit;
+    transform: skewX(-10deg);
+  }
 }
 
-.slant::after {
-  position: absolute;
-  z-index: -1;
-  content: "";
-  right: -10%;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: inherit;
-  transform: skewX(-10deg);
-}
+body {
+  width: 100vw;
+  overflow-x: hidden;
 }
