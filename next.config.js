@@ -1,10 +1,17 @@
+
 /** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    unoptimized:true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '/**',
+      },
+    ],
+  },
+}
 
-const withSVGR = require('next-plugin-svgr');
-
-module.exports = withSVGR({
-  reactStrictMode: false,
-  images:{
-    domains:["images.unsplash.com"]
-  }
-});
+module.exports = nextConfig
