@@ -4,7 +4,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../styles/react-dropdown.css";
 import Head from "next/head";
 import { createTheme, NextUIProvider } from "@nextui-org/react"
-
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 const theme = createTheme({
   type: "light", // it could be "light" or "dark"
   theme: {
@@ -49,13 +53,18 @@ const theme = createTheme({
 })
 
 export default function App({ Component, pageProps }) {
+
+  const queryClient = new QueryClient()
   return (
     <>
       <Head>
         {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
       </Head>
       <NextUIProvider theme={theme}>
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </NextUIProvider>
     </>
   );

@@ -4,7 +4,8 @@ export const ADMIN_ROUTES ={
     PRODUCTS : "/admin/products",
     UTILITIES : "/admin/utilities",
     PACKAGES : "/admin/packages",
-    ENQUIRIES : "/admin/enquiries",
+    HOTELS : "/admin/hotels",
+    HOTELS_ADD : "/admin/hotels/add",
     CONTACTS : "/admin/contacts",
     INDEX: "/admin",
 }

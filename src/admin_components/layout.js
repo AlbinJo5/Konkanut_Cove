@@ -10,33 +10,33 @@ import styles from "@/styles/admin_styles/layout.module.scss"
 
 function Layout({ children }) {
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
     const collapseItems = [
         "Dashboard",
-        "Products",
+        "Utilities",
         "Packages",
-        "Enquiries",
+        "Hotels",
         "Contacts"
     ];
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        var expiry = localStorage.getItem(LocalStorage.adminAuthExpiry)
-        if (expiry) {
-            if (new Date(expiry) > new Date()) {
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 1000)
-            } else {
-                router.push(ADMIN_ROUTES.AUTH)
-            }
-        }
-        else {
-            router.push(ADMIN_ROUTES.AUTH)
-        }
-    }, [router])
+    //     var expiry = localStorage.getItem(LocalStorage.adminAuthExpiry)
+    //     if (expiry) {
+    //         if (new Date(expiry) > new Date()) {
+    //             setTimeout(() => {
+    //                 setIsLoading(false)
+    //             }, 1000)
+    //         } else {
+    //             // router.push(ADMIN_ROUTES.AUTH)
+    //         }
+    //     }
+    //     else {
+    //         // router.push(ADMIN_ROUTES.AUTH)
+    //     }
+    // }, [router])
 
 
     return (
@@ -83,7 +83,7 @@ function Layout({ children }) {
                         <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.DASHBOARD} href={ADMIN_ROUTES.DASHBOARD}>Dashboard</Navbar.Link>
                         <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.UTILITIES} href={ADMIN_ROUTES.UTILITIES}>Utilities</Navbar.Link>
                         <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.PACKAGES} href={ADMIN_ROUTES.PACKAGES}>Packages</Navbar.Link>
-                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.ENQUIRIES} href={ADMIN_ROUTES.ENQUIRIES}>Enquiries</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.HOTELS} href={ADMIN_ROUTES.HOTELS}>Hotels</Navbar.Link>
                         <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.CONTACTS} href={ADMIN_ROUTES.CONTACTS}>Contacts</Navbar.Link>
                     </Navbar.Content>
                     <Navbar.Content
@@ -183,7 +183,9 @@ function Layout({ children }) {
                                     css={{
                                         minWidth: "100%",
                                     }}
-                                    href={item.toLocaleLowerCase()}
+                                    href={
+                                        "/admin/" + item.toLocaleLowerCase()
+                                    }
                                 >
                                     {item}
                                 </Link>
