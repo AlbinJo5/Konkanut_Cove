@@ -2,30 +2,61 @@ import Layout from '@/admin_components/layout'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { uploadImages } from '@/utils/firebase_image_upload'
+import { uploadData } from '@/utils/firebase_data_handler'
+import { queryClient } from '@/pages/_app'
 function Add() {
 
     const places = useQuery(['places'], () => {
         return fetch('/api/place')
             .then(res => res.json())
 
-    })
+    },
+        {
+
+            staleTime: 10000 * 60
+        }
+    )
+
+    const handleData = (data) => {
+        const resp = uploadData(data, "Hotels")
+        resp.then(res => {
+            console.log(res);
+            if (res.message === "success") {
+                // update or add the response to the cache
+                queryClient.setQueryData(['hotels'], (old) => {
+                    const oldData = old?.data
+                    if (oldData) {
+                        return { ...old, data: [...oldData, res.data] }
+                    }
+                    else {
+                        return { ...old, data: [res.data] }
+                    }
+                })
+
+                alert("Hotel Added Successfully")
+            }
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target.Hotel_Name.value);
-        console.log(e.target.Hotel_Address.value);
-        console.log(e.target.Hotel_Place.value);
-        console.log(e.target.Hotel_Description.value);
-        console.log(e.target.Hotel_Image.files);
-        console.log(e.target.Hotel_a.checked);
-        console.log(e.target.Hotel_b.checked);
-        console.log(e.target.Hotel_c.checked);
-        console.log(e.target.Hotel_Map.value);
-        console.log(e.target.Hotel_Cancel_Day.value);
-        console.log(e.target.Hotel_Cancel_Time.value);
-        const resp = uploadImages(e.target.Hotel_Image.files, "test_multiple2")
+        const data = {
+            name: e.target.Hotel_Name.value,
+            address: e.target.Hotel_Address.value,
+            place: e.target.Hotel_Place.value,
+            description: e.target.Hotel_Description.value,
+            a: e.target.Hotel_a.checked,
+            b: e.target.Hotel_b.checked,
+            c: e.target.Hotel_c.checked,
+            map: e.target.Hotel_Map.value,
+            cancel_day: e.target.Hotel_Cancel_Day.value,
+            cancel_time: e.target.Hotel_Cancel_Time.value
+        }
+        const resp = uploadImages(e.target.Hotel_Image.files, "Hotels")
         resp.then(res => {
             console.log(res.data);
+            data.images = res.data
+            handleData(data)
         })
     }
 

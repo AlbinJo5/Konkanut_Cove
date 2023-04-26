@@ -15,18 +15,18 @@ function Index() {
     const [count, setCount] = useState(0);
     const route = useRouter();
 
+
     const hotelsData = useQuery(
         ['hotels'],
         () => {
             return getAllData("Hotels")
         },
         {
-            staleTime: 10000 * 60 
+            staleTime: 10000 * 60
         }
     )
 
     console.log(hotelsData.data?.data);
-
 
     return (
         <Layout>
@@ -36,8 +36,8 @@ function Index() {
                     <Button auto color="success" css={{
                         color: "#ffffff",
                     }} onClick={() => {
-                        route.push(ADMIN_ROUTES.HOTELS_ADD)
-                    }}> Add Hotel </Button>
+                        route.push(ADMIN_ROUTES.PACKAGES_ADD)
+                    }}> Add Package </Button>
                 </div>
                 {/* <Addmodel /> */}
                 <Table

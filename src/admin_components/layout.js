@@ -80,11 +80,21 @@ function Layout({ children }) {
                         variant="highlight-rounded"
 
                     >
-                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.DASHBOARD} href={ADMIN_ROUTES.DASHBOARD}>Dashboard</Navbar.Link>
-                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.UTILITIES} href={ADMIN_ROUTES.UTILITIES}>Utilities</Navbar.Link>
-                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.PACKAGES} href={ADMIN_ROUTES.PACKAGES}>Packages</Navbar.Link>
-                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.HOTELS} href={ADMIN_ROUTES.HOTELS}>Hotels</Navbar.Link>
-                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.CONTACTS} href={ADMIN_ROUTES.CONTACTS}>Contacts</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.DASHBOARD} onClick={() => {
+                            router.push(ADMIN_ROUTES.DASHBOARD)
+                        }} >Dashboard</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.UTILITIES} onClick={() => {
+                            router.push(ADMIN_ROUTES.UTILITIES)
+                        }} >Utilities</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.PACKAGES} onClick={() => {
+                            router.push(ADMIN_ROUTES.PACKAGES)
+                        }} >Packages</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.HOTELS} onClick={() => {
+                            router.push(ADMIN_ROUTES.HOTELS)
+                        }} >Hotels</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.CONTACTS} onClick={() => {
+                            router.push(ADMIN_ROUTES.CONTACTS)
+                        }} >Contacts</Navbar.Link>
                     </Navbar.Content>
                     <Navbar.Content
                         css={{

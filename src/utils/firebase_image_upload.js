@@ -33,7 +33,7 @@ export async function uploadImages(images, path) {
         for (const key in images) {
             if (key == "item" || key == "length") continue;
             const image = images[key];
-            const imageRef = ref(storage, `${path}/${key}`);
+            const imageRef = ref(storage, `${path}/${image.name + new Date().getTime()}`);
             const uploadTask = await uploadBytesResumable(imageRef, image);
             // get the download url
             const url = await getDownloadURL(uploadTask.ref);
