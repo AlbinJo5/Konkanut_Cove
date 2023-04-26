@@ -1,4 +1,4 @@
-import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox } from "@nextui-org/react";
+import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox, Dropdown } from "@nextui-org/react";
 import { DeleteIcon, EditIcon, IconButton } from "../../icons";
 import { Input, Grid, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
@@ -6,10 +6,21 @@ import { useRouter } from "next/router"
 import { uploadImages } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
 import { uploadData } from "@/utils/firebase_data_handler";
+import { useQuery } from '@tanstack/react-query'
+
 
 export default function PackageAdd() {
     const { setVisible, bindings } = useModal();
 
+    const places = useQuery(['places'], () => {
+        return fetch('/api/place')
+            .then(res => res.json())
+    },
+        {
+
+            staleTime: 10000 * 60
+        }
+    )
     const handleAdd = (data) => {
         const resp = uploadData(data, "Packages")
         resp.then(res => {
@@ -43,8 +54,9 @@ export default function PackageAdd() {
         const price = e.target[1].value;
         const days = e.target[2].value;
         const nights = e.target[3].value;
-        const description = e.target[4].value;
-        const resp = uploadImages(e.target[5].files, "packages");
+        const place = e.target[4].value;
+        const description = e.target[5].value;
+        const resp = uploadImages(e.target[6].files, "packages");
         resp.then((res) => {
             const data = {
                 title: title,
@@ -52,6 +64,7 @@ export default function PackageAdd() {
                 days: days,
                 nights: nights,
                 description: description,
+                place: place,
                 images: res.data,
             }
             handleAdd(data);
@@ -66,21 +79,26 @@ export default function PackageAdd() {
             </Button>
 
             <Modal
-                scroll={true}
                 width="600px"
+                height="80px"
+
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
                 {...bindings}
             >
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
-                        color: "#ffffff",
+                        color: "#0000000",
                     }} size={20}>
                         Add Package
                     </Text>
                 </Modal.Header>
                 <form onSubmit={handleSubmit} >
-                    <Modal.Body>
+                    <Modal.Body
+                        height="800px"
+                        scroll={true}
+
+                    >
 
                         <Grid.Container gap={4}>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -115,6 +133,43 @@ export default function PackageAdd() {
                                     labelPlaceholder="Nights"
                                     type="number"
                                     color="error" />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <select name="place" id="place" style={{
+                                    width: "100%",
+                                    height: "max-content",
+                                    border: "3.5px solid #eaeaea",
+                                    borderRadius: "1rem",
+                                    padding: "10px",
+                                    outline: "none",
+                                    color: "#0000004a",
+                                    fontSize: "16px",
+                                    fontWeight: "500",
+                                    fontFamily: "inherit",
+                                    backgroundColor: "#ffffff",
+
+                                    // options in inline
+                                    "& option": {
+                                        color: "#0000004a",
+                                        fontSize: "16px",
+                                        fontWeight: "500",
+                                        fontFamily: "inherit",
+                                        backgroundColor: "#ffffff",
+                                        width: "100%",
+                                    }
+
+
+
+                                }} >
+                                    <option value="0">Select Place</option>
+                                    {
+                                        places.data?.data.map((place, index) => {
+                                            return (
+                                                <option key={index} value={place.id}>{place.data.title}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
                             </Grid>
 
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>

@@ -59,3 +59,31 @@ export async function getAllData(path) {
         }
     }
 }
+
+export async function getDataById(path) {
+    try {
+        const docRef = doc(db, path);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return {
+                message: "success",
+                data: {
+                    id: docSnap.id,
+                    ...docSnap.data()
+                }
+            }
+        } else {
+            return {
+                message: "error",
+                data: "No such document!"
+            };
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return {
+            message: "error",
+            data: err
+        }
+    }
+}

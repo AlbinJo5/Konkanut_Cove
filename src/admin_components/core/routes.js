@@ -5,6 +5,7 @@ export const ADMIN_ROUTES ={
     UTILITIES : "/admin/utilities",
     PACKAGES : "/admin/packages",
     PACKAGES_ADD : "/admin/packages/add",
+    PACKAGES_VIEW : "/admin/packages/view/",
     HOTELS : "/admin/hotels",
     HOTELS_ADD : "/admin/hotels/add",
     CONTACTS : "/admin/contacts",

@@ -33,11 +33,6 @@ function Index() {
             <div className={styles.products} >
                 <div className={styles.head} >
                     <h3>Packages</h3>
-                    {/* <Button auto color="success" css={{
-                        color: "#ffffff",
-                    }} onClick={() => {
-                        route.push(ADMIN_ROUTES.PACKAGES_ADD)
-                    }}> Add Package </Button> */}
                     <PackageAdd />
                 </div>
                 {/* <Addmodel /> */}
@@ -71,17 +66,15 @@ function Index() {
                                     </User></Table.Cell>
                                     <Table.Cell>{data.title}</Table.Cell>
 
-                                    <Table.Cell>  <Row justify="center" align="center">
-                                        <Col css={{ d: "flex" }}>
-                                            <PlacesView id={data.id} data={data} count={() => setCount(count + 1)} />
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                            <PlaceEdit id={data.id} data={data} count={() => setCount(count + 1)} />
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                            <PlaceDelete id={data.id} count={() => setCount(count + 1)} />
-                                        </Col>
-                                    </Row></Table.Cell>
+                                    <Table.Cell>
+                                        <Button auto color="success" css={{
+                                            color: "#ffffff",
+                                            // light green
+                                            backgroundColor: "#4caf40",
+                                        }} onClick={() => {
+                                            route.push(`${ADMIN_ROUTES.PACKAGES_VIEW}/${data.id}`)
+                                        }}> View </Button>
+                                    </Table.Cell>
                                 </Table.Row>
                             ))
                         }
