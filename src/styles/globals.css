@@ -1,13 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer components {
   .apply-gradient {
-    background: linear-gradient(
-      180deg,
-      #0e5347 -151.57%,
-      rgba(255, 255, 255, 0.5) 144.56%
-    );
+    background: linear-gradient(180deg,
+        #0e5347 -151.57%,
+        rgba(255, 255, 255, 0.5) 144.56%);
   }
 
   .slant {
