@@ -1,110 +1,203 @@
-import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox } from "@nextui-org/react";
+import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox, Dropdown } from "@nextui-org/react";
 import { DeleteIcon, EditIcon, IconButton } from "../../icons";
 import { Input, Grid, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { addData } from "@/utils/firebaseDataHandler";
 import { useRouter } from "next/router"
+import { uploadImages } from "@/utils/firebase_image_upload";
+import { queryClient } from "@/pages/_app";
+import { uploadData } from "@/utils/firebase_data_handler";
+import { useQuery } from '@tanstack/react-query'
 
-const ROUTE = '/api/package';
 
 export default function PackageEdit(props) {
-    const [form, setForm] = useState(props.data);
-    const router = useRouter();
     const { setVisible, bindings } = useModal();
-    const [imagePath, setImagePath] = useState([]);
 
-    if (props.visibity) {
-        setVisible(false);
-    }
+    const places = useQuery(['places'], () => {
+        return fetch('/api/place')
+            .then(res => res.json())
+    },
+        {
 
-    // Update Package API
-    const updatePackage = async (id, data) => {
-        console.log(data);
-        fetch(ROUTE + `?id=${id}`, { method: 'PUT', body: JSON.stringify(data), headers: { "Content-Type": "application/json", "accept": "application/json" } }).then(res => res.json()).then(res => {
-            if (res.status === 200) {
+            staleTime: 10000 * 60
+        }
+    )
+    const handleAdd = (data) => {
+        const resp = uploadData(data, "Packages")
+        resp.then(res => {
+            console.log(res);
+            if (res.message === "success") {
+                // update or add the response to the cache
+                queryClient.setQueryData(['packages'], (old) => {
+                    const oldData = old?.data
+                    if (oldData) {
+                        return { ...old, data: [...oldData, res.data] }
+                    }
+                    else {
+                        return { ...old, data: [res.data] }
+                    }
+                })
+
+                // close the modal
                 setVisible(false);
-                props.count();
+
+                alert("Package Added Successfully")
+            }
+            else {
+                alert("Package Adding Failed")
             }
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const title = e.target[0].value;
+        const price = e.target[1].value;
+        const days = e.target[2].value;
+        const nights = e.target[3].value;
+        const place = e.target[4].value;
+        const description = e.target[5].value;
+        const resp = uploadImages(e.target[6].files, "packages");
+        resp.then((res) => {
+            const data = {
+                title: title,
+                price: price,
+                days: days,
+                nights: nights,
+                description: description,
+                place: place,
+                images: res.data,
+            }
+            handleAdd(data);
+        }
+        )
+    }
+
     return (
         <div>
-            <Tooltip
-                content="Edit"
-                color="error"
-                onClick={() => {
-                    setVisible(true)
-                }}
-            >
-                <IconButton>
-                    <EditIcon size={20} fill="#FF0080" />
-                </IconButton>
-            </Tooltip>
+            <Button auto shadow color="error" onClick={() => setVisible(true)}>
+                Add Package
+            </Button>
 
             <Modal
-                scroll
                 width="600px"
+                height="80px"
+
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
                 {...bindings}
             >
                 <Modal.Header>
-                    <Text id="modal-title" size={20}>
-                        Edit Package
+                    <Text id="modal-title" color="success" css={{
+                        color: "#0000000",
+                    }} size={20}>
+                        Add Package
                     </Text>
                 </Modal.Header>
-                <Modal.Body>
-                    <Grid.Container gap={4}>
-                        <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                            <Input
-                                bordered
-                                fullWidth={true}
-                                labelPlaceholder="Title"
-                                onChange={e => setForm({ ...form, name: e.target.value })}
-                                value={form.name}
-                                color="error" />
-                        </Grid>
-                        <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                            <Input
-                                bordered
-                                fullWidth={true}
-                                labelPlaceholder="Stock"
-                                onChange={e => setForm({ ...form, stock: e.target.value })}
-                                type="number"
-                                value={form.stock}
-                                color="error" />
-                        </Grid>
+                <form onSubmit={handleSubmit} >
+                    <Modal.Body
+                        height="800px"
+                        scroll={true}
 
-                        <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                            <Textarea
-                                bordered
-                                onChange={e => setForm({ ...form, desc: e.target.value })}
-                                fullWidth={true}
-                                labelPlaceholder="Description"
-                                color="error"
-                                value={form.desc}
-                            />
-                        </Grid>
-                        <Grid>
-                            <Checkbox  defaultSelected={form.isAvailable ? true : false} onClick={() => setForm({...form, isAvailable:!form.isAvailable})} size="sm">
-                                isAvailable?
-                            </Checkbox>
-                        </Grid>
-                        {/* <Grid>
-                            <input type="file" multiple onChange={e => setImagePath(e.target.files)} />
-                        </Grid> */}
-                    </Grid.Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button auto flat color="error" onPress={() => { setVisible(false), setForm({}) }}>
-                        Close
-                    </Button>
-                    <Button auto color="error" onPress={() => { updatePackage(props.id, form) }}>
-                        Update
-                    </Button>
-                </Modal.Footer>
+                    >
+
+                        <Grid.Container gap={4}>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Input
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Title"
+                                    defaultValue={props.title}
+                                    color="error" />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Input
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Price"
+                                    defaultValue={props.price}
+                                    type="number"
+                                    color="error" />
+                            </Grid>
+
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Input
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Days"
+                                    defaultValue={props.days}
+                                    type="number"
+                                    color="error" />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Input
+                                    bordered
+                                    fullWidth={true}
+                                    defaultValue={props.nights}
+                                    labelPlaceholder="Nights"
+                                    type="number"
+                                    color="error" />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <select name="place" id="place" style={{
+                                    width: "100%",
+                                    height: "max-content",
+                                    border: "3.5px solid #eaeaea",
+                                    borderRadius: "1rem",
+                                    padding: "10px",
+                                    outline: "none",
+                                    color: "#0000004a",
+                                    fontSize: "16px",
+                                    fontWeight: "500",
+                                    fontFamily: "inherit",
+                                    backgroundColor: "#ffffff",
+
+                                    // options in inline
+                                    "& option": {
+                                        color: "#0000004a",
+                                        fontSize: "16px",
+                                        fontWeight: "500",
+                                        fontFamily: "inherit",
+                                        backgroundColor: "#ffffff",
+                                        width: "100%",
+                                    }
+
+
+
+                                }} >
+                                    <option value="0">Select Place</option>
+                                    {
+                                        places.data?.data.map((place, index) => {
+                                            return (
+                                                <option key={index} value={place.id}>{place.data.title}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </Grid>
+
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Textarea
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Description"
+                                    color="error"
+                                />
+                            </Grid>
+                            <Grid>
+                                <input type="file" multiple />
+                            </Grid>
+                        </Grid.Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button auto flat color="error" onPress={() => { setVisible(false) }}>
+                            Close
+                        </Button>
+                        <Button auto color="error" type="submit" >
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </form>
             </Modal>
-        </div>
+        </div >
     );
 }
