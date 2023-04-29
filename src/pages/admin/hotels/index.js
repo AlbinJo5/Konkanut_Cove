@@ -68,17 +68,13 @@ function Index() {
                                     </User></Table.Cell>
                                     <Table.Cell>{data.name}</Table.Cell>
 
-                                    <Table.Cell>  <Row justify="center" align="center">
-                                        <Col css={{ d: "flex" }}>
-                                            <PlacesView id={data.id} data={data} count={() => setCount(count + 1)} />
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                            <PlaceEdit id={data.id} data={data} count={() => setCount(count + 1)} />
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                            <PlaceDelete id={data.id} count={() => setCount(count + 1)} />
-                                        </Col>
-                                    </Row></Table.Cell>
+                                    <Table.Cell>
+                                        <Button onClick={()=>{
+                                            route.push(ADMIN_ROUTES.HOTELS_VIEW  + data.id)
+                                        }} > 
+                                            View
+                                        </Button>
+                                    </Table.Cell>
                                 </Table.Row>
                             ))
                         }

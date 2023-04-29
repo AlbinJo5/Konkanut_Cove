@@ -5,7 +5,7 @@ export async function uploadImage(image, path) {
 
     try {
         // create a storage reference
-        const storageRef = ref(storage, path);
+        const storageRef = ref(storage, `${path}/${image.name + new Date().getTime()}`);
 
         // upload the file
         const uploadTask = await uploadBytesResumable(storageRef, image);

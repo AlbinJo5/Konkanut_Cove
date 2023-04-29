@@ -47,7 +47,9 @@ export default function Hotels({ subPanelDatas, imageDatas, title, desc }) {
               <MainText width="600px">{desc}</MainText>
             </MainHeader>
             <div className="flex w-full justify-center">
+
               <Page4Slider />
+
             </div>
 
           </div>
@@ -92,20 +94,27 @@ export async function getStaticProps() {
     },
   ];
 
-  const imageDatas = [].concat(...Array(3).fill(
+  const imageDatas = [].concat(...Array(1).fill(
     {
       images: [
+
         {
-          image: "/assets/images/beds/bed_1.png",
+          image: "/assets/images/beds/bed_5.png",
         },
         {
-          image: "/assets/images/beds/bed_2.png",
+          image: "/assets/images/beds/bed_5.png",
         },
         {
-          image: "/assets/images/beds/bed_3.png",
+          image: "/assets/images/beds/bed_5.png",
         },
         {
-          image: "/assets/images/beds/bed_4.png",
+          image: "/assets/images/beds/bed_5.png",
+        },
+        {
+          image: "/assets/images/beds/bed_5.png",
+        },
+        {
+          image: "/assets/images/beds/bed_5.png",
         },
         {
           image: "/assets/images/beds/bed_5.png",
@@ -123,7 +132,7 @@ export async function getStaticProps() {
       after: Date(6, 2, 23),
       landmarks: [
         {
-          distance: "0.5km",
+          distance: "0.1km",
           placeName: "Aero city Metro Station"
         },
         {
@@ -132,7 +141,6 @@ export async function getStaticProps() {
         },
 
       ],
-
     }));
 
   const data = {

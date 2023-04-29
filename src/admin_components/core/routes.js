@@ -8,6 +8,7 @@ export const ADMIN_ROUTES ={
     PACKAGES_VIEW : "/admin/packages/view/",
     HOTELS : "/admin/hotels",
     HOTELS_ADD : "/admin/hotels/add",
+    HOTELS_VIEW : "/admin/hotels/view/",
     CONTACTS : "/admin/contacts",
     INDEX: "/admin",
 }
