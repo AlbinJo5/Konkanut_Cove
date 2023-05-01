@@ -50,13 +50,13 @@ const MapAC = () => {
   );
 }
 
-export default function Page4Panel4({ images, hotelName, address, until, after, landmarks, options }) {
+export default function Page4Panel4({ images, name, address, until, after, landmarks, options }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="flex flex-col border-[1px] border-gray-200 shadow-2xl py-5 rounded-lg px-10">
       <ImageModal images={images} showModal={showModal} setShowModal={setShowModal} />
-      <ImageGrid images={images} hotelName={hotelName} address={address} noCol setShowModal={setShowModal}>
+      <ImageGrid images={images} name={name} address={address} noCol setShowModal={setShowModal}>
         <MapAC />
       </ImageGrid>
 

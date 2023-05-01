@@ -8,6 +8,8 @@ import { Fade } from 'react-reveal'
 import { ClothesCardigan, Fitness, ForkSpoon, Parking, SwimmingPool, Wifi } from "@icon-park/react"
 import Page4Slider from '@/components/page4-slider'
 import { routes } from '@/routes'
+import { getAllSubcollections } from '@/utils/firebase_data_handler'
+import { useQuery } from '@tanstack/react-query'
 
 const options = [
     {
@@ -105,7 +107,20 @@ const data = {
     imageDatas,
 };
 
+
+
 export default function Hotels() {
+
+    const hotelsFullData = useQuery(
+        ['hotelsFullData'],
+        () => getAllSubcollections('Hotels', ["Rooms", "Landmarks"]),
+        {
+            staleTime: Infinity,
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+        }
+    )
     return (
         <Layout>
             <Fade top>
@@ -137,7 +152,11 @@ export default function Hotels() {
             </Fade>
             <div className="flex flex-col mt-40  sm:mt-25 md:mt-20">
                 <Page4Panel1 subPanelDatas={data.subPanelDatas} />
-                <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 mt-20">
+                <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 mt-20">{
+                    hotelsFullData.isLoading ? <div>Loading...</div> : hotelsFullData.data?.data.map((d, i) =>
+                        <Page4Panel4 {...d} options={options} key={i} />
+                    )
+                }
                     {data.imageDatas.map((d, i) =>
                         <Page4Panel4 {...d} options={options} key={i} />
                     )}

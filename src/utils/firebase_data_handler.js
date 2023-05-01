@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc, } from "firebase/firestore";
 import { db } from "./firebase";
 export async function uploadData(data, path) {
 
@@ -87,3 +87,36 @@ export async function getDataById(path) {
         }
     }
 }
+
+export async function getAllSubcollections(collectionName, subCollectionNames) {
+    try {
+        const collectionData = await getAllData(collectionName);
+        if (collectionData.message === "success") {
+            let data = collectionData.data;
+            for (let i = 0; i < data.length; i++) {
+                for (let j = 0; j < subCollectionNames.length; j++) {
+                    const subCollectionData = await getAllData(`${collectionName}/${data[i].id}/${subCollectionNames[j]}`);
+                    if (subCollectionData.message === "success") {
+                        data[i][subCollectionNames[j]] = subCollectionData.data;
+                    }
+                }
+            }
+            return {
+                message: "success",
+                data
+            }
+        }
+
+
+
+    } catch (err) {
+        console.log(err);
+        return {
+            message: "error",
+            data: err,
+        };
+    }
+}
+
+
+

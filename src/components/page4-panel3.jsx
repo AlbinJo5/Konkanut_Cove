@@ -20,7 +20,7 @@ export const Landmarks = ({ landmarks }) => {
           </tr>
         </thead>
         <tbody>
-          {landmarks.map(({ distance, placeName }, index) =>
+          {landmarks?.map(({ distance, placeName }, index) =>
             <tr key={index} className="border-gray-400 box-border">
               <td className="border-r-[1px] border-b-[1px]  border-gray-400 box-border p-3">{distance}</td>
               <td className="border-b-[1px]  border-gray-400 box-border p-3">{placeName}</td>
@@ -56,23 +56,23 @@ export const Cancellations = ({ until, after, refund1 = "100%", refund2 = "No" }
   )
 }
 
-export const ImageGrid = ({ images, setShowModal, hotelName, address, children, noCol = false }) => {
+export const ImageGrid = ({ images, setShowModal, name, address, children, noCol = false }) => {
 
   return (
     <>
       <div className="grid sm:grid-rows-2 sm:grid-flow-col sm:gap-4 w-full h-[250px]">
         <div className="row-span-2 col-span-3 relative">
-          <Image src={images[0].image} alt="grid pictures" fill className="rounded-md" />
+          <Image src={images[0]} alt="grid pictures" fill className="rounded-md" />
           <div className="sm:hidden z-0 absolute w-full h-full flex justify-center items-center text-4xl text-white font-bold">{images.length}+</div>
           <div className="sm:hidden absolute w-full h-full z-10 bg-black bg-opacity-25 hover:bg-opacity-20" onClick={() => setShowModal(true)}></div>
         </div>
-        {images.slice(1, images.length).map(({ image }, index) =>
+        {images.slice(1, images.length).map((image, index) =>
           <div className="max-sm:hidden sm:col-span-2 relative" key={index}><Image src={image} alt="grid pictures" fill className="rounded-md" /></div>
         )}
       </div>
       <div className={clsx("flex items-start mt-4", { "max-sm:flex-col": !noCol })}>
         <div className="flex flex-col grow">
-          <div className="text-xl font-bold">{hotelName}</div>
+          <div className="text-xl font-bold">{name}</div>
           <div className="text-sm text-gray-500">{address}</div>
         </div>
         {children}
