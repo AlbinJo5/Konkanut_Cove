@@ -1,5 +1,5 @@
 import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox, Dropdown } from "@nextui-org/react";
-import { DeleteIcon, EditIcon, IconButton } from "../../icons";
+import { DeleteIcon, EditIcon, IconButton } from "../../../icons";
 import { Input, Grid, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router"

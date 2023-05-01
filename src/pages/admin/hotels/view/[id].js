@@ -1,8 +1,6 @@
 import Layout from '@/admin_components/layout'
-import ActivityDelete from '@/admin_components/model/activity/activityDelete'
-import ActivityEdit from '@/admin_components/model/activity/activityEdit'
-import ActivitiesView from '@/admin_components/model/activity/activityView'
-import RoomAdd from '@/admin_components/model/room/roomAdd'
+import LandmarkAdd from '@/admin_components/model/HOTELS/landmarks/landmarkAdd'
+import RoomAdd from '@/admin_components/model/HOTELS/room/roomAdd'
 import { getAllData, getDataById } from '@/utils/firebase_data_handler'
 import { Button, Col, Row, Table, Text, User } from '@nextui-org/react'
 import { useQuery } from '@tanstack/react-query'
@@ -32,15 +30,39 @@ function Index() {
             staleTime: 10000 * 60
         }
     )
-    const hotelsData = useQuery(
-        ['hotels'],
+
+
+    const roomsData = useQuery(
+        [
+            'hotels',
+            id,
+            'rooms'
+        ],
         () => {
-            return getAllData("Hotels")
+            return getAllData(`Hotels/${id}/Rooms`)
         },
         {
-            staleTime: 10000 * 60
+            staleTime: 10000 * 60,
+            enabled: !!id
         }
     )
+
+    const landmarksData = useQuery(
+        [
+            'hotels',
+            id,
+            'landmarks'
+        ],
+        () => {
+            return getAllData(`Hotels/${id}/Landmarks`)
+        },
+        {
+            staleTime: 10000 * 60,
+            enabled: !!id
+        }
+    )
+
+    console.log(roomsData.data);
 
     return (
         <Layout>
@@ -92,6 +114,8 @@ function Index() {
 
                 }
             </div>
+
+            {/* Rooms */}
             <div style={{
                 marginTop: 50,
             }}>
@@ -127,22 +151,89 @@ function Index() {
                     <Table.Body>
                         {
                             // hotelsData.data?.map(({ id, data }, i) => (
-                            hotelsData.data?.data.map((data, i) => (
+                            roomsData.data?.data.map((data, i) => (
                                 <Table.Row key={i + 1}>
-                                    <Table.Cell>  <User size="xl" squared src={data.images[0]} css={{ p: 0 }}>
-                                    </User></Table.Cell>
-                                    <Table.Cell>{data.name}</Table.Cell>
+                                    <Table.Cell>
+                                        <User size="xl" squared src={data.image} css={{ p: 0 }}>
+                                        </User>
+                                    </Table.Cell>
+                                    <Table.Cell>{data.title}</Table.Cell>
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
 
-                                            <ActivitiesView id={id} data={data} activityCount={() => setActivityCount(activityCount + 1)} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
-                                            <ActivityEdit id={id} data={data} activityCount={() => setActivityCount(activityCount + 1)} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
-                                            <ActivityDelete id={id} activityCount={() => setActivityCount(activityCount + 1)} />
+                                        </Col>
+                                    </Row></Table.Cell>
+                                </Table.Row>
+                            ))
+                        }
+
+                    </Table.Body>
+                    <Table.Pagination
+                        shadow
+                        noMargin
+                        align="center"
+                        rowsPerPage={5}
+                        color={"success"}
+                        onPageChange={(page) => console.log({ page })}
+                    />
+                </Table>
+            </div>
+            
+            {/* Landmarks */}
+            <div style={{
+                marginTop: 50,
+            }}>
+
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 20
+                }} >
+                    <Text h3>Landmarks</Text>
+                    <LandmarkAdd hotelId={id} />
+                </div>
+
+                <Table
+                    bordered
+                    shadow={false}
+                    color={"suceess"}
+                    selectionBehavior="toggle"
+                    aria-label="Example static bordered collection table"
+                    allowDuplicateSelectionEvents="false"
+                    css={{
+                        height: "auto",
+                        minWidth: "100%",
+                    }}
+                >
+                    <Table.Header>
+                        <Table.Column>Name</Table.Column>
+                        <Table.Column>Distance</Table.Column>
+                        <Table.Column>Options</Table.Column>
+
+
+                    </Table.Header>
+                    <Table.Body>
+                        {
+                            // hotelsData.data?.map(({ id, data }, i) => (
+                            landmarksData.data?.data.map((data, i) => (
+                                <Table.Row key={i + 1}>
+
+                                    <Table.Cell>{data.name}</Table.Cell>
+                                    <Table.Cell>{data.distance} km</Table.Cell>
+
+                                    <Table.Cell>  <Row justify="center" align="center">
+                                        <Col css={{ d: "flex" }}>
+
+                                        </Col>
+                                        <Col css={{ d: "flex" }}>
+                                        </Col>
+                                        <Col css={{ d: "flex" }}>
                                         </Col>
                                     </Row></Table.Cell>
                                 </Table.Row>
