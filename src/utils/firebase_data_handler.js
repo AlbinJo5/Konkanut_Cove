@@ -118,5 +118,30 @@ export async function getAllSubcollections(collectionName, subCollectionNames) {
     }
 }
 
+export async function getSubcollectionById(collectionName, id, subCollectionNames) {
+    try {
+        const collectionData = await getDataById(`${collectionName}/${id}`);
+        if (collectionData.message === "success") {
+            let data = collectionData.data;
+            for (let j = 0; j < subCollectionNames.length; j++) {
+                const subCollectionData = await getAllData(`${collectionName}/${id}/${subCollectionNames[j]}`);
+                if (subCollectionData.message === "success") {
+                    data[subCollectionNames[j]] = subCollectionData.data;
+                }
+            }
+            return {
+                message: "success",
+                data
+            }
+        }
+    } catch (err) {
+        console.log(err);
+        return {
+            message: "error",
+            data: err,
+        };
+    }
+}
+
 
 

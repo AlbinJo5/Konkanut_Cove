@@ -76,7 +76,7 @@ function Add() {
                         })
                     }
                 </select>
-                <input type="text" name="Hotel_Description" placeholder="Hotel Description" />
+                <textarea type="text" name="Hotel_Description" placeholder="Hotel Description" />
                 <input type="file" name="Hotel_Image" multiple accept="image/*" />
                 {/* checkboxes a,b,c */}
                 <input type="checkbox" name="Hotel_a" />a

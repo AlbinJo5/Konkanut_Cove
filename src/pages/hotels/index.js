@@ -121,6 +121,33 @@ export default function Hotels() {
             refetchOnReconnect: false,
         }
     )
+
+    // covert this hotelsFullData to above data format
+
+    const hotelsFullDataConverted = hotelsFullData.data?.data.map((d, i) => {
+        return {
+            images: d.images.map((map_d, i) => {
+                return {
+                    image: map_d,
+                }
+            }),
+            hotelName: d.name,
+            address: d.address,
+            map: d.map,
+            // until: d.cancel_day. covert to date format
+            until: new Date(d.cancel_day),
+            after: new Date(d.cancel_day),
+            landmarks: d.Landmarks.map((map_d, i) => {
+                return {
+                    distance: map_d.distance,
+                    placeName: map_d.name
+                }
+            }),
+        }
+    })
+
+
+    console.log(hotelsFullData.data?.data);
     return (
         <Layout>
             <Fade top>
@@ -152,12 +179,13 @@ export default function Hotels() {
             </Fade>
             <div className="flex flex-col mt-40  sm:mt-25 md:mt-20">
                 <Page4Panel1 subPanelDatas={data.subPanelDatas} />
-                <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 mt-20">{
-                    hotelsFullData.isLoading ? <div>Loading...</div> : hotelsFullData.data?.data.map((d, i) =>
-                        <Page4Panel4 {...d} options={options} key={i} />
-                    )
-                }
-                    {data.imageDatas.map((d, i) =>
+                <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 mt-20">
+                    {/* {
+                        hotelsFullData.isLoading ? <div>Loading...</div> : hotelsFullData.data?.data.map((d, i) =>
+                            <Page4Panel4 {...d} data={d} options={options} key={i} />
+                        )
+                    } */}
+                    {hotelsFullDataConverted?.map((d, i) =>
                         <Page4Panel4 {...d} options={options} key={i} />
                     )}
                 </ul>

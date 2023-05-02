@@ -9,6 +9,7 @@ import ImageModal from "./image-modal"
 
 
 export const Landmarks = ({ landmarks }) => {
+  console.log(landmarks);
   return (
     <div className="">
       <p className="text-md font-bold">Nearby Landmarks</p>
@@ -62,13 +63,18 @@ export const ImageGrid = ({ images, setShowModal, name, address, children, noCol
     <>
       <div className="grid sm:grid-rows-2 sm:grid-flow-col sm:gap-4 w-full h-[250px]">
         <div className="row-span-2 col-span-3 relative">
-          <Image src={images[0]} alt="grid pictures" fill className="rounded-md" />
+          <Image style={{
+            objectFit: "cover",
+          }} src={images[0].image} alt="grid pictures" fill className="rounded-md" />
           <div className="sm:hidden z-0 absolute w-full h-full flex justify-center items-center text-4xl text-white font-bold">{images.length}+</div>
           <div className="sm:hidden absolute w-full h-full z-10 bg-black bg-opacity-25 hover:bg-opacity-20" onClick={() => setShowModal(true)}></div>
         </div>
-        {images.slice(1, images.length).map((image, index) =>
-          <div className="max-sm:hidden sm:col-span-2 relative" key={index}><Image src={image} alt="grid pictures" fill className="rounded-md" /></div>
-        )}
+        {images
+          // reverse the array so that the first image is not repeated
+          .reverse()
+          .slice(1, images.length).map((image, index) =>
+            <div className="max-sm:hidden sm:col-span-2 relative" key={index}><Image src={image.image} alt="grid pictures" fill className="rounded-md" /></div>
+          )}
       </div>
       <div className={clsx("flex items-start mt-4", { "max-sm:flex-col": !noCol })}>
         <div className="flex flex-col grow">
@@ -137,7 +143,8 @@ const OptionsList = ({ options }) => {
 
 export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options, checkIn, checkOut }) {
   const [showModal, setShowModal] = useState(false);
-
+  console.log(importantNotes);
+  console.log(images);
   // if (images.length<7)throw Error("Not enough images!")
 
   return (
@@ -169,9 +176,10 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
             <Cancellations until={until} after={after} />
             <div className="text-md font-bold mt-5">Important to note</div>
             <ul className="text-sm list-disc ml-3">
-              {importantNotes.map((note, index) =>
-                <li className="" key={index}>{note}</li>
-              )}
+              {importantNotes
+                .map((note, index) =>
+                  <li className="" key={index}>{note}</li>
+                )}
             </ul>
           </div>
         </div>
