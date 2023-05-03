@@ -67,7 +67,7 @@ export default function DayAdd(props) {
     return (
         <div>
             <Button auto shadow color="success" css={{
-                color: "#0000000",
+                color: "white",
             }} onClick={() => setVisible(true)}>
                 Add Room
             </Button>
@@ -137,7 +137,9 @@ export default function DayAdd(props) {
                         <Button auto flat color="error" onPress={() => { setVisible(false) }}>
                             Close
                         </Button>
-                        <Button auto color="success" type="submit" >
+                        <Button auto css={{
+                            color: "white",
+                        }} color="success" type="submit" >
                             Submit
                         </Button>
                     </Modal.Footer>

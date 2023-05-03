@@ -127,14 +127,8 @@ function Index() {
         }
     )
 
-    console.log(hotelsData.data?.data);
-    console.log(packageHotelData.data?.data);
 
-    console.log(
-        hotelsData.data?.data?.filter(hotel => {
-            return packageHotelData.data?.data?.find(item => item.accomadationId === hotel.id)
-        })
-    );
+
 
     return (
         <Layout>

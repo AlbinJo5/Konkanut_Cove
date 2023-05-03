@@ -55,7 +55,7 @@ export default function ActivityAdd(props) {
         const activityId = e.target[0].value;
 
         const data = {
-            activityId, 
+            activityId,
         }
 
         handleAdd(data)
@@ -64,9 +64,9 @@ export default function ActivityAdd(props) {
     return (
         <div>
             <Button auto shadow color="success" css={{
-                color: "#0000000",
+                color: "white",
             }} onClick={() => setVisible(true)}>
-                Add Room
+                Add Activity
             </Button>
 
             <Modal
@@ -92,8 +92,18 @@ export default function ActivityAdd(props) {
                     >
                         <Grid.Container gap={4}>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <select name="activity" id="activity">
-                                    {activitiesData.data?.data.map((activity,i) => {
+                                <select name="activity" id="activity" style={{
+                                    width: "100%",
+                                    height: "40px",
+                                    borderRadius: "5px",
+                                    border: "1px solid #eaeaea",
+                                    padding: "5px",
+                                    outline: "none",
+                                    fontSize: "16px",
+                                    color: "#000000",
+                                    backgroundColor: "#ffffff",
+                                }}>
+                                    {activitiesData.data?.data.map((activity, i) => {
                                         return (
                                             <option key={i} value={activity.id}>{activity.title}</option>
                                         )
@@ -108,7 +118,7 @@ export default function ActivityAdd(props) {
                             Close
                         </Button>
                         <Button auto color="success" css={{
-                            color: "#0000000",
+                            color: "white",
                         }} type="submit" >
                             Submit
                         </Button>

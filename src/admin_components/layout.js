@@ -21,22 +21,22 @@ function Layout({ children }) {
         "Contacts"
     ];
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     var expiry = localStorage.getItem(LocalStorage.adminAuthExpiry)
-    //     if (expiry) {
-    //         if (new Date(expiry) > new Date()) {
-    //             setTimeout(() => {
-    //                 setIsLoading(false)
-    //             }, 1000)
-    //         } else {
-    //             // router.push(ADMIN_ROUTES.AUTH)
-    //         }
-    //     }
-    //     else {
-    //         // router.push(ADMIN_ROUTES.AUTH)
-    //     }
-    // }, [router])
+        var expiry = localStorage.getItem(LocalStorage.adminAuthExpiry)
+        if (expiry) {
+            if (new Date(expiry) > new Date()) {
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 1000)
+            } else {
+                router.push(ADMIN_ROUTES.AUTH)
+            }
+        }
+        else {
+            router.push(ADMIN_ROUTES.AUTH)
+        }
+    }, [router])
 
 
     return (

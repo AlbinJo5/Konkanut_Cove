@@ -1,11 +1,14 @@
 import Layout from "@/admin_components/layout"
-import { Card, Grid, Row, Text } from "@nextui-org/react";
-// import LineChart from "@/admin_components/chart";
+import {Grid} from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { ADMIN_ROUTES } from "@/admin_components/core/routes";
+import DashboardCard from "@/admin_components/dashboardCard";
+
+
+
+
 
 function Dashboard() {
-    const router = useRouter();
     const list = [
         {
             title: "Products",
@@ -37,29 +40,7 @@ function Dashboard() {
         <Layout>
             <Grid.Container gap={2} justify="flex-start">
                 {list.map((item, index) => (
-                    <Grid lg={2} xs={6} sm={3} key={index}>
-                        <Card isPressable onClick={() => {
-                            router.push(item.link)
-                        }} >
-                            <Card.Body css={{ p: 10 }}>
-                                <Card.Image
-                                    src={item.img}
-                                    objectFit="contain"
-                                    width="80%"
-                                    height="max-content"
-                                    alt={item.title}
-                                />
-                            </Card.Body>
-                            <Card.Footer css={{ justifyItems: "flex-start" }}>
-                                <Row wrap="wrap" justify="space-between" align="center">
-                                    <Text b>{item.title}</Text>
-                                    <Text css={{ color: "$accents7", fontWeight: "$semibold", fontSize: "$sm" }}>
-                                        {item.totalCount}
-                                    </Text>
-                                </Row>
-                            </Card.Footer>
-                        </Card>
-                    </Grid>
+                    <DashboardCard key={index}  item={item}></DashboardCard>
                 ))}
             </Grid.Container>
             {/* <LineChart /> */}

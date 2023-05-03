@@ -3,8 +3,10 @@ import Swipe from "react-easy-swipe";
 import { ArrowLeft, ArrowRight } from "@icon-park/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { routes } from "@/routes";
 
-const CarouselLarge = ({ data, isLeft = false, title, desc }) => {
+const CarouselLarge = ({ data, id, isLeft = false, title, desc }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -28,11 +30,17 @@ const CarouselLarge = ({ data, isLeft = false, title, desc }) => {
     setCurrentSlide(newSlide);
   };
 
+  const router = useRouter();
+
   return (
     <div
       className={
         "min-w-[80vw]  sm:px-4 px-2  items-center      " +
         (isLeft ? "sm:pl-20" : "sm:pr-20")
+      }
+      onClick={() => {
+        router.push(routes.package_details + id);
+      }
       }
     >
       <div className=" h-[300px] max-w-[1000px] relative ">
@@ -40,7 +48,7 @@ const CarouselLarge = ({ data, isLeft = false, title, desc }) => {
           {data.map((slide, index) => {
             return (
               <Image
-                src={slide.image}
+                src={slide}
                 fill
                 alt="This is a carousel slide"
                 key={index}
@@ -73,8 +81,7 @@ const CarouselLarge = ({ data, isLeft = false, title, desc }) => {
               (isLeft ? "justify-start" : "justify-end")
             }
           >
-            <Link
-              href="/"
+            <div
               className=" p-2 sm:p-5 rounded-md sm:rounded-full bg-green-500"
             >
               {isLeft ? (
@@ -82,7 +89,7 @@ const CarouselLarge = ({ data, isLeft = false, title, desc }) => {
               ) : (
                 <ArrowRight size="30" fill="white" />
               )}
-            </Link>
+            </div>
           </div>
         </div>
 

@@ -8,22 +8,22 @@ import { ADMIN_ROUTES } from "@/admin_components/core/routes";
 
 function Index() {
     const router = useRouter()
-    // useEffect(() => {
-    //     var expiry = localStorage.getItem(LocalStorage.adminAuthExpiry)
-    //     // wait for 1 second
-    //     setTimeout(() => {
-    //         if (expiry) {
-    //             if (new Date(expiry) > new Date()) {
-    //                 router.push(ADMIN_ROUTES.DASHBOARD)
-    //             } else {
-    //                 router.push(ADMIN_ROUTES.AUTH)
-    //             }
-    //         }
-    //         else {
-    //             router.push(ADMIN_ROUTES.AUTH)
-    //         }
-    //     }, 1000)
-    // }, [router])
+    useEffect(() => {
+        var expiry = localStorage.getItem(LocalStorage.adminAuthExpiry)
+        // wait for 1 second
+        setTimeout(() => {
+            if (expiry) {
+                if (new Date(expiry) > new Date()) {
+                    router.push(ADMIN_ROUTES.DASHBOARD)
+                } else {
+                    router.push(ADMIN_ROUTES.AUTH)
+                }
+            }
+            else {
+                router.push(ADMIN_ROUTES.AUTH)
+            }
+        }, 1000)
+    }, [router])
 
 
 
