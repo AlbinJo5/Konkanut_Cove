@@ -46,6 +46,7 @@ export default function Packages() {
               <Fade {...(index % 2 == 0 ? { left: true } : { right: true })}>
                 <CarouselLarge
                   data={data.images}
+                  id={data.id}
                   title={data.title}
                   desc={data.description}
                   isLeft={index % 2 == 0}

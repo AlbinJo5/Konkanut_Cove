@@ -285,14 +285,13 @@ export default function Index() {
         return {
             title: a.title,
             image: a.images[0],
-            selected: false,
+            
         }
     })
 
     const transport = transportationsData.data?.data?.filter(
         (t) => packageData.data?.data?.Transportations.map((t) => t.transportationId).includes(t.id)
     ).map((t) => {
-        console.log(t);
         return {
             carType: t.title,
             image: t.images[0],
