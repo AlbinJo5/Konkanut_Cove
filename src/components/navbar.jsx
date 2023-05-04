@@ -20,7 +20,6 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
   }
 
   const router = useRouter();
-  console.log(router);
 
   const selectedIndexClasses = "border-green-800 border-b-4 hover:none";
   const selectedIndexSmall = "bg-green-800 bg-opacity-70 text-white hover:none"

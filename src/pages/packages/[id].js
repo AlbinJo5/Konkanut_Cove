@@ -249,23 +249,23 @@ export default function Index() {
 
     const panel1 = {
         ...panel1Copy,
-        duration: `${packageData.data?.data.days}Days,${packageData.data?.data.nights}Nights`,
+        duration: `${packageData.data?.data?.days}Days,${packageData.data?.data?.nights}Nights`,
         images: {
-            image1: packageData.data?.data.images[0],
-            image2: packageData.data?.data.images[1],
-            image3: packageData.data?.data.images[2],
-            image4: packageData.data?.data.images[3],
-            image5: packageData.data?.data.images[4],
-            image6: packageData.data?.data.images[5],
+            image1: packageData.data?.data?.images[0],
+            image2: packageData.data?.data?.images[1],
+            image3: packageData.data?.data?.images[2],
+            image4: packageData.data?.data?.images[3],
+            image5: packageData.data?.data?.images[4],
+            image6: packageData.data?.data?.images[5],
         },
-        imagesRemaining: packageData.data?.data.images.length - 6,
-        desc: packageData.data?.data.description,
-        startingPrice: packageData.data?.data.price,
+        imagesRemaining: packageData.data?.data?.images.length - 6,
+        desc: packageData.data?.data?.description,
+        startingPrice: packageData.data?.data?.price,
         // skip dates
     }
 
 
-    const travelSteps = packageData.data?.data.Days.map((d, i) => {
+    const travelSteps = packageData.data?.data?.Days.map((d, i) => {
         return {
             title: `Day ${i + 1} : ${d.title}`,
             title2: d.subTitle,
@@ -277,8 +277,8 @@ export default function Index() {
         }
     })
 
-    const activities = activitiesData.data?.data.filter(
-        (a) => packageData.data?.data.Activities.map((a) => a.activityId).includes(a.id)
+    const activities = activitiesData.data?.data?.filter(
+        (a) => packageData.data?.data?.Activities.map((a) => a.activityId).includes(a.id)
     ).map((a) => {
         return {
             title: a.title,
@@ -287,8 +287,8 @@ export default function Index() {
         }
     })
 
-    const transport = transportationsData.data?.data.filter(
-        (t) => packageData.data?.data.Transportations.map((t) => t.transportationId).includes(t.id)
+    const transport = transportationsData.data?.data?.filter(
+        (t) => packageData.data?.data?.Transportations.map((t) => t.transportationId).includes(t.id)
     ).map((t) => {
         console.log(t);
         return {
@@ -299,8 +299,8 @@ export default function Index() {
         }
     })
 
-    const accomodation = accomodationsData.data?.data.filter(
-        (a) => packageData.data?.data.Accomadations.map((a) => a.accomadationId).includes(a.id)
+    const accomodation = accomodationsData.data?.data?.filter(
+        (a) => packageData.data?.data?.Accomadations.map((a) => a.accomadationId).includes(a.id)
     ).map((a) => {
         return {
             title: a.name,
@@ -320,11 +320,11 @@ export default function Index() {
                 style={{ backgroundImage: "url('/assets/images/back3.png')" }}
             >
                 <ol className="flex flex-col overflow-scroll mt-5">
-                    {travelSteps?.map((tstep, i) => (
+                    {/* {travelSteps?.map((tstep, i) => (
                         <li className="mt-5" key={i}>
                             <Page3Panel {...tstep} includedList={includedList} />
                         </li>
-                    ))}
+                    ))} */}
                 </ol>
                 <div className="flex flex-col w-full items-center">
                     <div className="sm:w-[85%] w-[98%] mt-5">
@@ -334,7 +334,7 @@ export default function Index() {
                             setOptions={setOptions}
                         />
                     </div>
-                    <div className="w-[100%] mt-2">
+                    {/* <div className="w-[100%] mt-2">
                         {(() => {
                             switch (options) {
                                 case 0:
@@ -354,7 +354,7 @@ export default function Index() {
                                     null;
                             }
                         })()}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Layout>
