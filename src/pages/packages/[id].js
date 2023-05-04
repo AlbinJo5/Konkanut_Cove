@@ -174,7 +174,7 @@ const optionsList = [
 const Accomodation = ({ accomodation }) => {
     return (
         <ul className="flex flex-col">
-            {accomodation.map((a, i) => (
+            {accomodation?.map((a, i) => (
                 <li className="my-2" key={i}>
                     <Page3Panel2 {...a} />
                 </li>
@@ -186,7 +186,7 @@ const Accomodation = ({ accomodation }) => {
 const Activities = ({ activities, imageWidth, imageHeight }) => {
     return (
         <ul className="grid sm:grid-cols-2 md:grid-cols-1 max-sm:grid-cols-2 max-xs:grid-cols-1 gap-2">
-            {activities.map((a, i) => (
+            {activities?.map((a, i) => (
                 <li className="my-2" key={i}>
                     <Page3Panel2
                         {...a}
@@ -202,7 +202,7 @@ const Activities = ({ activities, imageWidth, imageHeight }) => {
 const Travel = ({ transport }) => {
     return (
         <ul className="grid md:grid-cols-3 sm:grid-cols-2 gap-2">
-            {transport.map((t, i) => (
+            {transport?.map((t, i) => (
                 <li className="my-2" key={i}>
                     <Page3Panel3 {...t} />
                 </li>
@@ -320,11 +320,11 @@ export default function Index() {
                 style={{ backgroundImage: "url('/assets/images/back3.png')" }}
             >
                 <ol className="flex flex-col overflow-scroll mt-5">
-                    {/* {travelSteps?.map((tstep, i) => (
+                    {travelSteps?.map((tstep, i) => (
                         <li className="mt-5" key={i}>
                             <Page3Panel {...tstep} includedList={includedList} />
                         </li>
-                    ))} */}
+                    ))}
                 </ol>
                 <div className="flex flex-col w-full items-center">
                     <div className="sm:w-[85%] w-[98%] mt-5">
@@ -334,7 +334,7 @@ export default function Index() {
                             setOptions={setOptions}
                         />
                     </div>
-                    {/* <div className="w-[100%] mt-2">
+                    <div className="w-[100%] mt-2">
                         {(() => {
                             switch (options) {
                                 case 0:
@@ -354,7 +354,7 @@ export default function Index() {
                                     null;
                             }
                         })()}
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </Layout>
