@@ -214,6 +214,8 @@ const Travel = ({ transport }) => {
 export default function Index() {
     const [options, setOptions] = useState(0);
     const { id } = useRouter().query
+
+    
     const packageData = useQuery(
         ["package", id],
         () => getSubcollectionById("Packages", id, ["Activities", "Accomadations", "Transportations", "Days"]),
