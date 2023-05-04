@@ -1,8 +1,47 @@
 import { Minus, Plus } from "@icon-park/react";
 import clsx from "clsx";
 import { useState } from "react";
+import { Airplane, Car, Hotel } from "@icon-park/react";
 
-export default function Page3Panel({ title, includedList, title2, desc }) {
+
+function Icons(props) {
+  return (<div className="flex sm:items-center px-8 max-md:px-5 max-sm:flex-col">
+    <div className="text-gray-500 text-xl my-5 sm:text-lg mx-2 max-sm:my-2">
+      Included:
+    </div>
+    {
+      props.flight && (<div className="flex sm:justify-center items-center max-sm:my-2">
+        <Airplane theme="filled" size="36" fill="black" />
+        <div className="text-green-800 text-xl sm:text-lg mx-3 ">
+          Airport
+        </div>
+      </div>
+      )
+    }
+    {
+      props.hotel && (<div className="flex sm:justify-center items-center max-sm:my-2">
+        <Hotel theme="filled" size="36" fill="black" />
+        <div className="text-green-800 text-xl sm:text-lg mx-3 ">
+          Accomodation
+        </div>
+      </div>
+      )
+    }
+    {
+      props.transfer && (<div className="flex sm:justify-center items-center max-sm:my-2">
+        <Car theme="filled" size="36" fill="black" />
+        <div className="text-green-800 text-xl sm:text-lg mx-3 ">
+          Transportation
+        </div>
+      </div>
+      )
+    }
+
+  </div>);
+}
+
+
+export default function Page3Panel({ title, includedList, hotel, flight, transfer, title2, desc }) {
   const [collapse, setCollapse] = useState(false);
   const [iconChange, setIconChange] = useState(false);
   const AccIcon = iconChange ? Minus : Plus;
@@ -10,6 +49,8 @@ export default function Page3Panel({ title, includedList, title2, desc }) {
   const handleClick = () => {
     setCollapse(!collapse);
   };
+
+  console.log(flight, hotel, transfer);
 
   const handleTransitionEnd = (e) => {
     if (collapse) {
@@ -58,22 +99,7 @@ export default function Page3Panel({ title, includedList, title2, desc }) {
         })}
         onTransitionEnd={handleTransitionEnd}
       >
-        <div className="flex sm:items-center px-8 max-md:px-5 max-sm:flex-col">
-          <div className="text-gray-500 text-xl my-5 sm:text-lg mx-2 max-sm:my-2">
-            Included:
-          </div>
-          {includedList.map(({ title, Icon }, index) => (
-            <div
-              className="flex sm:justify-center items-center max-sm:my-2"
-              key={index}
-            >
-              <Icon theme="filled" size="36" fill="black" />
-              <div className="text-green-800 text-xl sm:text-lg mx-3 ">
-                {title}
-              </div>
-            </div>
-          ))}
-        </div>
+        <Icons includedList={includedList} hotel={hotel} flight={flight} transfer={transfer}></Icons>
         <div className="text-2xl font-bold my-3 px-8 max-md:px-5 text-green-800">
           {title2}
         </div>

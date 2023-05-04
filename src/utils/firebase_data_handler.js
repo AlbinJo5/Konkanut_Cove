@@ -1,31 +1,52 @@
 import { collection, doc, getDoc, getDocs, setDoc, } from "firebase/firestore";
 import { db } from "./firebase";
-export async function uploadData(data, path) {
+export async function uploadData(data, path, id = null) {
 
     try {
 
         // doc ref
-        const docRef = doc(collection(db, path));
-
-        // add data to docRef
-        await setDoc(docRef, data, { merge: true });
-
-        // get the document 
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            return {
-                message: "success",
-                data: {
-                    id: docSnap.id,
-                    ...docSnap.data()
+        if (id) {
+            await setDoc(doc(db, path, id), data, { merge: true });
+            const docSnap = await getDoc(doc(db, path, id));
+            if (docSnap.exists()) {
+                return {
+                    message: "success",
+                    data: {
+                        id: docSnap.id,
+                        ...docSnap.data()
+                    }
                 }
             }
-        } else {
-            return {
-                message: "error",
-                data: "No such document!"
-            };
+            else {
+                return {
+                    message: "error",
+                    data: "No such document!"
+                };
+            }
         }
+
+        else {
+            const docRef = doc(collection(db, path));
+            // add data to docRef
+            await setDoc(docRef, data, { merge: true });
+            // get the document 
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                return {
+                    message: "success",
+                    data: {
+                        id: docSnap.id,
+                        ...docSnap.data()
+                    }
+                }
+            } else {
+                return {
+                    message: "error",
+                    data: "No such document!"
+                };
+            }
+        }
+
     }
     catch (err) {
         console.log(err);

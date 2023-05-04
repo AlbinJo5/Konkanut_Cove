@@ -12,7 +12,7 @@ export default function DayAdd(props) {
     const { setVisible, bindings } = useModal();
 
     const handleAdd = (data) => {
-        const resp = uploadData(data, `Packages/${props.packageId}/Days`)
+        const resp = uploadData(data, `Packages/${props.packageId}/Days`,data.dayNumber)
         resp.then(res => {
             if (res.message === "success") {
                 // update or add the response to the cache
@@ -46,10 +46,11 @@ export default function DayAdd(props) {
         const dayNumber = e.target[0].value;
         const title = e.target[1].value;
         const subTitle = e.target[2].value;
-        const hotel = e.target[3].value;
-        const transfer = e.target[4].value;
-        const flight = e.target[5].value;
+        const hotel = e.target[3].checked;
+        const transfer = e.target[4].checked;
+        const flight = e.target[5].checked;
         const description = e.target[6].value;
+
 
         const data = {
             dayNumber,
@@ -60,7 +61,6 @@ export default function DayAdd(props) {
             flight,
             description,
         }
-
         handleAdd(data)
     }
 
@@ -69,7 +69,7 @@ export default function DayAdd(props) {
             <Button auto shadow color="success" css={{
                 color: "white",
             }} onClick={() => setVisible(true)}>
-                Add Room
+                Add Day
             </Button>
 
             <Modal
@@ -84,7 +84,7 @@ export default function DayAdd(props) {
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
                     }} size={20}>
-                        Add Room
+                        Add Day
                     </Text>
                 </Modal.Header>
                 <form onSubmit={handleSubmit} >

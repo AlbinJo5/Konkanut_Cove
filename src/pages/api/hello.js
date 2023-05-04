@@ -158,9 +158,6 @@ const transport = [
 ]
 
 export default async function handler(req,res){
-  const {location} = req.query;
-  console.log(location);
-  if (location==="devbag"){
       res.status(200).json({
           panel1,
           travelSteps,
@@ -168,5 +165,4 @@ export default async function handler(req,res){
           activities,
           transport
       })
-  }
 }
