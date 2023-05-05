@@ -10,6 +10,8 @@ import { routes } from "@/routes";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { getAllData, getSubcollectionById } from "@/utils/firebase_data_handler";
+import EnquireModal from "@/components/modal/enquireModal";
+import InitialLoading from "@/admin_components/initialLoading";
 
 const panel1Copy = {
     duration: "3days,2nights",
@@ -175,7 +177,8 @@ const Accomodation = ({ accomodation, selected, handleSelect }) => {
     return (
         <ul className="flex flex-col">
             {accomodation?.map((a, i) => {
-                const isSelected = selected?.accomodations.includes(a?.id)
+                const findObj = selected?.accomodations.find((s) => s.id === a?.id)
+                const isSelected = findObj ? true : false
                 return (
                     <li className="my-2" key={i}>
                         <Page3Panel2 {...a} handleSelect={handleSelect} selected={isSelected} />
@@ -190,7 +193,8 @@ const Activities = ({ activities, imageWidth, imageHeight, selected, handleSelec
     return (
         <ul className="grid sm:grid-cols-2 md:grid-cols-1 max-sm:grid-cols-2 max-xs:grid-cols-1 gap-2">
             {activities?.map((a, i) => {
-                const isSelected = selected?.activities.includes(a?.id)
+                const findObj = selected?.activities.find((s) => s.id === a?.id)
+                const isSelected = findObj ? true : false
                 return (
                     <li className="my-2" key={i}>
                         <Page3Panel2
@@ -214,11 +218,8 @@ const Travel = ({ transport, selected, handleSelect }) => {
     return (
         <ul className="grid md:grid-cols-3 sm:grid-cols-2 gap-2">
             {transport?.map((t, i) => {
-                console.log(selected);
-                console.log(t);
-                console.log(selected?.transportations.includes(t?.id));
-                const isSelected = selected?.transportations.includes(t?.id)
-                console.log(isSelected);
+                const findObj = selected?.transportations.find((s) => s.id === t?.id)
+                const isSelected = findObj ? true : false
                 return (
                     <li className="my-2" key={i}>
                         <Page3Panel3 {...t} selected={isSelected} handleSelect={handleSelect} />
@@ -239,24 +240,40 @@ export default function Index() {
         transportations: [],
     });
 
-    const handleActivitySelect = (id) => {
+    const handleActivitySelect = (id, title) => {
         setSelected((prev) => ({
             ...prev,
-            activities: prev.activities.includes(id) ? prev.activities.filter(a => a !== id) : [...prev.activities.slice(1), id],
+            // activities: prev.activities.includes(id) ? prev.activities.filter(a => a !== id) : [...prev.activities.slice(1), id],
+            // { id:"",title:"" } 
+            // activities: [
+            //     ...prev.activities, 
+            //     { id, title }
+            // ]
+            // only allow 2 activities and remove the first one
+            activities: prev.activities.length === 2 ? [...prev.activities.slice(1), { id, title }] : [...prev.activities, { id, title }]
+
         }));
     };
 
-    const handleAccomodationSelect = (id) => {
+    const handleAccomodationSelect = (id, title) => {
         setSelected((prev) => ({
             ...prev,
-            accomodations: [id],
+            accomodations: [{
+                id,
+                title
+            }],
         }));
     };
 
-    const handleTransportationSelect = (id) => {
+    const handleTransportationSelect = (id, title) => {
         setSelected((prev) => ({
             ...prev,
-            transportations: [id],
+            transportations: [
+                {
+                    id,
+                    title
+                }
+            ],
         }));
     };
 
@@ -363,70 +380,116 @@ export default function Index() {
             setSelected((prev) => ({
                 ...prev,
                 // only slelect first 2activity and 1accomodation and 1transportation
-                activities: packageData.data?.data?.Activities.map((a) => a.activityId).slice(0, 2),
-                accomodations: [packageData.data?.data?.Accomadations[0]?.accomadationId],
-                transportations: [packageData.data?.data?.Transportations[0]?.transportationId],
+                activities: packageData.data?.data?.Activities.map((a) => {
+                    return {
+                        id: a.activityId,
+                        title: activitiesData.data?.data?.find((d) => d.id === a.activityId)?.title,
+                    }
+                }
+                ).slice(0, 2),
+                accomodations: [
+                    {
+                        id: packageData.data?.data?.Accomadations[0]?.accomadationId,
+                        title: accomodationsData.data?.data?.find((d) => d.id === packageData.data?.data?.Accomadations[0]?.accomadationId)?.name,
+                    }
+                ],
+                transportations: [
+                    {
+                        id: packageData.data?.data?.Transportations[0]?.transportationId,
+                        title: transportationsData.data?.data?.find((d) => d.id === packageData.data?.data?.Transportations[0]?.transportationId)?.title,
+                    }
+                ],
 
             }));
         }
-    }, [packageData.data?.data])
+    }, [packageData.data?.data, activitiesData.data?.data, accomodationsData.data?.data, transportationsData.data?.data])
 
 
     return (
         <Layout>
-            <div className="mt-20">
-                <Page3PicPanel {...panel1} />
-            </div>
-            <div
-                className="grid grid-cols-1 lg:grid-cols-2   bg-repeat "
-                style={{ backgroundImage: "url('/assets/images/back3.png')" }}
-            >
-                <ol className="flex flex-col overflow-scroll mt-5">
-                    {travelSteps?.map((tstep, i) => (
-                        <li className="mt-5" key={i}>
-                            <Page3Panel {...tstep} includedList={includedList} />
-                        </li>
-                    ))}
-                </ol>
-                <div className="flex flex-col w-full items-center">
-                    <div className="sm:w-[85%] w-[98%] mt-5">
-                        <ButtonPanel
-                            optionList={["Accommodation", "Activities", "Transport"]}
-                            options={options}
-                            setOptions={setOptions}
-                        />
+            {
+                packageData.isLoading || activitiesData.isLoading || accomodationsData.isLoading || transportationsData.isLoading ?
+                    <div className="flex justify-center items-center h-screen">
+                        <InitialLoading />
                     </div>
-                    <div className="w-[100%] mt-2">
-                        {(() => {
-                            switch (options) {
-                                case 0:
-                                    return <Accomodation
-                                        selected={selected}
-                                        handleSelect={handleAccomodationSelect}
-                                        accomodation={accomodation} />;
-                                case 1:
-                                    return (
-                                        <Activities
-                                            activities={activities}
-                                            selected={selected}
-                                            handleSelect={handleActivitySelect}
-                                            image
-                                            imageWidth="120"
-                                            imageHeight="90"
+                    :
+                    packageData.isError || activitiesData.isError || accomodationsData.isError || transportationsData.isError ?
+                        <div className="flex justify-center items-center h-screen">
+                            <h1 className="text-2xl text-red-500">Error</h1>
+                        </div>
+                        :
+                        <>
+                            <div className="mt-20">
+                                <Page3PicPanel {...panel1} />
+                            </div>
+                            <div
+                                className="grid grid-cols-1 lg:grid-cols-2 relative   bg-repeat  pb-32 "
+                                style={{ backgroundImage: "url('/assets/images/back3.png')" }}
+                            >
+                                <ol className="flex flex-col overflow-scroll mt-5">
+                                    {travelSteps?.map((tstep, i) => (
+                                        <li className="mt-5" key={i}>
+                                            <Page3Panel {...tstep} includedList={includedList} />
+                                        </li>
+                                    ))}
+                                </ol>
+                                <div className="flex flex-col w-full items-center">
+                                    <div className="sm:w-[85%] w-[98%] mt-5">
+                                        <ButtonPanel
+                                            optionList={["Accommodation", "Activities", "Transport"]}
+                                            options={options}
+                                            setOptions={setOptions}
                                         />
-                                    );
-                                case 2:
-                                    return <Travel
-                                        selected={selected}
-                                        handleSelect={handleTransportationSelect}
-                                        transport={transport} />;
-                                default:
-                                    null;
-                            }
-                        })()}
-                    </div>
-                </div>
-            </div>
+                                    </div>
+                                    <div className="w-[100%] mt-2">
+                                        {(() => {
+                                            switch (options) {
+                                                case 0:
+                                                    return <Accomodation
+                                                        selected={selected}
+                                                        handleSelect={handleAccomodationSelect}
+                                                        accomodation={accomodation} />;
+                                                case 1:
+                                                    return (
+                                                        <Activities
+                                                            activities={activities}
+                                                            selected={selected}
+                                                            handleSelect={handleActivitySelect}
+                                                            image
+                                                            imageWidth="120"
+                                                            imageHeight="90"
+                                                        />
+                                                    );
+                                                case 2:
+                                                    return <Travel
+                                                        selected={selected}
+                                                        handleSelect={handleTransportationSelect}
+                                                        transport={transport} />;
+                                                default:
+                                                    null;
+                                            }
+                                        })()}
+                                    </div>
+                                    <div className="mt-10 w-[90%] flex justify-end" >
+                                        {/* <button className=" flex-end   mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500" >
+                            Enquire Now , Pay Later
+                        </button> */}
+                                        <EnquireModal
+                                            selected={selected}
+                                            packageDetails={{
+                                                id: packageData.data?.data?.id,
+                                                title: packageData.data?.data?.title,
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-6 right-6" >
+
+                                </div>
+                            </div>
+                        </>
+            }
+
         </Layout>
     );
 }

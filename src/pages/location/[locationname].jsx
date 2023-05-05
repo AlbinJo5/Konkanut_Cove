@@ -132,14 +132,7 @@ export async function getServerSideProps(context) {
     };
   });
 
-  if (!sampleData[locationname]) {
-    return {
-      redirect: {
-        destination: routes.page404,
-        permanent: false,
-      },
-    };
-  }
+  
 
   return {
     props: {

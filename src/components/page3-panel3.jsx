@@ -15,7 +15,7 @@ export default function Page3Panel3({ id, image, imageWidth, imageHeight, carTyp
                 className={"mx-5 mb-5 rounded-lg py-3 bg-green-300 hover:bg-green-600 text-white font-bold disabled:bg-slate-500" + (selected ? " bg-green-600" : "bg-green-100")}
                 onClick={() => {
                     if (selected) return
-                    handleSelect(id)
+                    handleSelect(id, carType)
                 }} >{selected ? "Selected" : "Select"}</button>
         </div>
     )

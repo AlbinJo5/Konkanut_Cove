@@ -9,7 +9,7 @@ export default function Page3Panel2({ selected, image, id, imageWidth = 150, ima
     <div className="flex max-sm:flex-col items-center bg-white border-[1px] shadow-xl border-gray-200 px-5 py-3 rounded-md max-sm:w-fit"
       onClick={() => {
         if (selected) return
-        handleSelect(id)
+        handleSelect(id, title)
       }}
     >
       <Image src={image} alt="picture" width={"" + imageWidth} height={"" + imageHeight} className="rounded-md" />

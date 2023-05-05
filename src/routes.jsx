@@ -3,6 +3,7 @@ import Router from "next/router";
 export const routes = {
     home: '/',
     packages: '/packages',
+    packages_palces: '/packages/place/',
     package_details: '/packages/',
     contact:'contact/',
     gallery: '/gallery',

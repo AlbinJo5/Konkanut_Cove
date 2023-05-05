@@ -50,7 +50,6 @@ export default function Page3Panel({ title, includedList, hotel, flight, transfe
     setCollapse(!collapse);
   };
 
-  console.log(flight, hotel, transfer);
 
   const handleTransitionEnd = (e) => {
     if (collapse) {
