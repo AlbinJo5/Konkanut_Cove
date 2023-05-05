@@ -5,7 +5,7 @@ import Page3Panel2 from "@/components/page3-panel2";
 import Page3Panel3 from "@/components/page3-panel3";
 import Page3PicPanel from "@/components/page3-pic-panel";
 import { Airplane, Car, Hotel } from "@icon-park/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { routes } from "@/routes";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
@@ -171,42 +171,60 @@ const optionsList = [
     },
 ];
 
-const Accomodation = ({ accomodation }) => {
+const Accomodation = ({ accomodation, selected, handleSelect }) => {
     return (
         <ul className="flex flex-col">
-            {accomodation?.map((a, i) => (
-                <li className="my-2" key={i}>
-                    <Page3Panel2 {...a} />
-                </li>
-            ))}
+            {accomodation?.map((a, i) => {
+                const isSelected = selected?.accomodations.includes(a?.id)
+                return (
+                    <li className="my-2" key={i}>
+                        <Page3Panel2 {...a} handleSelect={handleSelect} selected={isSelected} />
+                    </li>
+                )
+            })}
         </ul>
     );
 };
 
-const Activities = ({ activities, imageWidth, imageHeight }) => {
+const Activities = ({ activities, imageWidth, imageHeight, selected, handleSelect }) => {
     return (
         <ul className="grid sm:grid-cols-2 md:grid-cols-1 max-sm:grid-cols-2 max-xs:grid-cols-1 gap-2">
-            {activities?.map((a, i) => (
-                <li className="my-2" key={i}>
-                    <Page3Panel2
-                        {...a}
-                        imageWidth={imageWidth}
-                        imageHeight={imageHeight}
-                    />
-                </li>
-            ))}
+            {activities?.map((a, i) => {
+                const isSelected = selected?.activities.includes(a?.id)
+                return (
+                    <li className="my-2" key={i}>
+                        <Page3Panel2
+                            {...a}
+                            handleSelect={handleSelect}
+                            selected={isSelected}
+                            imageWidth={imageWidth}
+                            imageHeight={imageHeight}
+                        />
+                    </li>
+                )
+            })
+
+            }
+
         </ul>
     );
 };
 
-const Travel = ({ transport }) => {
+const Travel = ({ transport, selected, handleSelect }) => {
     return (
         <ul className="grid md:grid-cols-3 sm:grid-cols-2 gap-2">
-            {transport?.map((t, i) => (
-                <li className="my-2" key={i}>
-                    <Page3Panel3 {...t} />
-                </li>
-            ))}
+            {transport?.map((t, i) => {
+                console.log(selected);
+                console.log(t);
+                console.log(selected?.transportations.includes(t?.id));
+                const isSelected = selected?.transportations.includes(t?.id)
+                console.log(isSelected);
+                return (
+                    <li className="my-2" key={i}>
+                        <Page3Panel3 {...t} selected={isSelected} handleSelect={handleSelect} />
+                    </li>
+                )
+            })}
         </ul>
     );
 };
@@ -215,7 +233,34 @@ export default function Index() {
     const [options, setOptions] = useState(0);
     const { id } = useRouter().query
 
-    
+    const [selected, setSelected] = useState({
+        activities: [],
+        accomodations: [],
+        transportations: [],
+    });
+
+    const handleActivitySelect = (id) => {
+        setSelected((prev) => ({
+            ...prev,
+            activities: prev.activities.includes(id) ? prev.activities.filter(a => a !== id) : [...prev.activities.slice(1), id],
+        }));
+    };
+
+    const handleAccomodationSelect = (id) => {
+        setSelected((prev) => ({
+            ...prev,
+            accomodations: [id],
+        }));
+    };
+
+    const handleTransportationSelect = (id) => {
+        setSelected((prev) => ({
+            ...prev,
+            transportations: [id],
+        }));
+    };
+
+
     const packageData = useQuery(
         ["package", id],
         () => getSubcollectionById("Packages", id, ["Activities", "Accomadations", "Transportations", "Days"]),
@@ -285,7 +330,7 @@ export default function Index() {
         return {
             title: a.title,
             image: a.images[0],
-            
+            id: a.id,
         }
     })
 
@@ -297,6 +342,7 @@ export default function Index() {
             image: t.images[0],
             imageWidth: 250,
             imageHeight: 172,
+            id: t.id,
         }
     })
 
@@ -304,12 +350,27 @@ export default function Index() {
         (a) => packageData.data?.data?.Accomadations.map((a) => a.accomadationId).includes(a.id)
     ).map((a) => {
         return {
+            id: a.id,
             title: a.name,
             image: a.images[0],
             imageWidth: 250,
             imageHeight: 172,
         }
     })
+
+    useEffect(() => {
+        if (packageData.data?.data) {
+            setSelected((prev) => ({
+                ...prev,
+                // only slelect first 2activity and 1accomodation and 1transportation
+                activities: packageData.data?.data?.Activities.map((a) => a.activityId).slice(0, 2),
+                accomodations: [packageData.data?.data?.Accomadations[0]?.accomadationId],
+                transportations: [packageData.data?.data?.Transportations[0]?.transportationId],
+
+            }));
+        }
+    }, [packageData.data?.data])
+
 
     return (
         <Layout>
@@ -339,18 +400,26 @@ export default function Index() {
                         {(() => {
                             switch (options) {
                                 case 0:
-                                    return <Accomodation accomodation={accomodation} />;
+                                    return <Accomodation
+                                        selected={selected}
+                                        handleSelect={handleAccomodationSelect}
+                                        accomodation={accomodation} />;
                                 case 1:
                                     return (
                                         <Activities
                                             activities={activities}
+                                            selected={selected}
+                                            handleSelect={handleActivitySelect}
                                             image
                                             imageWidth="120"
                                             imageHeight="90"
                                         />
                                     );
                                 case 2:
-                                    return <Travel transport={transport} />;
+                                    return <Travel
+                                        selected={selected}
+                                        handleSelect={handleTransportationSelect}
+                                        transport={transport} />;
                                 default:
                                     null;
                             }
