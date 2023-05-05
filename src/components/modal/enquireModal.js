@@ -6,7 +6,6 @@ export default function EnquireModal(props) {
     const handler = () => setVisible(true);
     const closeHandler = () => {
         setVisible(false);
-        console.log("closed");
     };
 
     const handleSubmit = (e) => {
@@ -49,7 +48,7 @@ export default function EnquireModal(props) {
     return (
         <div>
             <button className="flex-end   mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500" auto color="warning" shadow onClick={handler}>
-                Enquire Now, Pay Later
+                Enquire Now
             </button>
             <Modal
                 closeButton
@@ -62,9 +61,9 @@ export default function EnquireModal(props) {
                 <form onSubmit={handleSubmit} >
                     <Modal.Header>
                         <Text id="modal-title" size={18}>
-                            Welcome to
+                            Konkanut Cove
                             <Text b size={18}>
-                                NextUI
+                                {" "}Enquiry
                             </Text>
                         </Text>
                     </Modal.Header>

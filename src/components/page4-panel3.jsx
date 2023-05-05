@@ -6,6 +6,7 @@ import moment from "moment"
 import Image from "next/image"
 import { useState } from "react"
 import ImageModal from "./image-modal"
+import EnquireModal from "./modal/enquireModal"
 
 
 export const Landmarks = ({ landmarks }) => {
@@ -143,8 +144,6 @@ const OptionsList = ({ options }) => {
 
 export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options, checkIn, checkOut }) {
   const [showModal, setShowModal] = useState(false);
-  console.log(importantNotes);
-  console.log(images);
   // if (images.length<7)throw Error("Not enough images!")
 
   return (
@@ -167,7 +166,9 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
         </div>
       </div>
 
-      <ImageGrid images={images} hotelName={hotelName} address={address} setShowModal={setShowModal}><button className="bg-green-800 text-white px-5 py-2 rounded-md hover:transition-transform hover:scale-110 hover:duration-750">Send Enquiry</button></ImageGrid>
+      <ImageGrid images={images} hotelName={hotelName} address={address} setShowModal={setShowModal}>
+        <EnquireModal  />
+      </ImageGrid>
 
       <div className="flex max-md:flex-col mt-4 grow">
         <div className="flex max-sm:flex-col">
