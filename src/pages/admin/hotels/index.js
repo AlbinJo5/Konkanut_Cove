@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { ADMIN_ROUTES } from '@/admin_components/core/routes';
 import { useQuery } from '@tanstack/react-query'
 import { getAllData } from '@/utils/firebase_data_handler';
+import HotelsAdd from '@/admin_components/model/HOTELS/HotelsAdd';
 function Index() {
 
     const [count, setCount] = useState(0);
@@ -21,23 +22,16 @@ function Index() {
             return getAllData("Hotels")
         },
         {
-            staleTime: 10000 * 60 
+            staleTime: 10000 * 60
         }
     )
-
-    console.log(hotelsData.data?.data);
-
 
     return (
         <Layout>
             <div className={styles.products} >
                 <div className={styles.head} >
                     <h3>Hotels</h3>
-                    <Button auto color="success" css={{
-                        color: "#ffffff",
-                    }} onClick={() => {
-                        route.push(ADMIN_ROUTES.HOTELS_ADD)
-                    }}> Add Hotel </Button>
+                    <HotelsAdd />
                 </div>
                 {/* <Addmodel /> */}
                 <Table
@@ -50,28 +44,32 @@ function Index() {
                     css={{
                         height: "auto",
                         minWidth: "100%",
+                        overflow: "auto",
                     }}
+
                 >
-                    <Table.Header>
+                    <Table.Header >
                         <Table.Column>Place</Table.Column>
                         <Table.Column>Title</Table.Column>
                         <Table.Column>
-                            {/* <DeleteIcon size={20} fill="#979797" /> */}
                         </Table.Column>
                     </Table.Header>
-                    <Table.Body>
+                    <Table.Body >
                         {
                             // hotelsData.data?.map(({ id, data }, i) => (
                             hotelsData.data?.data.map((data, i) => (
-                                <Table.Row key={i + 1}>
+                                <Table.Row key={i + 1} >
                                     <Table.Cell>  <User size="xl" squared src={data.images[0]} css={{ p: 0 }}>
                                     </User></Table.Cell>
-                                    <Table.Cell>{data.name}</Table.Cell>
+                                    <Table.Cell>{data.title}</Table.Cell>
 
-                                    <Table.Cell>
-                                        <Button onClick={()=>{
-                                            route.push(ADMIN_ROUTES.HOTELS_VIEW  + data.id)
-                                        }} > 
+                                    <Table.Cell css={{
+                                        display: "flex",
+                                        justifyContent: "end",
+                                    }}>
+                                        <Button onClick={() => {
+                                            route.push(ADMIN_ROUTES.HOTELS_VIEW + data.id)
+                                        }} >
                                             View
                                         </Button>
                                     </Table.Cell>

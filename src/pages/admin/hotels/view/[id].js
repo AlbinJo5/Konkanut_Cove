@@ -62,7 +62,6 @@ function Index() {
         }
     )
 
-    console.log(roomsData.data);
 
     return (
         <Layout>
@@ -73,7 +72,7 @@ function Index() {
                 margin: 0,
                 padding: 0,
                 letterSpacing: 0.5,
-            }} h1>{hotels.data?.data?.name}</Text>
+            }} h1>{hotels.data?.data?.title}</Text>
             <Text css={{
                 margin: 0,
                 padding: 0,

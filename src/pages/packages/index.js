@@ -48,7 +48,7 @@ export default function Packages() {
                   </div>
                 </div>
               </Fade>
-              <ul className="w-full bg-gray-400 flex flex-col justify-center align-center items-center m-0 p-0	  my-5  ">
+              <ul className="w-full  flex flex-col justify-center align-center items-center m-0 p-0	  my-5  ">
                 {placesData.data?.data
                   // make the content of the array 3 times
 

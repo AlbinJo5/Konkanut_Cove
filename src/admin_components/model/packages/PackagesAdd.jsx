@@ -81,7 +81,6 @@ export default function PackageAdd() {
             <Modal
                 width="600px"
                 height="80px"
-
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"
                 {...bindings}
