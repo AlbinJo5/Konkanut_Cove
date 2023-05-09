@@ -1,14 +1,14 @@
 import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox, Dropdown } from "@nextui-org/react";
 import { Input, Grid, Textarea } from "@nextui-org/react";
-import { uploadImages } from "@/utils/firebase_image_upload";
+import { deleteImages, uploadImages } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
-import { uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
 import { useState } from "react";
 import InitialLoading from "@/admin_components/initialLoading";
+import { updateData } from "@/utils/firebase_data_handler";
 
 
-export default function HotelsAdd() {
+export default function HotelsEdit(props) {
     const { setVisible, bindings } = useModal();
     const [loading, setLoading] = useState(false);
 
@@ -24,32 +24,33 @@ export default function HotelsAdd() {
     )
 
     const handleData = (data) => {
-        const resp = uploadData(data, "Hotels")
+        const resp = updateData(data, `Hotels/${props.data.id}`)
         resp.then(res => {
             if (res.message === "success") {
                 // update or add the response to the cache
-                queryClient.setQueryData(['hotels'], (old) => {
+                queryClient.setQueryData(['hotel', props.data.id], (old) => {
                     const oldData = old?.data
+                    console.log(oldData);
                     if (oldData) {
-                        return { ...old, data: [...oldData, res.data] }
+                        return { ...old, ...res.data }
                     }
                     else {
-                        return { ...old, data: [res.data] }
+                        return {...res.data}
                     }
                 })
 
-                alert("Hotel Added Successfully")
+                alert("Hotel Updated Successfully")
                 setLoading(false);
                 setVisible(false);
             }
             else {
-                alert("Hotel Adding Failed")
+                alert("Hotel Updation Failed")
                 setLoading(false);
             }
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
@@ -67,40 +68,59 @@ export default function HotelsAdd() {
         const laundary = e.target[11].checked;
         const map = e.target[12].value;
         const cancelTime = e.target[13].value;
-
-        const resp = uploadImages(images, "Hotels");
-        resp.then(res => {
-            if (res.message === "success") {
-                const data = {
-                    title: title,
-                    address: address,
-                    place: place,
-                    type: type,
-                    description: description,
-                    images: res.data,
-                    wifi: wifi,
-                    pool: pool,
-                    parking: parking,
-                    restaurant: restaurant,
-                    fitness: fitness,
-                    laundary: laundary,
-                    map: map,
-                    cancelDate: cancelDate,
-                    cancelTime: cancelTime,
-                    createdAt: new Date().toISOString()
-                }
-                handleData(data)
-            }
+        if (images.length === 0) {
+            handleData({
+                title: title,
+                address: address,
+                place: place,
+                type: type,
+                description: description,
+                images: props.data.images,
+                wifi: wifi,
+                pool: pool,
+                parking: parking,
+                restaurant: restaurant,
+                fitness: fitness,
+                laundary: laundary,
+                map: map,
+                cancelTime: cancelTime,
+            })
         }
-        )
-    }
+        else {
+            deleteImages(props.data.images);
+            const resp = uploadImages(images, "Hotels");
+            resp.then(res => {
+                if (res.message === "success") {
+                    const data = {
+                        title: title,
+                        address: address,
+                        place: place,
+                        type: type,
+                        description: description,
+                        images: res.data,
+                        wifi: wifi,
+                        pool: pool,
+                        parking: parking,
+                        restaurant: restaurant,
+                        fitness: fitness,
+                        laundary: laundary,
+                        map: map,
+                        cancelTime: cancelTime,
+                        createdAt: new Date().toISOString()
+                    }
+                    handleData(data)
+                }
+            }
+            )
+        }
 
+    }
     return (
         <div>
             <Button auto shadow color="success" css={{
                 color: "white",
             }} onClick={() => setVisible(true)}>
-                Add Hotel
+                Edit
             </Button>
             {
                 loading && <InitialLoading />
@@ -132,6 +152,7 @@ export default function HotelsAdd() {
                                     bordered
                                     fullWidth={true}
                                     placeholder="Name"
+                                    initialValue={props.data.title}
                                     color="success" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -139,38 +160,47 @@ export default function HotelsAdd() {
                                     bordered
                                     fullWidth={true}
                                     placeholder="Address"
+                                    initialValue={props.data.address}
                                     color="success" />
                             </Grid>
 
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <select name="Place" style={{
-                                    width: "100%",
-                                    height: "40px",
-                                    borderRadius: "5px",
-                                    border: "1px solid #ccc",
-                                    padding: "5px"
-                                }} >
+                                <select name="Place"
+                                    style={{
+                                        width: "100%",
+                                        height: "40px",
+                                        borderRadius: "5px",
+                                        border: "1px solid #ccc",
+                                        padding: "5px"
+                                    }} >
                                     <option value="0" hidden>Select Place</option>
                                     {
                                         places.data?.data.map((place, index) => {
                                             return (
-                                                <option key={index} value={place.id}>{place.data.title}</option>
+                                                <option selected={
+                                                    place.id === props.data.place
+                                                } key={index} value={place.id}>{place.data.title}</option>
                                             )
                                         })
                                     }
                                 </select>
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <select name="Place" style={{
-                                    width: "100%",
-                                    height: "40px",
-                                    borderRadius: "5px",
-                                    border: "1px solid #ccc",
-                                    padding: "5px"
-                                }} >
-                                    <option value="0" hidden>Select Type</option>
-                                    <option value="hotel">Hotel</option>
-                                    <option value="homeStay">Home Stay</option>
+                                <select name="Place"
+                                    style={{
+                                        width: "100%",
+                                        height: "40px",
+                                        borderRadius: "5px",
+                                        border: "1px solid #ccc",
+                                        padding: "5px"
+                                    }} >
+                                    <option value="0" hidden >Select Type</option>
+                                    <option selected={
+                                        props.data.type === "hotel"
+                                    } value="hotel">Hotel</option>
+                                    <option selected={
+                                        props.data.type === "homeStay"
+                                    } value="homeStay">Home Stay</option>
                                 </select>
                             </Grid>
 
@@ -178,6 +208,7 @@ export default function HotelsAdd() {
                                 <Textarea
                                     bordered
                                     fullWidth={true}
+                                    initialValue={props.data.description}
                                     placeholder="Description"
                                     color="success" />
                             </Grid>
@@ -192,18 +223,31 @@ export default function HotelsAdd() {
                                 // child padding
 
                             }} xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <Checkbox defaultSelected>Wifi</Checkbox>
-                                <Checkbox defaultSelected>Pool Side</Checkbox>
-                                <Checkbox defaultSelected>Parking</Checkbox>
-                                <Checkbox defaultSelected>Restaurant</Checkbox>
-                                <Checkbox defaultSelected>Fitness</Checkbox>
-                                <Checkbox defaultSelected>Laundary</Checkbox>
+                                <Checkbox defaultSelected={
+                                    props.data?.wifi
+                                } >Wifi</Checkbox>
+                                <Checkbox defaultSelected={
+                                    props.data?.pool
+                                } >Pool Side</Checkbox>
+                                <Checkbox defaultSelected={
+                                    props.data?.parking
+                                } >Parking</Checkbox>
+                                <Checkbox defaultSelected={
+                                    props.data?.restaurant
+                                } >Restaurant</Checkbox>
+                                <Checkbox defaultSelected={
+                                    props.data?.fitness
+                                } >Fitness</Checkbox>
+                                <Checkbox defaultSelected={
+                                    props.data?.laundary
+                                } >Laundary</Checkbox>
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
                                 <Input
                                     bordered
                                     fullWidth={true}
                                     placeholder="Map Link"
+                                    initialValue={props.data.map}
                                     color="success" />
                             </Grid>
 
@@ -218,6 +262,7 @@ export default function HotelsAdd() {
                                     bordered
                                     fullWidth={true}
                                     type="time"
+                                    initialValue={props.data.cancelTime}
                                     color="success" />
                             </Grid>
 

@@ -62,3 +62,19 @@ export async function deleteImage(path) {
         return { message: "error" }
     }
 }
+
+export async function deleteImages(paths) {
+    // paths = [path1,path2,path3]
+    try {
+        for (const path of paths) {
+            // detele using url
+            const imageRef = ref(storage, path);
+            await deleteObject(imageRef);
+        }
+        return { message: "success" }
+    }
+    catch (error) {
+        console.log("Error: ", error);
+        return { message: "error" }
+    }
+}

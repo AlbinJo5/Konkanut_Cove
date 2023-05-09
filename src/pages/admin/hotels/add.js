@@ -9,10 +9,8 @@ function Add() {
     const places = useQuery(['places'], () => {
         return fetch('/api/place')
             .then(res => res.json())
-
     },
         {
-
             staleTime: 10000 * 60
         }
     )

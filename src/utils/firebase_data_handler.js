@@ -57,6 +57,37 @@ export async function uploadData(data, path, id = null) {
     }
 }
 
+export async function updateData(data, path) {
+    try {
+        console.log("sadgasdghjasdjghajhsd");
+        console.log(path);
+        const docRef = doc(db, path);
+        await setDoc(docRef, data);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return {
+                message: "success",
+                data: {
+                    id: docSnap.id,
+                    ...docSnap.data()
+                }
+            }
+        } else {
+            return {
+                message: "error",
+                data: "No such document!"
+            };
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return {
+            message: "error",
+            data: err
+        }
+    }
+}
+
 export async function getAllData(path) {
     try {
         const querySnapshot = await getDocs(collection(db, path));

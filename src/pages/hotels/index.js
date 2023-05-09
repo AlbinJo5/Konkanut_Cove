@@ -147,7 +147,6 @@ export default function Hotels() {
     })
 
 
-    console.log(hotelsFullData.data?.data);
     return (
         <Layout>
             <Fade top>

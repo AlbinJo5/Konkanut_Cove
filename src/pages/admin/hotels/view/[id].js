@@ -1,4 +1,6 @@
+import InitialLoading from '@/admin_components/initialLoading'
 import Layout from '@/admin_components/layout'
+import HotelsEdit from '@/admin_components/model/HOTELS/HotelsEdit'
 import LandmarkAdd from '@/admin_components/model/HOTELS/landmarks/landmarkAdd'
 import RoomAdd from '@/admin_components/model/HOTELS/room/roomAdd'
 import { getAllData, getDataById } from '@/utils/firebase_data_handler'
@@ -6,10 +8,9 @@ import { Button, Col, Row, Table, Text, User } from '@nextui-org/react'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 
 function Index() {
-
     const { id } = useRouter().query
     const hotels = useQuery(
         ['hotel', id],
@@ -65,14 +66,32 @@ function Index() {
 
     return (
         <Layout>
-            {/* <div className={styles.pacakage} >
-                <h1>{pacakage.data?.data?.title}</h1>
-            </div> */}
-            <Text css={{
-                margin: 0,
-                padding: 0,
-                letterSpacing: 0.5,
-            }} h1>{hotels.data?.data?.title}</Text>
+            {
+                hotels.isLoading && <InitialLoading />
+            }
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 20
+            }} >
+                <Text css={{
+                    margin: 0,
+                    padding: 0,
+                    letterSpacing: 0.5,
+                }} h1>{hotels.data?.data?.title}</Text>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10
+                }} >
+                    <HotelsEdit data={{
+                        ...hotels.data?.data
+                    }} />
+                    <Button auto size="small" color="error">Delete</Button>
+                </div>
+            </div>
+
             <Text css={{
                 margin: 0,
                 padding: 0,
@@ -101,7 +120,7 @@ function Index() {
             }} >
 
                 {
-                    hotels.data?.data?.images.map((item, index) => {
+                    hotels.data?.data?.images?.map((item, index) => {
                         return (
                             <Image key={index} src={item} alt="" style={{
                                 borderRadius: 10,
@@ -182,7 +201,7 @@ function Index() {
                     />
                 </Table>
             </div>
-            
+
             {/* Landmarks */}
             <div style={{
                 marginTop: 50,
