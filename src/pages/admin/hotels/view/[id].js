@@ -3,6 +3,8 @@ import Layout from '@/admin_components/layout'
 import HotelsEdit from '@/admin_components/model/HOTELS/HotelsEdit'
 import LandmarkAdd from '@/admin_components/model/HOTELS/landmarks/landmarkAdd'
 import RoomAdd from '@/admin_components/model/HOTELS/room/roomAdd'
+import RoomEdit from '@/admin_components/model/HOTELS/room/roomEdit'
+import RoomView from '@/admin_components/model/HOTELS/room/roomView'
 import { getAllData, getDataById } from '@/utils/firebase_data_handler'
 import { Button, Col, Row, Table, Text, User } from '@nextui-org/react'
 import { useQuery } from '@tanstack/react-query'
@@ -164,7 +166,8 @@ function Index() {
                         <Table.Column>Place</Table.Column>
                         <Table.Column>Title</Table.Column>
                         <Table.Column>
-                            sss                        </Table.Column>
+                            Options
+                        </Table.Column>
                     </Table.Header>
                     <Table.Body>
                         {
@@ -179,13 +182,16 @@ function Index() {
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
-
+                                            <RoomView data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
+                                            <RoomEdit hotelId={id}  data={{...data}} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
+                                            delete
                                         </Col>
-                                    </Row></Table.Cell>
+                                    </Row>
+                                    </Table.Cell>
                                 </Table.Row>
                             ))
                         }

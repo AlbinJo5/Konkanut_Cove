@@ -59,7 +59,6 @@ export async function uploadData(data, path, id = null) {
 
 export async function updateData(data, path) {
     try {
-        console.log("sadgasdghjasdjghajhsd");
         console.log(path);
         const docRef = doc(db, path);
         await setDoc(docRef, data);

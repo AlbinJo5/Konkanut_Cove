@@ -31,11 +31,12 @@ export default function HotelsEdit(props) {
                 queryClient.setQueryData(['hotel', props.data.id], (old) => {
                     const oldData = old?.data
                     console.log(oldData);
+                    console.log(res.data);
                     if (oldData) {
-                        return { ...old, ...res.data }
+                        return res
                     }
                     else {
-                        return {...res.data}
+                        return res.data
                     }
                 })
 
