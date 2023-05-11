@@ -1,12 +1,17 @@
 import InitialLoading from '@/admin_components/initialLoading'
 import Layout from '@/admin_components/layout'
+import HotelsDelete from '@/admin_components/model/HOTELS/HotelsDelete'
 import HotelsEdit from '@/admin_components/model/HOTELS/HotelsEdit'
 import LandmarkAdd from '@/admin_components/model/HOTELS/landmarks/landmarkAdd'
+import LandmarkDelete from '@/admin_components/model/HOTELS/landmarks/landmarkDelete'
+import LandmarkEdit from '@/admin_components/model/HOTELS/landmarks/landmarkEdit'
+import LandmarkView from '@/admin_components/model/HOTELS/landmarks/landmarkView'
 import RoomAdd from '@/admin_components/model/HOTELS/room/roomAdd'
+import RoomDelete from '@/admin_components/model/HOTELS/room/roomDelete'
 import RoomEdit from '@/admin_components/model/HOTELS/room/roomEdit'
 import RoomView from '@/admin_components/model/HOTELS/room/roomView'
 import { getAllData, getDataById } from '@/utils/firebase_data_handler'
-import { Button, Col, Row, Table, Text, User } from '@nextui-org/react'
+import { Button, Col, Row, Table, Text, Tooltip, User } from '@nextui-org/react'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -90,7 +95,24 @@ function Index() {
                     <HotelsEdit data={{
                         ...hotels.data?.data
                     }} />
-                    <Button auto size="small" color="error">Delete</Button>
+
+                    {/* only display delete if there are no landmarks nor rooms or else display a diabled button with a tool tip */}
+                    {/* <HotelsDelete data={{
+                        ...hotels.data?.data
+                    }} /> */}
+                    {
+                        (landmarksData.data?.data?.length === 0 && roomsData.data?.data?.length === 0) ?
+                            <HotelsDelete data={{
+                                ...hotels.data?.data
+                            }} />
+                            :
+                            <Tooltip
+                                content="Delete all landmarks and rooms first"
+                                color="error"
+                            >
+                                <Button disabled auto tooltip="Delete all landmarks and rooms first" >Delete</Button>
+                            </Tooltip>
+                    }
                 </div>
             </div>
 
@@ -103,7 +125,7 @@ function Index() {
                 }</Text>
             {
                 // split the string into array of string by *
-                hotels.data?.data?.description.split('*').map((item, index) => {
+                hotels.data?.data?.description?.split('*').map((item, index) => {
                     return (
                         <Text key={index} p>
                             {item}
@@ -185,10 +207,10 @@ function Index() {
                                             <RoomView data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
-                                            <RoomEdit hotelId={id}  data={{...data}} />
+                                            <RoomEdit hotelId={id} data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
-                                            delete
+                                            <RoomDelete hotelId={id} data={{ ...data }} />
                                         </Col>
                                     </Row>
                                     </Table.Cell>
@@ -253,13 +275,16 @@ function Index() {
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
-
+                                            <LandmarkView data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
+                                            <LandmarkEdit hotelId={id} data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
+                                            <LandmarkDelete hotelId={id} data={{ ...data }} />
                                         </Col>
-                                    </Row></Table.Cell>
+                                    </Row>
+                                    </Table.Cell>
                                 </Table.Row>
                             ))
                         }

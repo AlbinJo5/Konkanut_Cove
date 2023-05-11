@@ -85,7 +85,6 @@ export default function HotelsAdd() {
                     fitness: fitness,
                     laundary: laundary,
                     map: map,
-                    cancelDate: cancelDate,
                     cancelTime: cancelTime,
                     createdAt: new Date().toISOString()
                 }

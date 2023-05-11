@@ -47,7 +47,6 @@ function Add() {
             b: e.target.Hotel_b.checked,
             c: e.target.Hotel_c.checked,
             map: e.target.Hotel_Map.value,
-            cancel_day: e.target.Hotel_Cancel_Day.value,
             cancel_time: e.target.Hotel_Cancel_Time.value
         }
         const resp = uploadImages(e.target.Hotel_Image.files, "Hotels")

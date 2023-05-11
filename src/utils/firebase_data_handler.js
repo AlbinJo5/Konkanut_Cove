@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, setDoc, } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, } from "firebase/firestore";
 import { db } from "./firebase";
 export async function uploadData(data, path, id = null) {
 
@@ -194,5 +194,21 @@ export async function getSubcollectionById(collectionName, id, subCollectionName
     }
 }
 
+
+export async function deleteData(path) {
+    try {
+        await deleteDoc(doc(db, path));
+        return {
+            message: "success",
+            data: "Document successfully deleted!"
+        };
+    } catch (err) {
+        console.log(err);
+        return {
+            message: "error",
+            data: err,
+        };
+    }
+}
 
 

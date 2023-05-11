@@ -5,16 +5,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import { uploadImage } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
-import { uploadData } from "@/utils/firebase_data_handler";
+import { updateData, uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
 import InitialLoading from "@/admin_components/initialLoading";
 
-export default function LandmarkAdd(props) {
+export default function LandmarkEdit(props) {
     const { setVisible, bindings } = useModal();
     const [loading, setLoading] = useState(false);
 
     const handleAdd = (data) => {
-        const resp = uploadData(data, `Hotels/${props.hotelId}/Landmarks`)
+        const resp = updateData(data, `Hotels/${props.hotelId}/Landmarks/${props.data.id}`)
         resp.then(res => {
             if (res.message === "success") {
                 // update or add the response to the cache
@@ -24,22 +24,28 @@ export default function LandmarkAdd(props) {
                     'landmarks'
                 ], (old) => {
                     const oldData = old?.data
+                    // replace the same data with the new one using id
                     if (oldData) {
-                        return { ...old, data: [...oldData, res.data] }
-                    }
-                    else {
-                        return { ...old, data: [res.data] }
+                        const newData = oldData.map((item) => {
+                            if (item.id === props.data.id) {
+                                return res.data
+                            }
+                            else {
+                                return item
+                            }
+                        })
+                        return { ...old, data: newData }
                     }
                 })
 
                 // close the modal
                 setVisible(false);
 
-                alert("Landmark Added Successfully")
+                alert("Landmark Edited Successfully")
                 setLoading(false);
             }
             else {
-                alert("Lamdmark Adding Failed")
+                alert("Lamdmark Editing Failed")
                 setLoading(false);
             }
         })
@@ -61,15 +67,19 @@ export default function LandmarkAdd(props) {
 
     return (
         <div>
-            <Button auto shadow color="success" css={{
-                color: "white",
-            }} onClick={() => setVisible(true)}>
-                Add Landmark
-            </Button>
+            <Tooltip
+                content="Edit"
+                color="success"
+                onClick={() => {
+                    setVisible(true)
+                }}
+            >
+                <IconButton>
+                    <EditIcon size={20} fill="#095000" />
+                </IconButton>
+            </Tooltip>
 
-            {
-                loading && <InitialLoading />
-            }
+
 
             <Modal
                 width="600px"
@@ -79,6 +89,9 @@ export default function LandmarkAdd(props) {
                 aria-describedby="modal-description"
                 {...bindings}
             >
+                {
+                    loading && <InitialLoading />
+                }
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
@@ -98,6 +111,7 @@ export default function LandmarkAdd(props) {
                                 <Input
                                     bordered
                                     fullWidth={true}
+                                    initialValue={props.data.name}
                                     labelPlaceholder="Name"
                                     color="success" />
                             </Grid>
@@ -105,6 +119,7 @@ export default function LandmarkAdd(props) {
                                 <Input
                                     bordered
                                     fullWidth={true}
+                                    initialValue={props.data.distance}
                                     labelPlaceholder="Distance"
                                     type="number"
                                     step=".1"

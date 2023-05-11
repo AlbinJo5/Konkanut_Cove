@@ -38,13 +38,13 @@ export default function RoomEdit(props) {
 
                 // close the modal
                 setVisible(false);
-                setLoading(false);
 
                 alert("Room Edited Successfully")
+                setLoading(false);
             }
             else {
-                setLoading(false);
                 alert("Room Editing Failed")
+                setLoading(false);
             }
         })
     }
