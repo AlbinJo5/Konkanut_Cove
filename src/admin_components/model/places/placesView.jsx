@@ -43,6 +43,10 @@ function PlacesView(props) {
                     <Text id="modal-description">
                         {props.data.title}
                     </Text>
+
+                    <Text id="modal-description">
+                        {props.data.description??"No Description"}
+                    </Text>
                     {/* props.data.image is an object with 0:"link", 1:"link" */}
                     {/* map through it */}
                     <div style={{

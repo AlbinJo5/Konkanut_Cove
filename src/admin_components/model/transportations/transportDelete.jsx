@@ -8,7 +8,6 @@ const ROUTE = '/api/transport';
 export default function TransportDelete(props) {
     const [isLoading, setIsLoading] = useState(false);
     const { setVisible, bindings } = useModal();
-    console.log(bindings);
     if (props.visibity) {
         setVisible(false);
     }
@@ -33,13 +32,13 @@ export default function TransportDelete(props) {
             }
             <Tooltip
                 content="Delete"
-                color="success"
+                color="error"
                 onClick={() => {
                     setVisible(true)
                 }}
             >
                 <IconButton>
-                    <DeleteIcon size={20} fill="#095000" />
+                    <DeleteIcon size={20} fill="#ff4d4f" />
                 </IconButton>
             </Tooltip>
 

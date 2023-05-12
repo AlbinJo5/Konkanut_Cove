@@ -72,10 +72,20 @@ export default function PlaceEdit(props) {
                                 value={form.title}
                                 color="success" />
                         </Grid>
-                       
-                       
+
+                        <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                            <Textarea
+                                bordered
+                                fullWidth={true}
+                                labelPlaceholder="Description"
+                                onChange={e => setForm({ ...form, description: e.target.value })}
+                                value={form.description ?? ''}
+                                color="success" />
+                        </Grid>
+
+
                         <Grid>
-                            <input type="file"  onChange={e => setImagePath(e.target.files)} />
+                            <input type="file" onChange={e => setImagePath(e.target.files)} />
                         </Grid>
                         {/* <Grid>
                             <input type="file" multiple onChange={e => setImagePath(e.target.files)} />

@@ -64,6 +64,15 @@ export default function PlacesAdd(props) {
                                 color="error" />
                         </Grid>
 
+                        <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                            <Textarea
+                                bordered
+                                fullWidth={true}
+                                labelPlaceholder="Description"
+                                onChange={e => setForm({ ...form, description: e.target.value })}
+                                color="error" />
+                        </Grid>
+
                         <Grid>
                             <input type="file" onChange={e => setImagePath(e.target.files)} />
                         </Grid>
