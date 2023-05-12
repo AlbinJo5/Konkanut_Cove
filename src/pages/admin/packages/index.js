@@ -11,6 +11,7 @@ import { ADMIN_ROUTES } from '@/admin_components/core/routes';
 import { useQuery } from '@tanstack/react-query'
 import { getAllData } from '@/utils/firebase_data_handler';
 import PackageAdd from '@/admin_components/model/packages/PackagesAdd';
+import InitialLoading from '@/admin_components/initialLoading';
 function Index() {
 
     const [count, setCount] = useState(0);
@@ -31,6 +32,9 @@ function Index() {
     return (
         <Layout>
             <div className={styles.products} >
+                {
+                    packagesData.isLoading && <InitialLoading />
+                }
                 <div className={styles.head} >
                     <h3>Packages</h3>
                     <PackageAdd />

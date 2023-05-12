@@ -5,16 +5,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import { uploadImage } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
-import { uploadData } from "@/utils/firebase_data_handler";
+import { updateData, uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
 import InitialLoading from "@/admin_components/initialLoading";
 
-export default function DayAdd(props) {
+export default function DayEdit(props) {
     const { setVisible, bindings } = useModal();
     const [loading, setLoading] = useState(false);
 
     const handleAdd = (data) => {
-        const resp = uploadData(data, `Packages/${props.packageId}/Days`, data.dayNumber)
+        const resp = updateData(data, `Packages/${props.packageId}/Days/${props.data.id}`)
         resp.then(res => {
             if (res.message === "success") {
                 // update or add the response to the cache
@@ -24,22 +24,28 @@ export default function DayAdd(props) {
                     'days'
                 ], (old) => {
                     const oldData = old?.data
+                    // replace the same data with the new one using id
                     if (oldData) {
-                        return { ...old, data: [...oldData, res.data] }
-                    }
-                    else {
-                        return { ...old, data: [res.data] }
+                        const newData = oldData.map((item) => {
+                            if (item.id === props.data.id) {
+                                return res.data
+                            }
+                            else {
+                                return item
+                            }
+                        })
+                        return { ...old, data: newData }
                     }
                 })
 
                 // close the modal
                 setVisible(false);
 
-                alert("Day Added Successfully")
+                alert("Day Edited Successfully")
                 setLoading(false);
             }
             else {
-                alert("Day Adding Failed")
+                alert("Day Editing Failed")
                 setLoading(false);
             }
         })
@@ -71,14 +77,18 @@ export default function DayAdd(props) {
 
     return (
         <div>
-            <Button auto shadow color="success" css={{
-                color: "white",
-            }} onClick={() => setVisible(true)}>
-                Add Day
-            </Button>
-            {
-                loading && <InitialLoading />
-            }
+            <Tooltip
+                content="Edit"
+                color="success"
+                onClick={() => {
+                    setVisible(true)
+                }}
+            >
+                <IconButton>
+                    <EditIcon size={20} fill="#095000" />
+                </IconButton>
+            </Tooltip>
+
 
             <Modal
                 width="600px"
@@ -88,11 +98,14 @@ export default function DayAdd(props) {
                 aria-describedby="modal-description"
                 {...bindings}
             >
+                {
+                    loading && <InitialLoading />
+                }
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
                     }} size={20}>
-                        Add Day
+                        Edit Day
                     </Text>
                 </Modal.Header>
                 <form onSubmit={handleSubmit} >
@@ -109,6 +122,7 @@ export default function DayAdd(props) {
                                     fullWidth={true}
                                     labelPlaceholder="Day Number"
                                     type="number"
+                                    initialValue={props.data.dayNumber}
                                     color="success" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -116,6 +130,7 @@ export default function DayAdd(props) {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Title"
+                                    initialValue={props.data.title}
                                     color="success" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -123,15 +138,16 @@ export default function DayAdd(props) {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Sub Title"
+                                    initialValue={props.data.subTitle}
                                     color="success" />
                             </Grid>
 
                             <Grid css={{
                                 gap: "10px",
                             }} xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <Checkbox color="success" label="Hotel" />
-                                <Checkbox color="success" label="Transfer" />
-                                <Checkbox color="success" label="Flight" />
+                                <Checkbox defaultSelected={props.data.hotel} color="success" label="Hotel" />
+                                <Checkbox defaultSelected={props.data.transfer} color="success" label="Transfer" />
+                                <Checkbox defaultSelected={props.data.flight} color="success" label="Flight" />
                             </Grid>
 
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -139,6 +155,7 @@ export default function DayAdd(props) {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Description"
+                                    initialValue={props.data.description}
                                     color="success" />
                             </Grid>
                         </Grid.Container>

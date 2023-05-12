@@ -11,6 +11,10 @@ import DayAdd from '@/admin_components/model/PACKAES_CONTENT/days/dayAdd';
 import ActivityAdd from '@/admin_components/model/PACKAES_CONTENT/activities/activityAdd';
 import TransportAdd from '@/admin_components/model/PACKAES_CONTENT/transporations/transportAdd';
 import AccomadationAdd from '@/admin_components/model/PACKAES_CONTENT/accomadations/accomadationAdd';
+import InitialLoading from '@/admin_components/initialLoading';
+import DayView from '@/admin_components/model/PACKAES_CONTENT/days/dayView';
+import DayEdit from '@/admin_components/model/PACKAES_CONTENT/days/dayEdit';
+import DayDelete from '@/admin_components/model/PACKAES_CONTENT/days/dayDelete';
 function Index() {
     const { id } = useRouter().query
     const pacakage = useQuery(
@@ -132,6 +136,14 @@ function Index() {
 
     return (
         <Layout>
+            {
+                pacakage.isLoading || places.isLoading || activitiesData.isLoading || packageActivityData.isLoading || transportationsData.isLoading || packageTransportationData.isLoading || hotelsData.isLoading || packageHotelData.isLoading || daysData.isLoading ? (
+                    <InitialLoading />
+                ) : pacakage.isError || places.isError || activitiesData.isError || packageActivityData.isError || transportationsData.isError || packageTransportationData.isError || hotelsData.isError || packageHotelData.isError || daysData.isError ? (
+                    <div>Error...</div>
+                ) : null
+
+            }
             <Text css={{
                 margin: 0,
                 padding: 0,
@@ -226,13 +238,16 @@ function Index() {
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
-
+                                            <DayView data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
+                                            <DayEdit packageId={id} data={{ ...data }} />
                                         </Col>
                                         <Col css={{ d: "flex" }}>
+                                            <DayDelete packageId={id} data={{ ...data }} />
                                         </Col>
-                                    </Row></Table.Cell>
+                                    </Row>
+                                    </Table.Cell>
                                 </Table.Row>
                             ))
                         }

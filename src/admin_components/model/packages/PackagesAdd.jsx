@@ -7,10 +7,12 @@ import { uploadImages } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
 import { uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
+import InitialLoading from "@/admin_components/initialLoading";
 
 
 export default function PackageAdd() {
     const { setVisible, bindings } = useModal();
+    const [loading, setLoading] = useState(false);
 
     const places = useQuery(['places'], () => {
         return fetch('/api/place')
@@ -41,15 +43,18 @@ export default function PackageAdd() {
                 setVisible(false);
 
                 alert("Package Added Successfully")
+                setLoading(false);
             }
             else {
                 alert("Package Adding Failed")
+                setLoading(false);
             }
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         const title = e.target[0].value;
         const price = e.target[1].value;
         const days = e.target[2].value;
@@ -74,7 +79,9 @@ export default function PackageAdd() {
 
     return (
         <div>
-            <Button auto shadow color="error" onClick={() => setVisible(true)}>
+            <Button auto shadow css={{
+                color: "white",
+            }} color="success" onClick={() => setVisible(true)}>
                 Add Package
             </Button>
 
@@ -85,6 +92,9 @@ export default function PackageAdd() {
                 aria-describedby="modal-description"
                 {...bindings}
             >
+                {
+                    loading && <InitialLoading />
+                }
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
@@ -188,7 +198,9 @@ export default function PackageAdd() {
                         <Button auto flat color="error" onPress={() => { setVisible(false) }}>
                             Close
                         </Button>
-                        <Button auto color="error" type="submit" >
+                        <Button auto css={{
+                            color: "white",
+                        }} color="success" type="submit" >
                             Submit
                         </Button>
                     </Modal.Footer>
