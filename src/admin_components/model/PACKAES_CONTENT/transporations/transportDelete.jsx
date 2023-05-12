@@ -1,44 +1,41 @@
 import { Modal, useModal, Button, Text, Tooltip, Spacer, Checkbox, Dropdown } from "@nextui-org/react";
 import { Grid } from "@nextui-org/react";
-import { deleteImages } from "@/utils/firebase_image_upload";
+import { DeleteIcon, IconButton } from "@/admin_components/icons";
 import { deleteData } from "@/utils/firebase_data_handler";
 import { queryClient } from "@/pages/_app";
 import { useState } from "react";
 import InitialLoading from "@/admin_components/initialLoading";
-import { useRouter } from "next/router";
-import { ADMIN_ROUTES } from "@/admin_components/core/routes";
 
-export default function PackageDelete(props) {
+export default function TransportDelete(props) {
     const { setVisible, bindings } = useModal();
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
 
     const handleDelete = () => {
         setLoading(true);
-        // delete the image
-        deleteImages(props.data.images).then(() => {
-        }).catch((error) => {
-            console.log(error);
-        });
+
 
         // delete the room
-        deleteData(`Packages/${props.data.id}`).then(() => {
+        deleteData(`Packages/${props.packageId}/Transportations/${props.packageTransportId.id}`).then(() => {
             // u[date the query cache
-            queryClient.setQueryData(["packages"], (oldData) => {
+            queryClient.setQueryData([
+                'packages',
+                props.packageId,
+                'transportations'
+            ], (oldData) => {
                 return {
                     ...oldData,
-                    data: oldData.data.filter((hotel) => hotel.id !== props.data.id)
+                    data: oldData.data.filter((room) => room.id !== props.packageTransportId.id)
 
                 }
             }
             );
-            alert("Packages deleted successfully");
-            router.push(ADMIN_ROUTES.PACKAGES);
+            alert("Transport deleted");
+            props.transportationContentChange();
             setLoading(false);
         }
         ).catch((error) => {
             console.log(error);
-            alert("Error deleting Packages");
+            alert("Error deleting Transport");
             setLoading(false);
         }
         );
@@ -47,11 +44,17 @@ export default function PackageDelete(props) {
 
     return (
         <div>
-            <Button auto shadow color="error" css={{
-                color: "white",
-            }} onClick={() => setVisible(true)}>
-                Delete
-            </Button>
+            <Tooltip
+                content="Delete"
+                color="error"
+                onClick={() => {
+                    setVisible(true)
+                }}
+            >
+                <IconButton>
+                    <DeleteIcon size={20} fill="#ff4d4f" />
+                </IconButton>
+            </Tooltip>
 
             {
                 loading && <InitialLoading />
@@ -68,7 +71,7 @@ export default function PackageDelete(props) {
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
                     }} size={20}>
-                        View
+                        Delete
                     </Text>
                 </Modal.Header>
                 <Modal.Body
@@ -82,7 +85,7 @@ export default function PackageDelete(props) {
                         <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
 
                             <Text size={15} >
-                                Are you sure you want to delete this Package?
+                                Are you sure you want to delete this Transport?
                             </Text>
 
 
@@ -90,10 +93,8 @@ export default function PackageDelete(props) {
                         <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
 
                             <Text size={20} >
-                                {props.data.title}
+                                {props.name}
                             </Text>
-
-
                         </Grid>
 
                     </Grid.Container>

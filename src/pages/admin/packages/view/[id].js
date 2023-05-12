@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { queryClient } from '@/pages/_app';
 import { useQuery } from '@tanstack/react-query'
 import { getAllData, getDataById } from '@/utils/firebase_data_handler';
-import { Button, Col, Row, Table, Text, User } from '@nextui-org/react';
+import { Button, Col, Row, Spacer, Table, Text, Tooltip, User } from '@nextui-org/react';
 import styles from '@/styles/admin_styles/package_view.module.scss'
 import Image from 'next/image';
 import DayAdd from '@/admin_components/model/PACKAES_CONTENT/days/dayAdd';
@@ -15,8 +15,19 @@ import InitialLoading from '@/admin_components/initialLoading';
 import DayView from '@/admin_components/model/PACKAES_CONTENT/days/dayView';
 import DayEdit from '@/admin_components/model/PACKAES_CONTENT/days/dayEdit';
 import DayDelete from '@/admin_components/model/PACKAES_CONTENT/days/dayDelete';
+import ActivityDelete from '@/admin_components/model/PACKAES_CONTENT/activities/activityDelete';
+import TransportDelete from '@/admin_components/model/PACKAES_CONTENT/transporations/transportDelete';
+import AccomadationDelete from '@/admin_components/model/PACKAES_CONTENT/accomadations/accomadationDelete';
+import PackageEdit from '@/admin_components/model/packages/PackageEdit';
+import PackageDelete from '@/admin_components/model/packages/PackageDelete';
 function Index() {
     const { id } = useRouter().query
+    const [activityContent, setActivityContent] = React.useState(undefined)
+    const [activityContentChange, setActivityContentChange] = React.useState(false)
+    const [transportContent, setTransportContent] = React.useState(undefined)
+    const [transportContentChange, setTransportContentChange] = React.useState(false)
+    const [accomadationContent, setAccomadationContent] = React.useState(undefined)
+    const [accomadationContentChange, setAccomadationContentChange] = React.useState(false)
     const pacakage = useQuery(
         ['package', id],
         () => {
@@ -132,6 +143,52 @@ function Index() {
     )
 
 
+    // Activity Content
+    React.useEffect(() => {
+        if (activitiesData.data?.data && packageActivityData.data?.data) {
+            setActivityContent(activitiesData.data?.data.filter(
+                activity => packageActivityData.data?.data?.find(
+                    packageActivity => packageActivity.activityId === activity.id
+                )
+            ))
+        }
+    }, [
+        activitiesData.data?.data,
+        packageActivityData.data?.data,
+        activityContentChange
+    ])
+
+    // Transport Content
+    React.useEffect(() => {
+        if (transportationsData.data?.data && packageTransportationData.data?.data) {
+            setTransportContent(transportationsData.data?.data.filter(
+                transport => packageTransportationData.data?.data?.find(
+                    packageTransportation => packageTransportation.transportationId === transport.id
+                )
+            ))
+        }
+    }, [
+        transportationsData.data?.data,
+        packageTransportationData.data?.data,
+        transportContentChange
+    ])
+
+    // Accomadation Content
+    React.useEffect(() => {
+        if (hotelsData.data?.data && packageHotelData.data?.data) {
+            setAccomadationContent(hotelsData.data?.data.filter(
+                hotel => packageHotelData.data?.data?.find(
+                    packageHotel => packageHotel.hotelId === hotel.id
+                )
+            ))
+        }
+    }, [
+        hotelsData.data?.data,
+        packageHotelData.data?.data,
+        accomadationContentChange
+    ])
+
+
 
 
     return (
@@ -144,11 +201,45 @@ function Index() {
                 ) : null
 
             }
-            <Text css={{
-                margin: 0,
-                padding: 0,
-                letterSpacing: 0.5,
-            }} h1>{pacakage.data?.data?.title}</Text>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 20
+            }} >
+                <Text css={{
+                    margin: 0,
+                    padding: 0,
+                    letterSpacing: 0.5,
+                }} h1>{pacakage.data?.data?.title}</Text>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10
+                }} >
+                    <PackageEdit data={{
+                        ...pacakage.data?.data
+                    }} />
+
+                    {/* only display delete if there are no landmarks nor rooms or else display a diabled button with a tool tip */}
+                    {/* <HotelsDelete data={{
+                        ...hotels.data?.data
+                    }} /> */}
+                    {
+                        (packageActivityData.data?.data?.length === 0 && packageTransportationData.data?.data?.length === 0 && packageHotelData.data?.data?.length === 0) ?
+                            <PackageDelete data={{
+                                ...pacakage.data?.data
+                            }} />
+                            :
+                            <Tooltip
+                                content="Delete all landmarks and rooms first"
+                                color="error"
+                            >
+                                <Button disabled auto tooltip="Delete all landmarks and rooms first" >Delete</Button>
+                            </Tooltip>
+                    }
+                </div>
+            </div>
             <Text css={{
                 margin: 0,
                 padding: 0,
@@ -166,6 +257,12 @@ function Index() {
                     )
                 })
             }
+
+            <Text h4>Price: {pacakage.data?.data?.price}</Text>
+            <Text h4>Days: {pacakage.data?.data?.days}</Text>
+            <Text h4>Nights: {pacakage.data?.data?.nights}</Text>
+
+            {/* Images */}
             <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -300,11 +397,7 @@ function Index() {
                     <Table.Body>
                         {
                             // hotelsData.data?.map(({ id, data }, i) => (
-                            activitiesData.data?.data.filter(
-                                activity => packageActivityData.data?.data?.find(
-                                    packageActivity => packageActivity.activityId === activity.id
-                                )
-                            ).map((data, i) => (
+                            activityContent?.map((data, i) => (
                                 <Table.Row key={i + 1}>
                                     <Table.Cell>
                                         <User size="xl" squared src={data.images[0]} css={{ p: 0 }}>
@@ -314,12 +407,15 @@ function Index() {
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
+                                            <ActivityDelete packageId={id} packageActivityId={{
+                                                id: packageActivityData.data?.data?.find(
+                                                    packageActivity => packageActivity.activityId === data.id
+                                                )?.id
+                                            }} activityContentChange={() => {
+                                                setActivityContentChange(!activityContentChange)
+                                            }} name={data.title} />
+                                        </Col>
 
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                        </Col>
                                     </Row></Table.Cell>
                                 </Table.Row>
                             ))
@@ -373,11 +469,7 @@ function Index() {
                     <Table.Body>
                         {
                             // hotelsData.data?.map(({ id, data }, i) => (
-                            transportationsData.data?.data.filter(
-                                transportation => packageTransportationData.data?.data?.find(
-                                    packageTransporation => packageTransporation.transportationId === transportation.id
-                                )
-                            ).map((data, i) => (
+                            transportContent?.map((data, i) => (
                                 <Table.Row key={i + 1}>
                                     <Table.Cell>
                                         <User size="xl" squared src={data.images[0]} css={{ p: 0 }}>
@@ -387,12 +479,15 @@ function Index() {
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
+                                            <TransportDelete packageId={id} packageTransportId={{
+                                                id: packageTransportationData.data?.data?.find(
+                                                    transportContent => transportContent.transportationId === data.id
+                                                )?.id
+                                            }} transportationContentChange={() => {
+                                                setTransportContentChange(!transportContentChange)
+                                            }} name={data.title} />
+                                        </Col>
 
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                        </Col>
                                     </Row></Table.Cell>
                                 </Table.Row>
                             ))
@@ -457,16 +552,19 @@ function Index() {
                                         <User size="xl" squared src={data.images[0]} css={{ p: 0 }}>
                                         </User>
                                     </Table.Cell>
-                                    <Table.Cell>{data.name}</Table.Cell>
+                                    <Table.Cell>{data.title}</Table.Cell>
 
                                     <Table.Cell>  <Row justify="center" align="center">
                                         <Col css={{ d: "flex" }}>
+                                            <AccomadationDelete packageId={id} packageAccomadationId={{
+                                                id: packageHotelData.data?.data?.find(
+                                                    packageHotel => packageHotel.accomadationId === data.id
+                                                )?.id
+                                            }} accomadationContentChange={() => {
+                                                setAccomadationContentChange(!accomadationContentChange)
+                                            }} name={data.title} />
+                                        </Col>
 
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                        </Col>
-                                        <Col css={{ d: "flex" }}>
-                                        </Col>
                                     </Row></Table.Cell>
                                 </Table.Row>
                             ))
@@ -483,6 +581,7 @@ function Index() {
                     />
                 </Table>
             </div>
+            <Spacer size="xl" />
 
         </Layout>
     )

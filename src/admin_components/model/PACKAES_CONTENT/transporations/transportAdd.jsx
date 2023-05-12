@@ -7,9 +7,11 @@ import { uploadImage } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
 import { getAllData, uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
+import InitialLoading from "@/admin_components/initialLoading";
 
 export default function TransportAdd(props) {
     const { setVisible, bindings } = useModal();
+    const [loading, setLoading] = useState(false);
 
     const handleAdd = (data) => {
         const resp = uploadData(data, `Packages/${props.transportationId}/Transportations`)
@@ -32,9 +34,11 @@ export default function TransportAdd(props) {
                 // close the modal
                 setVisible(false);
                 alert("Transport Added Successfully")
+                setLoading(false);
             }
             else {
                 alert("Transport Adding Failed")
+                setLoading(false);
             }
         })
     }
@@ -49,11 +53,11 @@ export default function TransportAdd(props) {
         }
     )
 
-    console.log(transportationsData);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         const transportationId = e.target[0].value;
 
         const data = {
@@ -79,6 +83,9 @@ export default function TransportAdd(props) {
                 aria-describedby="modal-description"
                 {...bindings}
             >
+                {
+                    loading && <InitialLoading />
+                }
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",

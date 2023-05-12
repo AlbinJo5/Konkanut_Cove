@@ -3,14 +3,16 @@ import { DeleteIcon, EditIcon, IconButton } from "../../icons";
 import { Input, Grid, Textarea } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
-import { uploadImages } from "@/utils/firebase_image_upload";
+import { deleteImages, uploadImages } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
-import { uploadData } from "@/utils/firebase_data_handler";
+import { updateData, uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
+import InitialLoading from "@/admin_components/initialLoading";
 
 
 export default function PackageEdit(props) {
     const { setVisible, bindings } = useModal();
+    const [loading, setLoading] = useState(false);
 
     const places = useQuery(['places'], () => {
         return fetch('/api/place')
@@ -21,61 +23,80 @@ export default function PackageEdit(props) {
             staleTime: 10000 * 60
         }
     )
-    const handleAdd = (data) => {
-        const resp = uploadData(data, "Packages")
+    const handleData = (data) => {
+        const resp = updateData(data, `Packages/${props.data.id}`)
         resp.then(res => {
-            console.log(res);
             if (res.message === "success") {
                 // update or add the response to the cache
-                queryClient.setQueryData(['packages'], (old) => {
+                queryClient.setQueryData(['package', props.data.id], (old) => {
                     const oldData = old?.data
+                    console.log(oldData);
+                    console.log(res.data);
                     if (oldData) {
-                        return { ...old, data: [...oldData, res.data] }
+                        return res
                     }
                     else {
-                        return { ...old, data: [res.data] }
+                        return res.data
                     }
                 })
 
-                // close the modal
+                alert("Hotel Updated Successfully")
+                setLoading(false);
                 setVisible(false);
-
-                alert("Package Added Successfully")
             }
             else {
-                alert("Package Adding Failed")
+                alert("Hotel Updation Failed")
+                setLoading(false);
             }
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         const title = e.target[0].value;
         const price = e.target[1].value;
         const days = e.target[2].value;
         const nights = e.target[3].value;
         const place = e.target[4].value;
         const description = e.target[5].value;
-        const resp = uploadImages(e.target[6].files, "packages");
-        resp.then((res) => {
-            const data = {
+        const images = e.target[6].files;
+
+        if (images.length === 0) {
+            handleData({
                 title: title,
                 price: price,
                 days: days,
                 nights: nights,
                 description: description,
                 place: place,
-                images: res.data,
-            }
-            handleAdd(data);
+                images: props.data.images,
+            });
         }
-        )
+
+        else {
+            deleteImages(props.data.images);
+            const resp = uploadImages(images, "packages");
+            resp.then((res) => {
+                const data = {
+                    title: title,
+                    price: price,
+                    days: days,
+                    nights: nights,
+                    description: description,
+                    place: place,
+                    images: res.data,
+                }
+                handleData(data);
+            }
+            )
+        }
     }
 
     return (
         <div>
             <Button auto shadow color="error" onClick={() => setVisible(true)}>
-                Add Package
+                Edit
             </Button>
 
             <Modal
@@ -86,11 +107,14 @@ export default function PackageEdit(props) {
                 aria-describedby="modal-description"
                 {...bindings}
             >
+                {
+                    loading && <InitialLoading />
+                }
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
                     }} size={20}>
-                        Add Package
+                        Edit Package
                     </Text>
                 </Modal.Header>
                 <form onSubmit={handleSubmit} >
@@ -106,7 +130,7 @@ export default function PackageEdit(props) {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Title"
-                                    defaultValue={props.title}
+                                    initialValue={props.data.title}
                                     color="error" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -114,7 +138,7 @@ export default function PackageEdit(props) {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Price"
-                                    defaultValue={props.price}
+                                    initialValue={props.data.price}
                                     type="number"
                                     color="error" />
                             </Grid>
@@ -124,7 +148,7 @@ export default function PackageEdit(props) {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Days"
-                                    defaultValue={props.days}
+                                    initialValue={props.data.days}
                                     type="number"
                                     color="error" />
                             </Grid>
@@ -132,7 +156,7 @@ export default function PackageEdit(props) {
                                 <Input
                                     bordered
                                     fullWidth={true}
-                                    defaultValue={props.nights}
+                                    initialValue={props.data.nights}
                                     labelPlaceholder="Nights"
                                     type="number"
                                     color="error" />
@@ -160,13 +184,12 @@ export default function PackageEdit(props) {
                                         backgroundColor: "#ffffff",
                                         width: "100%",
                                     }
-
-
-
-                                }} >
-                                    <option value="0">Select Place</option>
+                                }}
+                                >
                                     {
-                                        places.data?.data.map((place, index) => {
+                                        places.data?.data.filter(
+                                            (place) => place.id === props.data.place
+                                        ).map((place, index) => {
                                             return (
                                                 <option key={index} value={place.id}>{place.data.title}</option>
                                             )
@@ -181,6 +204,7 @@ export default function PackageEdit(props) {
                                     fullWidth={true}
                                     labelPlaceholder="Description"
                                     color="error"
+                                    initialValue={props.data.description}
                                 />
                             </Grid>
                             <Grid>

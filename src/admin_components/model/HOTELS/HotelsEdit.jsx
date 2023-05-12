@@ -107,7 +107,6 @@ export default function HotelsEdit(props) {
                         laundary: laundary,
                         map: map,
                         cancelTime: cancelTime,
-                        createdAt: new Date().toISOString()
                     }
                     handleData(data)
                 }

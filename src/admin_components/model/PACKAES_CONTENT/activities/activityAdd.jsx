@@ -7,9 +7,11 @@ import { uploadImage } from "@/utils/firebase_image_upload";
 import { queryClient } from "@/pages/_app";
 import { getAllData, uploadData } from "@/utils/firebase_data_handler";
 import { useQuery } from '@tanstack/react-query'
+import InitialLoading from "@/admin_components/initialLoading";
 
 export default function ActivityAdd(props) {
     const { setVisible, bindings } = useModal();
+    const [loading, setLoading] = useState(false);
 
     const handleAdd = (data) => {
         const resp = uploadData(data, `Packages/${props.packageId}/Activities`)
@@ -32,9 +34,11 @@ export default function ActivityAdd(props) {
                 // close the modal
                 setVisible(false);
                 alert("Activity Added Successfully")
+                setLoading(false);
             }
             else {
                 alert("Activity Adding Failed")
+                setLoading(false);
             }
         })
     }
@@ -52,6 +56,7 @@ export default function ActivityAdd(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         const activityId = e.target[0].value;
 
         const data = {
@@ -77,6 +82,9 @@ export default function ActivityAdd(props) {
                 aria-describedby="modal-description"
                 {...bindings}
             >
+                {
+                    loading && <InitialLoading />
+                }
                 <Modal.Header>
                     <Text id="modal-title" color="success" css={{
                         color: "#0000000",
