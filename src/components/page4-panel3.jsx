@@ -35,22 +35,20 @@ export const Landmarks = ({ landmarks }) => {
 }
 
 export const Cancellations = ({ until, after, refund1 = "100%", refund2 = "No" }) => {
-  const untilDate = moment(until).format("dddd, MMMM d \u25aa h a")
-  const afterDate = moment(after).format("dddd, MMMM d \u25aa h a")
 
   return (
     <div className="flex flex-col max-sm:mt-2 h-max">
       <div className="flex mb-2">
         <div className="bg-green-400 w-2 h-[45px] mr-4 "></div>
         <div className="flex flex-col">
-          <div className="text-md">Until {untilDate}</div>
+          <div className="text-md">Until {until} hours from check in</div>
           <div className="text-sm text-green-400">{refund1} refund</div>
         </div>
       </div>
       <div className="flex">
         <div className="bg-red-400 w-2 h-[45px] mr-4"></div>
         <div className="flex flex-col">
-          <div className="text-md">After {afterDate}</div>
+          <div className="text-md">After </div>
           <div className="text-sm text-red-400">{refund2} refund</div>
         </div>
       </div>
@@ -167,7 +165,7 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
       </div>
 
       <ImageGrid images={images} hotelName={hotelName} address={address} setShowModal={setShowModal}>
-        <EnquireModal  />
+        <EnquireModal />
       </ImageGrid>
 
       <div className="flex max-md:flex-col mt-4 grow">

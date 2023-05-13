@@ -8,23 +8,30 @@ import { Fade } from 'react-reveal'
 import { ClothesCardigan, Fitness, ForkSpoon, Parking, SwimmingPool, Wifi } from "@icon-park/react"
 import Page4Slider from '@/components/page4-slider'
 import { routes } from '@/routes'
-import { getAllSubcollections } from '@/utils/firebase_data_handler'
+import { getAllData, getAllSubcollections } from '@/utils/firebase_data_handler'
 import { useQuery } from '@tanstack/react-query'
+import InitialLoading from '@/admin_components/initialLoading'
 
 const options = [
     {
-        name: "Wi-fi",
+        name: "wifi",
         icon: Wifi
     }, {
-        name: "Poolside",
+        name: "pool",
         icon: SwimmingPool
     }, {
-        name: "Parking",
+        name: "parking",
         icon: Parking
     }, {
-        name: "Restaurant",
+        name: "restaurant",
         icon: ForkSpoon
-    },
+    }, {
+        name: "fitness",
+        icon: Fitness
+    }, {
+        name: "laundry",
+        icon: ClothesCardigan
+    }
 ]
 
 const subPanelDatas = [
@@ -49,71 +56,26 @@ const subPanelDatas = [
         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is ",
         price: 5499
     },
+
 ];
 
-const imageDatas = [].concat(...Array(1).fill(
-    {
-        images: [
 
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_5.png",
-            },
-            {
-                image: "/assets/images/beds/bed_6.png",
-            },
-            {
-                image: "/assets/images/beds/bed_7.png",
-            },
-        ],
-        hotelName: "LP2 Residency",
-        address: "45 Road Devbag,Maharashtra",
-        until: Date(4, 2, 23),
-        after: Date(6, 2, 23),
-        landmarks: [
-            {
-                distance: "0.1km",
-                placeName: "Aero city Metro Station"
-            },
-            {
-                distance: "0.5km",
-                placeName: "Pune Express Railway Station"
-            },
-
-        ],
-    }));
 
 const data = {
     title: "Enjoy Your Dream Vacation",
     desc: "Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum  is simply dummy text of the printing and types Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types",
     subPanelDatas,
-    imageDatas,
 };
 
 
 
 export default function Hotels() {
 
+    const [type, setType] = React.useState("hotel")
+
     const hotelsFullData = useQuery(
-        ['hotelsFullData'],
-        () => getAllSubcollections('Hotels', ["Rooms", "Landmarks"]),
+        ['hotels'],
+        () => getAllData('Hotels'),
         {
             staleTime: Infinity,
             refetchOnWindowFocus: false,
@@ -121,6 +83,18 @@ export default function Hotels() {
             refetchOnReconnect: false,
         }
     )
+
+    const flexiPackagesData = useQuery(
+        ['packages'],
+        () => getAllData('Packages'),
+        {
+            staleTime: Infinity,
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+        }
+    )
+
 
     // covert this hotelsFullData to above data format
 
@@ -131,24 +105,45 @@ export default function Hotels() {
                     image: map_d,
                 }
             }),
-            hotelName: d.name,
+            hotelName: d.title,
             address: d.address,
             map: d.map,
             // until: d.cancel_day. covert to date format
-            until: new Date(d.cancel_day),
-            after: new Date(d.cancel_day),
-            landmarks: d.Landmarks.map((map_d, i) => {
-                return {
-                    distance: map_d.distance,
-                    placeName: map_d.name
-                }
-            }),
+            until: d.cancelTime,
+            ac: d.ac,
+            mainOptions: {
+                wifi: d.wifi,
+                pool: d.pool,
+                parking: d.parking,
+                restaurant: d.restaurant,
+                fitness: d.fitness,
+                laundry: d.laundry,
+            },
+            type: d.type,
+
+        }
+    })
+
+    const flexiPackagesDataConverted = flexiPackagesData.data?.data.map((d, i) => {
+        return {
+            image: d.images[0],
+            D: d.days,
+            N: d.nights,
+            location: d.title,
+            desc: d.description,
+            price: d.price,
+            id: d.id,
         }
     })
 
 
+
+
     return (
         <Layout>
+            {
+                hotelsFullData.isLoading && flexiPackagesData.isLoading ? <InitialLoading /> : null
+            }
             <Fade top>
                 <div className="w-full bg-cover relative" style={{ backgroundImage: "url('/assets/images/back33.png')" }}>
                     <div className="absolute z-50 md:-bottom-12 -bottom-32 flex w-full justify-center">
@@ -168,7 +163,7 @@ export default function Hotels() {
                         </MainHeader>
                         <div className="flex w-full justify-center">
 
-                            <Page4Slider />
+                            <Page4Slider setType={(type) => setType(type)} />
 
                         </div>
 
@@ -177,14 +172,19 @@ export default function Hotels() {
                 </div>
             </Fade>
             <div className="flex flex-col mt-40  sm:mt-25 md:mt-20">
-                <Page4Panel1 subPanelDatas={data.subPanelDatas} />
+                {
+                    flexiPackagesData.isLoading ? <div>Loading...</div> : (
+                        <Page4Panel1 subPanelDatas={flexiPackagesDataConverted} />
+                    )
+                }
+
                 <ul className="grid lg:grid-cols-2 grid-cols-1 gap-2 mt-20">
                     {/* {
                         hotelsFullData.isLoading ? <div>Loading...</div> : hotelsFullData.data?.data.map((d, i) =>
                             <Page4Panel4 {...d} data={d} options={options} key={i} />
                         )
                     } */}
-                    {hotelsFullDataConverted?.map((d, i) =>
+                    {hotelsFullDataConverted?.filter(x => x.type === type).map((d, i) =>
                         <Page4Panel4 {...d} options={options} key={i} />
                     )}
                 </ul>

@@ -58,15 +58,16 @@ export default function HotelsAdd() {
         const place = e.target[2].value;
         const type = e.target[3].value;
         const description = e.target[4].value;
-        const images = e.target[5].files;
-        const wifi = e.target[6].checked;
-        const pool = e.target[7].checked;
-        const parking = e.target[8].checked;
-        const restaurant = e.target[9].checked;
-        const fitness = e.target[10].checked;
-        const laundary = e.target[11].checked;
-        const map = e.target[12].value;
-        const cancelTime = e.target[13].value;
+        const ac = e.target[5].checked;
+        const images = e.target[6].files;
+        const wifi = e.target[7].checked;
+        const pool = e.target[8].checked;
+        const parking = e.target[9].checked;
+        const restaurant = e.target[10].checked;
+        const fitness = e.target[11].checked;
+        const laundary = e.target[12].checked;
+        const map = e.target[13].value;
+        const cancelTime = e.target[14].value;
 
         const resp = uploadImages(images, "Hotels");
         resp.then(res => {
@@ -85,8 +86,8 @@ export default function HotelsAdd() {
                     fitness: fitness,
                     laundary: laundary,
                     map: map,
+                    ac: ac,
                     cancelTime: cancelTime,
-                    createdAt: new Date().toISOString()
                 }
                 handleData(data)
             }
@@ -181,6 +182,9 @@ export default function HotelsAdd() {
                                     color="success" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Checkbox defaultSelected>AC</Checkbox>
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
                                 <input type="file" multiple />
                             </Grid>
 
@@ -215,8 +219,8 @@ export default function HotelsAdd() {
                                 </Text>
                                 <Input
                                     bordered
+                                    placeholder="In Hours"
                                     fullWidth={true}
-                                    type="time"
                                     color="success" />
                             </Grid>
 
