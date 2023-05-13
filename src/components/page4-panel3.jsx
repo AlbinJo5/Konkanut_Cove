@@ -140,14 +140,14 @@ const OptionsList = ({ options }) => {
   )
 }
 
-export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options, checkIn, checkOut }) {
+export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options}) {
   const [showModal, setShowModal] = useState(false);
   // if (images.length<7)throw Error("Not enough images!")
 
   return (
     <div className="flex flex-col border-[1px] border-gray-200 shadow-2xl py-5 rounded-lg sm:px-10 px-3">
       <ImageModal images={images} showModal={showModal} setShowModal={setShowModal} />
-      <div className="flex">
+      {/* <div className="flex">
         <div className="flex flex-col mr-2 mb-2">
           <p className="text-sm text-gray-500">CHECK-IN</p>
           <div className="bg-gray-200 bg-opacity-50 rounded-sm text-green-800 px-2 py-1 flex justify-center">
@@ -162,7 +162,7 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
             <Calendar className="pt-1" />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <ImageGrid images={images} hotelName={hotelName} address={address} setShowModal={setShowModal}>
         <EnquireModal />
