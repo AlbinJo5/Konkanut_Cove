@@ -120,6 +120,7 @@ export default function Hotels() {
                 laundry: d.laundry,
             },
             type: d.type,
+            id: d.id,
 
         }
     })

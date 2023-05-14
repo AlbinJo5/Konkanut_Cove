@@ -7,6 +7,7 @@ import Image from "next/image"
 import { useState } from "react"
 import ImageModal from "./image-modal"
 import EnquireModal from "./modal/enquireModal"
+import { useRouter } from "next/router"
 
 
 export const Landmarks = ({ landmarks }) => {
@@ -24,7 +25,7 @@ export const Landmarks = ({ landmarks }) => {
         <tbody>
           {landmarks?.map(({ distance, placeName }, index) =>
             <tr key={index} className="border-gray-400 box-border">
-              <td className="border-r-[1px] border-b-[1px]  border-gray-400 box-border p-3">{distance}</td>
+              <td className="border-r-[1px] border-b-[1px]  border-gray-400 box-border p-3">{distance} km</td>
               <td className="border-b-[1px]  border-gray-400 box-border p-3">{placeName}</td>
             </tr>
           )}
@@ -41,7 +42,7 @@ export const Cancellations = ({ until, after, refund1 = "100%", refund2 = "No" }
       <div className="flex mb-2">
         <div className="bg-green-400 w-2 h-[45px] mr-4 "></div>
         <div className="flex flex-col">
-          <div className="text-md">Until {until} hours from check in</div>
+          <div className="text-md">Until {until ?? "24"} hours from check in</div>
           <div className="text-sm text-green-400">{refund1} refund</div>
         </div>
       </div>
@@ -89,24 +90,32 @@ export const ImageGrid = ({ images, setShowModal, name, address, children, noCol
 const BedTypePanel = ({ bedTypes }) => {
   return (
     <div className="grid sm:grid-cols-3 w-full rounded-md mt-4 overflow-hidden border-[1px] border-gray-200 box-border">
-      {bedTypes.map(({ image, type, view, ViewIcon, beds, BedIcon, desc }, ind) =>
-        <div className="flex flex-col p-2 border-[1px] border-gray-200" key={ind}>
+      {bedTypes?.map(({ people, image, type, view, ViewIcon, beds, BedIcon, desc }, ind) =>
+        <div className="flex flex-col p-2 border-[1px] m-2 border-gray-200" key={ind}>
           <Image src={image} width="414" height="200" alt="" />
           <p className="text-md font-bold py-1">{type}</p>
           <div className="flex mb-2">
             <SvgNoView />
-            <p className="text-sm text-gray-400 mr-5">{view}</p>
+            <p className="text-sm text-gray-400 mx-2">{
+              view ? " Landscape" : "No View"
+            }</p>
             <SvgDoubleBed />
-            <p className="text-sm text-gray-400">{beds}</p>
+            <p className="text-sm text-gray-400 mx-2 -mt-[1px]">{
+              beds ? "Double Bed" : "Single Bed"
+            }</p>
           </div>
-          <p className="text-xs text-gray-400">{desc}</p>
+          <p className="text-xs text-gray-800">
+            Total number of people: {people}
+          </p>
+          <p className="text-xs text-gray-400 ">{desc}</p>
         </div>
       )}
     </div>
   )
 }
 
-const OptionsList = ({ options }) => {
+const OptionsList = ({ options, map, ac }) => {
+  const router = useRouter();
   return (
     <div className="flex flex-col justify-start mt-5">
       <ul className="grid grid-cols-6 gap-2 max-xs:grid-cols-4 md:max-lg:grid-cols-4 mb-5 max-sm:mt-4" >
@@ -124,13 +133,28 @@ const OptionsList = ({ options }) => {
       </ul>
       <div className="flex flex-row-reverse w-full">
         <div className="ml-5 flex flex-col items-center">
-          <div className="relative w-12 h-6">
-            <div className="absolute z-0 w-10 bg-gray-300 h-5"></div>
-            <div className="absolute z-10 top-[-4px] bg-gray-400 rounded-sm w-5 h-7"></div>
-          </div>
+          {
+            !ac ? (
+
+
+              <div className="relative w-12 h-6">
+                <div className="absolute z-0 w-10 bg-gray-300 h-5"></div>
+                <div className="absolute z-10 top-[-4px] left-0 bg-gray-400 rounded-sm w-5 h-7"></div>
+              </div>
+            ) : (
+
+              <div className="relative w-12 h-6">
+                <div className="absolute z-0 w-10 bg-green-300 h-5"></div>
+                <div className="absolute z-10 top-[-4px] right-0 bg-green-700 rounded-sm w-5 h-7"></div>
+              </div>
+
+            )
+          }
           <div className="text-green-800 text-xs pl-1">AC</div>
         </div>
-        <div className="ml-5 flex flex-col">
+        <div className="ml-5 flex flex-col" onClick={() => {
+          router.push(map)
+        }}>
           <LocalTwo size="24" className="stroke-current text-green-800 " />
           <div className="text-green-800 text-xs">Map</div>
         </div>
@@ -140,31 +164,17 @@ const OptionsList = ({ options }) => {
   )
 }
 
-export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options}) {
+export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options, map, ac }) {
   const [showModal, setShowModal] = useState(false);
   // if (images.length<7)throw Error("Not enough images!")
+
 
   return (
     <div className="flex flex-col border-[1px] border-gray-200 shadow-2xl py-5 rounded-lg sm:px-10 px-3">
       <ImageModal images={images} showModal={showModal} setShowModal={setShowModal} />
-      {/* <div className="flex">
-        <div className="flex flex-col mr-2 mb-2">
-          <p className="text-sm text-gray-500">CHECK-IN</p>
-          <div className="bg-gray-200 bg-opacity-50 rounded-sm text-green-800 px-2 py-1 flex justify-center">
-            <p className="font-bold grow">{moment(checkIn).format("D MMM YYYY")}</p>
-            <Calendar className="pt-1" />
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <p className="text-sm text-gray-500">CHECK-OUT</p>
-          <div className="bg-gray-200 bg-opacity-50 rounded-sm text-green-800 px-2 py-1 flex justify-center">
-            <p className="font-bold grow">{moment(checkOut).format("D MMM YYYY")}</p>
-            <Calendar className="pt-1" />
-          </div>
-        </div>
-      </div> */}
 
-      <ImageGrid images={images} hotelName={hotelName} address={address} setShowModal={setShowModal}>
+
+      <ImageGrid images={images} name={hotelName} address={address} setShowModal={setShowModal}>
         <EnquireModal />
       </ImageGrid>
 
@@ -175,15 +185,17 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
             <Cancellations until={until} after={after} />
             <div className="text-md font-bold mt-5">Important to note</div>
             <ul className="text-sm list-disc ml-3">
-              {importantNotes
-                .map((note, index) =>
-                  <li className="" key={index}>{note}</li>
-                )}
+              {importantNotes?.split("*")
+                .map((note, index) => {
+                  if (index === 0) return null;
+                  return <li className="" key={index}>{note}</li>
+                })}
+
             </ul>
           </div>
         </div>
 
-        <OptionsList options={options} />
+        <OptionsList map={map} ac={ac} options={options} />
 
       </div>
 

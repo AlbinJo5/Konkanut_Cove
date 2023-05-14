@@ -5,6 +5,7 @@ import { useState } from "react"
 import ImageModal from "./image-modal"
 import { Cancellations, ImageGrid, Landmarks } from "./page4-panel3"
 import { useRouter } from "next/router"
+import { routes } from "@/routes"
 
 
 const OptionGrid = ({ options, mainOptions }) => {
@@ -12,7 +13,7 @@ const OptionGrid = ({ options, mainOptions }) => {
     <ul className="flex h-fit mb-5 max-sm:mt-5 grow">
       {options.filter(
         (option) => {
-           // mainoptions is an object with keys as the name of the option
+          // mainoptions is an object with keys as the name of the option
           if (mainOptions[option.name]) {
             return false;
           }
@@ -71,7 +72,7 @@ const MapAC = ({ url, ac }) => {
   );
 }
 
-export default function Page4Panel4({ mainOptions, ac, hotelName, images, name, address, until, after, options, map }) {
+export default function Page4Panel4({ id, mainOptions, ac, hotelName, images, name, address, until, after, options, map }) {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   return (
@@ -92,7 +93,7 @@ export default function Page4Panel4({ mainOptions, ac, hotelName, images, name, 
         <div className="flex flex-col items-center justify-center">
           <OptionGrid options={options} mainOptions={mainOptions} />
           <button onClick={() => {
-            router.push("/hotels/rp_residency")
+            router.push(routes.hotels_details + id)
           }} className="bg-green-800 hover:bg-green-600 h-[50px] min-w-[200px] font-bold text-white px-5 py-2 rounded-md hover:transition-transform hover:scale-110 hover:duration-750">Know More</button>
         </div>
       </div>

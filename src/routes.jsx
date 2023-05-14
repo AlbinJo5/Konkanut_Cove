@@ -10,5 +10,6 @@ export const routes = {
     page404:'/page404',
     experiences:"/experiences",
     hotels:"/hotels",
+    hotels_details:"/hotels/",
     about:"/about",
 }
