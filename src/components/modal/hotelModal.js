@@ -1,11 +1,12 @@
 import React from "react";
-import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
+import { Modal, Input, Row, Checkbox, Button, Text, Switch } from "@nextui-org/react";
 import { uploadData } from "../../utils/firebase_data_handler";
 import InitialLoading from "@/admin_components/initialLoading";
-export default function EnquireModal(props) {
+export default function HotelModal() {
     const [visible, setVisible] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [id, setId] = React.useState("");
+
     const handler = () => setVisible(true);
     const closeHandler = () => {
         setVisible(false);
@@ -18,19 +19,26 @@ export default function EnquireModal(props) {
         const email = e.target[2].value;
         const phone = e.target[4].value;
         const people = e.target[6].value;
+        const checkIn = e.target[8].value;
+        const checkOut = e.target[10].value;
+        const ac = e.target[12].checked;
+
 
         const data = {
-            ...props,
             name,
             email,
             phone,
-            people
+            people,
+            checkIn,
+            checkOut,
+            ac
 
         }
 
+        console.log(data);
 
 
-        uploadData(data, "Package_Enquiries").then((res) => {
+        uploadData(data, "Hotel_Enquiries").then((res) => {
             if (res.message === "success") {
                 setId(res.data.id);
                 alert("Enquiry Submitted Successfully");
@@ -39,14 +47,12 @@ export default function EnquireModal(props) {
             else {
                 console.log("error");
                 alert("Enquiry Submission Failed");
-                setVisible(false);
                 setLoading(false);
             }
         }
         ).catch((err) => {
             console.log(err);
             alert("Enquiry Submission Failed");
-            setVisible(false);
             setLoading(false);
         }
         );
@@ -84,12 +90,10 @@ export default function EnquireModal(props) {
                             Click to copy
                         </Button>
                     </div>) : (
-
-
                         <form onSubmit={handleSubmit} >
                             <Modal.Header>
                                 <Text id="modal-title" size={18}>
-                                    Package
+                                    Hotels
                                     <Text b size={18}>
                                         {" "}Enquiry
                                     </Text>
@@ -130,6 +134,48 @@ export default function EnquireModal(props) {
                                     type="number"
                                     placeholder="Total Number of People (Optional)"
                                 />
+                                <Text size={15}>
+                                    Check In
+                                </Text>
+                                <Input
+                                    clearable
+                                    bordered
+                                    fullWidth
+                                    color="primary"
+                                    size="lg"
+                                    type="date"
+                                    // prevent from selecting past dates
+                                    min={new Date().toISOString().split("T")[0]}
+                                />
+                                <Text size={15}>
+                                    Check Out
+                                </Text>
+                                <Input
+                                    clearable
+                                    bordered
+                                    fullWidth
+                                    color="primary"
+                                    size="lg"
+                                    type="date"
+                                    // prevent from selecting past dates
+                                    min={new Date().toISOString().split("T")[0]}
+                                />
+                                <Row css={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}  >
+
+
+                                    <Switch
+                                        color="primary"
+                                        initialChecked
+                                    />
+                                    <Text css={{ margin: 0, marginTop: "5px", marginLeft: "15px" }} size={15}>
+                                        AC
+                                    </Text>
+                                </Row>
+
+
 
                             </Modal.Body>
                             <Modal.Footer>
@@ -141,9 +187,7 @@ export default function EnquireModal(props) {
                                 </Button>
                             </Modal.Footer>
                         </form>
-                    )
-
-                }
+                    )}
             </Modal>
         </div>
     );

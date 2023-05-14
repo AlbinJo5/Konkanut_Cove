@@ -8,6 +8,7 @@ import { useState } from "react"
 import ImageModal from "./image-modal"
 import EnquireModal from "./modal/enquireModal"
 import { useRouter } from "next/router"
+import HotelModal from "./modal/hotelModal"
 
 
 export const Landmarks = ({ landmarks }) => {
@@ -175,7 +176,7 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
 
 
       <ImageGrid images={images} name={hotelName} address={address} setShowModal={setShowModal}>
-        <EnquireModal />
+        <HotelModal />
       </ImageGrid>
 
       <div className="flex max-md:flex-col mt-4 grow">
