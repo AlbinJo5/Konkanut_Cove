@@ -18,7 +18,8 @@ function Layout({ children }) {
         "Utilities",
         "Packages",
         "Hotels",
-        "Contacts"
+        "Contacts",
+        "Enquiries",
     ];
 
     useEffect(() => {
@@ -95,6 +96,9 @@ function Layout({ children }) {
                         <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.CONTACTS} onClick={() => {
                             router.push(ADMIN_ROUTES.CONTACTS)
                         }} >Contacts</Navbar.Link>
+                        <Navbar.Link isActive={router.pathname === ADMIN_ROUTES.ENQUIRIES} onClick={() => {
+                            router.push(ADMIN_ROUTES.ENQUIRIES)
+                        }} >Enquiries</Navbar.Link>
                     </Navbar.Content>
                     <Navbar.Content
                         css={{

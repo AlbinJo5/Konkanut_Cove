@@ -10,5 +10,6 @@ export const ADMIN_ROUTES ={
     HOTELS_ADD : "/admin/hotels/add",
     HOTELS_VIEW : "/admin/hotels/view/",
     CONTACTS : "/admin/contacts",
+    ENQUIRIES : "/admin/enquiries",
     INDEX: "/admin",
 }
