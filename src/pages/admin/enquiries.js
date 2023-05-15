@@ -104,7 +104,9 @@ function Index() {
                 </Table>
             </div>
 
-            <div className={styles.products} >
+            <div style={{
+                marginBottom: "40px"
+            }} className={styles.products} >
                 {
                     hotelsEnquiries.isLoading && <InitialLoading />
                 }

@@ -195,6 +195,7 @@ export default function HotelInfo() {
           importantNotes: hotel.description,
           map: hotel.map,
           ac: hotel.ac,
+          id: hotel.id,
         }
       })
       setLoading(false)

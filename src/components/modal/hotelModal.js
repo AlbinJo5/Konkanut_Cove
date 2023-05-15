@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Input, Row, Checkbox, Button, Text, Switch } from "@nextui-org/react";
 import { uploadData } from "../../utils/firebase_data_handler";
 import InitialLoading from "@/admin_components/initialLoading";
-export default function HotelModal() {
+export default function HotelModal(props) {
     const [visible, setVisible] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [id, setId] = React.useState("");
@@ -22,7 +22,7 @@ export default function HotelModal() {
         const checkIn = e.target[8].value;
         const checkOut = e.target[10].value;
         const ac = e.target[12].checked;
-
+        const hotelDetails = props.data;
 
         const data = {
             name,
@@ -31,7 +31,8 @@ export default function HotelModal() {
             people,
             checkIn,
             checkOut,
-            ac
+            ac,
+            hotelDetails,
 
         }
 

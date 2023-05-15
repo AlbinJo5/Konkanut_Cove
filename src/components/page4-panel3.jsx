@@ -165,7 +165,7 @@ const OptionsList = ({ options, map, ac }) => {
   )
 }
 
-export default function Page4Panel1({ images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options, map, ac }) {
+export default function Page4Panel1({ id, images, hotelName, address, until, after, importantNotes, bedTypes, landmarks, options, map, ac }) {
   const [showModal, setShowModal] = useState(false);
   // if (images.length<7)throw Error("Not enough images!")
 
@@ -176,7 +176,10 @@ export default function Page4Panel1({ images, hotelName, address, until, after, 
 
 
       <ImageGrid images={images} name={hotelName} address={address} setShowModal={setShowModal}>
-        <HotelModal />
+        <HotelModal data={{
+          id: id,
+          title: hotelName,
+        }} />
       </ImageGrid>
 
       <div className="flex max-md:flex-col mt-4 grow">
