@@ -66,6 +66,21 @@ export default function Home() {
     sections: [
       {
         desc: {
+          heading: "About Sindhudurg ",
+          maxWidth: "350px",
+          paragraphs: [
+            "Sindhudurg is the First Tourism District declared in Maharashtra in the year 1997. Sindhudurg has a 121-kilometer-long coastline.",
+            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is ",
+          ],
+          alignLeft: false,
+        },
+        carousel: {
+          type: 3,
+          images: carouselData,
+        },
+      },
+      {
+        desc: {
           heading: "Why Sindhuburg",
           maxWidth: "350px",
           paragraphs: [
@@ -80,21 +95,7 @@ export default function Home() {
         },
       },
 
-      {
-        desc: {
-          heading: "About Sindhudurg ",
-          maxWidth: "350px",
-          paragraphs: [
-            "Sindhudurg is the First Tourism District declared in Maharashtra in the year 1997. Sindhudurg has a 121-kilometer-long coastline.",
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is ",
-          ],
-          alignLeft: false,
-        },
-        carousel: {
-          type: 3,
-          images: carouselData,
-        },
-      },
+
 
       {
         desc: {
@@ -179,7 +180,7 @@ export default function Home() {
       <div className="w-full relative m-0 h-max   ">
         <div className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90">
           <Image
-            src="/assets/images/background.png"
+            src="./assets/images/background.png"
             alt="background"
             className="object-cover absolute z-0"
             width={1920}
