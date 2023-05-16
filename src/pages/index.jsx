@@ -179,8 +179,8 @@ export default function Home() {
       <div className="w-full relative m-0 h-max   ">
         <div className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90">
           <Image
-            src="/assets/images/background.png"
-            alt=""
+            src="assets/images/background.png"
+            alt="background"
             className="object-cover absolute z-0"
             width={1920}
             height={1080}

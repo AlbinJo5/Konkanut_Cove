@@ -28,7 +28,7 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
     <nav className="flex flex-col w-full h-20 apply-gradient items-center">
       <div className="flex w-full h-full items-center">
         <div className="flex-grow ml-6 md:ml-16">
-          <Image src="/assets/images/logo.svg" alt="" width="120" height="80" />
+          <Image src="/assets/images/logo.svg" alt="logo" width="120" height="80" />
         </div>
 
         <div className="flex h-full max-sm:hidden ">
