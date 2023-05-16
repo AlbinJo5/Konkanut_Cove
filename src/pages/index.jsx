@@ -55,13 +55,119 @@ function FormModal({ showModal, setShowModal }) {
   );
 }
 
-export default function Home({
-  mainTitle,
-  mainText,
-  widthText,
-  widthTitle,
-  sections,
-}) {
+export default function Home() {
+  const props = {
+    mainTitle:
+      "Spend Quality Holidays <span key={2} style='color:#22543d;'> With Us.</span>",
+    mainText:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and typesLorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types",
+    widthTitle: "600px",
+    widthText: "800px",
+    sections: [
+      {
+        desc: {
+          heading: "Why Sindhuburg",
+          maxWidth: "350px",
+          paragraphs: [
+            "It is famous for Scuba Diving, serene beaches, beautiful temples, historical forts and its delicious cuisine. Sindhudurg is the only official Scuba Diving destination in Maharashtra.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is",
+          ],
+          alignLeft: true,
+        },
+        carousel: {
+          type: 1,
+          images: carouselData,
+        },
+      },
+
+      {
+        desc: {
+          heading: "About Sindhudurg ",
+          maxWidth: "350px",
+          paragraphs: [
+            "Sindhudurg is the First Tourism District declared in Maharashtra in the year 1997. Sindhudurg has a 121-kilometer-long coastline.",
+            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is ",
+          ],
+          alignLeft: false,
+        },
+        carousel: {
+          type: 3,
+          images: carouselData,
+        },
+      },
+
+      {
+        desc: {
+          heading: "Places ",
+          maxWidth: "350px",
+          paragraphs: [
+            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
+            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+          ],
+          alignLeft: false,
+        },
+        carousel: {
+          type: 2,
+          images: carouselData,
+        },
+      },
+
+      {
+        desc: {
+          heading: "Places 2",
+          maxWidth: "350px",
+          paragraphs: [
+            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
+            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+          ],
+          alignLeft: false,
+        },
+        carousel: {
+          type: 1,
+          images: carouselData,
+        },
+      },
+
+      {
+        desc: {
+          heading: "Places 3",
+          maxWidth: "350px",
+          paragraphs: [
+            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
+            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+          ],
+          alignLeft: false,
+        },
+        carousel: {
+          type: 1,
+          images: carouselData,
+        },
+      },
+
+      {
+        desc: {
+          heading: "Places 4",
+          maxWidth: "350px",
+          paragraphs: [
+            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
+            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+          ],
+          alignLeft: false,
+        },
+        carousel: {
+          type: 1,
+          images: carouselData,
+        },
+      },
+    ],
+  }
+  const {
+    mainTitle,
+    mainText,
+    widthText,
+    widthTitle,
+    sections,
+  } = props;
   const [modal, showModal] = useState(false);
   return (
     <Layout>
@@ -125,112 +231,3 @@ export default function Home({
   );
 }
 
-export async function getStaticProps() {
-  return {
-    props: {
-      mainTitle:
-        "Spend Quality Holidays <span key={2} style='color:#22543d;'> With Us.</span>",
-      mainText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and typesLorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types",
-      widthTitle: "600px",
-      widthText: "800px",
-      sections: [
-        {
-          desc: {
-            heading: "Why Sindhuburg",
-            maxWidth: "350px",
-            paragraphs: [
-              "It is famous for Scuba Diving, serene beaches, beautiful temples, historical forts and its delicious cuisine. Sindhudurg is the only official Scuba Diving destination in Maharashtra.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is",
-            ],
-            alignLeft: true,
-          },
-          carousel: {
-            type: 1,
-            images: carouselData,
-          },
-        },
-
-        {
-          desc: {
-            heading: "About Sindhudurg ",
-            maxWidth: "350px",
-            paragraphs: [
-              "Sindhudurg is the First Tourism District declared in Maharashtra in the year 1997. Sindhudurg has a 121-kilometer-long coastline.",
-              "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is ",
-            ],
-            alignLeft: false,
-          },
-          carousel: {
-            type: 3,
-            images: carouselData,
-          },
-        },
-
-        {
-          desc: {
-            heading: "Places ",
-            maxWidth: "350px",
-            paragraphs: [
-              "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-              "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
-            ],
-            alignLeft: false,
-          },
-          carousel: {
-            type: 2,
-            images: carouselData,
-          },
-        },
-
-        {
-          desc: {
-            heading: "Places 2",
-            maxWidth: "350px",
-            paragraphs: [
-              "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-              "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
-            ],
-            alignLeft: false,
-          },
-          carousel: {
-            type: 1,
-            images: carouselData,
-          },
-        },
-
-        {
-          desc: {
-            heading: "Places 3",
-            maxWidth: "350px",
-            paragraphs: [
-              "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-              "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
-            ],
-            alignLeft: false,
-          },
-          carousel: {
-            type: 1,
-            images: carouselData,
-          },
-        },
-
-        {
-          desc: {
-            heading: "Places 4",
-            maxWidth: "350px",
-            paragraphs: [
-              "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-              "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
-            ],
-            alignLeft: false,
-          },
-          carousel: {
-            type: 1,
-            images: carouselData,
-          },
-        },
-      ],
-    },
-  };
-}
