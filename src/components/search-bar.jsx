@@ -33,7 +33,7 @@ export default function SearchBar({
   const [startDate, setStartDate] = useState(new Date());
   const [index, setIndex] = useState(null);
   return (
-    <div className="  grid grid-cols-2 shadow-2xl max-md:grid-rows-1 md:grid-cols-3  w-full rounded-md justify-items-center gap-0  px-2 py-2 bg-white ">
+    <div className="  grid grid-cols-2 shadow-2xl max-md:grid-rows-1 md:grid-cols-3  w-full rounded-md justify-items-center gap-0  px-3 py-2 bg-white ">
       {dropdowns.map((dd, ind) =>
         (() => {
           if (["Check In", "Check Out"].includes(dd))
