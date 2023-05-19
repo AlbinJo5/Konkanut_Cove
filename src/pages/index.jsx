@@ -169,14 +169,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <FormModal showModal={modal} setShowModal={showModal} />
+
       <div className="w-full relative m-0 h-max   ">
         <div className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90">
-          <Image
+          <img
             src="/assets/images/background.png"
             alt="background"
             className="object-cover absolute z-0"
-            width={1920}
-            height={1080}
             style={{
               objectFit: "cover",
               // width: "100%",
@@ -203,6 +202,7 @@ export default function Home() {
           <Description sections={sections} />
         </div>
       </div>
+
       <div className="relative">
         <div className="z-0">
           <LocationPanel />
