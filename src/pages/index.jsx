@@ -1,6 +1,4 @@
-import ReactDOMServer from "react-dom/server";
 import MainHeader, { MainText, MainTitle } from "@/components/main-header";
-import Navbar from "@/components/navbar";
 import Head from "next/head";
 import SearchBar from "@/components/search-bar";
 import Layout from "@/components/layout";
@@ -9,7 +7,6 @@ import LocationPanel from "@/components/location-panel";
 import Page1Form from "@/components/page1-form";
 import { useRef, useState } from "react";
 import { Fade } from "react-reveal";
-import Image from "next/image";
 
 const carouselData = [
   {
