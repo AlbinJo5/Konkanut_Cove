@@ -27,11 +27,8 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
       <div className="flex w-full h-full items-center">
         <div className="flex-grow ml-6 md:ml-16">
           <Image
-            src="/assets/images/logo.svg"
-            alt="logo"
-            width={120}
-            height={80}
-          />
+          src={"/assets/images/logo.svg"}
+          width={100} height={80} alt=" jiji" />
         </div>
 
         <div className="flex h-full max-sm:hidden ">
