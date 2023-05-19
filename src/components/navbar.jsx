@@ -20,7 +20,9 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
   const router = useRouter();
 
   const imageLoader = ({ src, width, quality }) => {
-    return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+    return `https://konkanut-cove.vercel.app/${src}?w=${width}&q=${
+      quality || 75
+    }`;
   };
 
   const selectedIndexClasses = "border-green-800 border-b-4 hover:none";
