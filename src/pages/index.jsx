@@ -95,8 +95,6 @@ export default function Index() {
         },
       },
 
-
-
       {
         desc: {
           heading: "Places ",
@@ -161,14 +159,9 @@ export default function Index() {
         },
       },
     ],
-  }
-  const {
-    mainTitle,
-    mainText,
-    widthText,
-    widthTitle,
-    sections,
-  } = props;
+  };
+  const { mainTitle, mainText, widthText, widthTitle, sections } = props;
+
   const [modal, showModal] = useState(false);
   return (
     <Layout>
@@ -178,21 +171,12 @@ export default function Index() {
       </Head>
       <FormModal showModal={modal} setShowModal={showModal} />
       <div className="w-full relative m-0 h-max   ">
-        <div className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90">
-          <Image
-            src="./assets/images/background.png"
-            alt="background"
-            className="object-cover absolute z-0"
-            width={1920}
-            height={1080}
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "100%",
-            }}
-            priority
-          />
-
+        <div
+          style={{
+            backgroundImage: "url('/assets/images/background.png')",
+          }}
+          className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90"
+        >
           <Fade bottom>
             <div className="py-24">
               <MainHeader>
@@ -211,6 +195,7 @@ export default function Index() {
           <Description sections={sections} />
         </div>
       </div>
+
       <div className="relative">
         <div className="z-0">
           <LocationPanel />
@@ -231,4 +216,3 @@ export default function Index() {
     </Layout>
   );
 }
-
