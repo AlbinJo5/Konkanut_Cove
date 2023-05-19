@@ -163,63 +163,16 @@ export default function Home() {
   const { mainTitle, mainText, widthText, widthTitle, sections } = props;
   const [modal, showModal] = useState(false);
   return (
-    <Layout>
-      <Head>
-        <title>Welcome to Konkanut Cove!</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <FormModal showModal={modal} setShowModal={showModal} />
-
-      <div className="w-full relative m-0 h-max   ">
-        <div className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90">
-          <img
-            src="/assets/images/background.png"
-            alt="background"
-            className="object-cover absolute z-0"
-            style={{
-              objectFit: "cover",
-              // width: "100%",
-              // height: "100%",
-            }}
-            priority
-          />
-
-          <Fade bottom>
-            <div className="py-24">
-              <MainHeader>
-                <MainTitle width={widthTitle}>{mainTitle}</MainTitle>
-                <MainText width={widthText}>{mainText}</MainText>
-              </MainHeader>
-            </div>
-          </Fade>
-
-          <div className="flex w-[100vw]  justify-center  mb-10">
-            <div className=" opacity-90   ">
-              <SearchBar />
-            </div>
-          </div>
-
-          <Description sections={sections} />
-        </div>
-      </div>
-
-      <div className="relative">
-        <div className="z-0">
-          <LocationPanel />
-        </div>
-        <div className="absolute z-50 top-[60%] max-md:hidden flex justify-center w-full">
-          <Page1Form />
-        </div>
-        <div className="absolute z-40 top-[70%] sm:hidden flex justify-center w-full">
-          <p
-            className="underline text-green-800 text-md hover:text-green-700 hover:text-sm cursor-pointer"
-            onClick={() => showModal(true)}
-          >
-            {" "}
-            Submit feedback form
-          </p>
-        </div>
-      </div>
-    </Layout>
+    <img
+      src="/assets/images/background.png"
+      alt="background"
+      className="object-cover absolute z-0"
+      style={{
+        objectFit: "cover",
+        width: "100%",
+        height: "100%",
+      }}
+      priority
+    />
   );
 }
