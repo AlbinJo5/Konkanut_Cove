@@ -163,7 +163,7 @@ export default function Home() {
   const { mainTitle, mainText, widthText, widthTitle, sections } = props;
   const [modal, showModal] = useState(false);
   return (
-    <img
+    <Image
       src="/assets/images/background.png"
       alt="background"
       className="object-cover absolute z-0"
