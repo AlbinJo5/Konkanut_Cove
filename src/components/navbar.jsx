@@ -19,12 +19,23 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
 
   const router = useRouter();
 
+  const imageLoader = ({ src, width, quality }) => {
+    return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+  };
+
   const selectedIndexClasses = "border-green-800 border-b-4 hover:none";
   const selectedIndexSmall = "bg-green-800 bg-opacity-70 text-white hover:none";
 
   return (
     <nav className="flex flex-col w-full h-20 apply-gradient items-center">
-      <Image src={"assets/images/logo.svg"} width={100} height={80} alt=" " />
+      <Image src={"/assets/images/logo.svg"} width={100} height={80} alt=" " />
+      <Image
+        loader={imageLoader}
+        src={"/assets/images/logo.svg"}
+        width={100}
+        height={80}
+        alt="nnini "
+      />
       <div className="flex w-full h-full items-center">
         <div className="flex-grow ml-6 md:ml-16"></div>
 
