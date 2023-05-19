@@ -29,8 +29,8 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
           <Image
             src="/assets/images/logo.svg"
             alt="logo"
-            width="120"
-            height="80"
+            width={120}
+            height={80}
           />
         </div>
 
