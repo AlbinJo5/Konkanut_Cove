@@ -31,15 +31,17 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
   return (
     <nav className="flex flex-col w-full h-20 apply-gradient items-center">
       <Image src={"/assets/images/logo.svg"} width={100} height={80} alt=" " />
-      <Image
-        loader={imageLoader}
-        src={"/assets/images/logo.svg"}
-        width={100}
-        height={80}
-        alt="nnini "
-      />
+
       <div className="flex w-full h-full items-center">
-        <div className="flex-grow ml-6 md:ml-16"></div>
+        <div className="flex-grow ml-6 md:ml-16">
+          <Image
+            loader={imageLoader}
+            src={"/assets/images/logo.svg"}
+            width={100}
+            height={80}
+            alt="nnini "
+          />
+        </div>
 
         <div className="flex h-full max-sm:hidden ">
           {buttonList.map(({ name, url }, ind) => (
