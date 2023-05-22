@@ -95,8 +95,6 @@ export default function Index() {
         },
       },
 
-
-
       {
         desc: {
           heading: "Places ",
@@ -161,16 +159,8 @@ export default function Index() {
         },
       },
     ],
-  }
-  const {
-    mainTitle,
-    mainText,
-    widthText,
-    widthTitle,
-    sections,
-  } = props;
-
-
+  };
+  const { mainTitle, mainText, widthText, widthTitle, sections } = props;
 
   const [modal, showModal] = useState(false);
   return (
@@ -182,9 +172,8 @@ export default function Index() {
       <FormModal showModal={modal} setShowModal={showModal} />
       <div className="w-full relative m-0 h-max   ">
         <div className="w-[100vw] h-max p-0 m-0  flex flex-col justify-center   z-10 bg-black bg-opacity-90">
-         
           <Image
-            src="/assets/images/background.png"
+            src="/background.png"
             alt="background"
             className="object-cover absolute z-0"
             width={1920}
@@ -197,7 +186,6 @@ export default function Index() {
             priority
           />
 
-          
           <Fade bottom>
             <div className="py-24">
               <MainHeader>
@@ -237,4 +225,3 @@ export default function Index() {
     </Layout>
   );
 }
-
