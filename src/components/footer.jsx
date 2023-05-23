@@ -1,11 +1,12 @@
 import { Facebook, Instagram } from "@icon-park/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const IconFooter = ({ children, classNames = [], text }) => {
   return (
     <div
       className={
-        "bg-gray-500 bg-opacity-10 sm:w-50 sm:h-50 p-1 max-sm:flex " +
+        " bg-opacity-10 sm:w-50 cursor-pointer sm:h-50 p-1 max-sm:flex " +
         classNames.join(" ")
       }
     >
@@ -21,24 +22,39 @@ export default function Footer() {
   return (
     <div className="p-10 sm:pt-40 sm:pb-20 px-5 bg-footer w-[100vw] h-100">
       <div className="flex max-sm:flex-col sm:items-end items-center">
-        <Image src="/logo.svg" alt="" width="180" height="120" />
         <div className="ml-5 grow text-gray-500 max-sm:my-4">
+          <Link href={"/"}>
+            <Image
+              src="/logo.svg"
+              alt=""
+              width="180"
+              height="120"
+              style={{
+                marginBottom: "20px",
+              }}
+            />
+          </Link>
           {"\u00A9 All Copyrights Reserved"}
         </div>
-        <IconFooter text="Facebook">
-          <Facebook
-            theme="outline"
-            size="24"
-            className="stroke-current text-white"
-          />
-        </IconFooter>
-        <IconFooter classNames={["sm:ml-2 mt-2"]} text="Instagram">
-          <Instagram
-            theme="outline"
-            size="24"
-            className="stroke-current text-white"
-          />
-        </IconFooter>
+
+        <Link href={"https://www.facebook.com/konkanutcove.holidays"}>
+          <IconFooter text="Facebook">
+            <Facebook
+              // theme="outline"
+              size="24"
+              className="stroke-current text-white"
+            />
+          </IconFooter>
+        </Link>
+        <Link href={"https://www.instagram.com/konkanutcove_holidays/"}>
+          <IconFooter classNames={["sm:ml-2 mt-2"]} text="Instagram">
+            <Instagram
+              // theme="outline"
+              size="24"
+              className="stroke-current text-white"
+            />
+          </IconFooter>
+        </Link>
       </div>
     </div>
   );

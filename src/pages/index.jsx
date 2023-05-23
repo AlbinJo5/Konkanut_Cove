@@ -209,12 +209,12 @@ export default function Index() {
         <div className="z-0">
           <LocationPanel />
         </div>
-        <div className="absolute z-50 top-[60%] max-md:hidden flex justify-center w-full">
+        <div className="absolute z-50 bottom-[-200px] max-md:hidden flex justify-center w-full">
           <Page1Form />
         </div>
-        <div className="absolute z-40 top-[70%] sm:hidden flex justify-center w-full">
+        <div className="absolute z-40 top-[70%] md:hidden flex justify-center w-full">
           <p
-            className="underline text-green-800 text-md hover:text-green-700 hover:text-sm cursor-pointer"
+            className="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded pointer"
             onClick={() => showModal(true)}
           >
             {" "}

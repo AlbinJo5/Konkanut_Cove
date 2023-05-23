@@ -39,17 +39,10 @@ export default function Page5Panel1({ imageData, count }) {
 
         {imageData.slice(1).map((image, index) => (
           <li
-            className="h-[300px] lg:h-[250px] relative grow rounded-md flex ml-3 max-[900px]:hidden"
+            className="h-[300px] lg:h-[250px] relative grow rounded-md flex ml-3  max-[900px]:hidden"
             key={index}
           >
-            <Image
-              fill
-              src={image.image}
-              alt=""
-              style={{
-                objectFit: "cover",
-              }}
-            />
+            <Image fill src={image.image} alt="" className="object-cover" />
           </li>
         ))}
       </ul>

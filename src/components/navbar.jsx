@@ -32,7 +32,9 @@ export default function Navbar({ buttonList, selectedIndex = 0 }) {
     <nav className="flex flex-col w-full h-20 apply-gradient items-center">
       <div className="flex w-full h-full items-center">
         <div className="flex-grow ml-6 md:ml-16">
-          <Image src={"logo.svg"} width={100} height={80} alt=" " />
+          <Link href={"/"}>
+            <Image src={"/logo.svg"} width={100} height={80} alt=" " />
+          </Link>
         </div>
 
         <div className="flex h-full max-sm:hidden ">

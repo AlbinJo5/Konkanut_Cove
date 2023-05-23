@@ -2,7 +2,7 @@ import Layout from '@/components/layout'
 import Page5Panel4 from '@/components/page5-panel4'
 import React from 'react'
 
-const ImageData = [
+const images = [
     {
       image:"/assets/images/gallery/image_5.png"
     },{
@@ -16,7 +16,7 @@ const ImageData = [
     }
     ];
 
-export default function Gallery({images}) {
+export default function Gallery() {
   return (
     <Layout>
         <div className="container mx-auto mt-28 flex justify-center">
@@ -29,10 +29,3 @@ export default function Gallery({images}) {
   )
 }
 
-export async function getStaticProps(){
-    return {
-        props:{
-            images:ImageData
-        }
-    }
-}
