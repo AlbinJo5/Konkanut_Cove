@@ -61,7 +61,10 @@ export default function SearchBar({
 
   useEffect(() => {
     // get current location and for from session storage
-    sessionStorage.getItem('location') === null ? sessionStorage.setItem('location', null) : sessionStorage.getItem('location')
+    sessionStorage.getItem('location') === null ?
+      // do nothing
+      sessionStorage.setItem('location', "")
+      : sessionStorage.getItem('location')
     sessionStorage.getItem('for') === null ? sessionStorage.setItem('for', 'hotels') : sessionStorage.getItem('for')
   }, [])
 

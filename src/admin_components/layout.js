@@ -64,7 +64,7 @@ function Layout({ children }) {
                     >
 
 
-                        <Image src="/assets/images/logo.svg" alt="logo" width={1000} height={1000} style={{
+                        <Image src="/logo.svg" alt="logo" width={1000} height={1000} style={{
                             width: "max-content",
                             height: "2rem",
                             marginRight: "0.5rem",

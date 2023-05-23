@@ -65,7 +65,7 @@ function Auth() {
     return (
         <div className={styles.conatiner} >
             <div className={styles.card}>
-                <Image src="/assets/images/logo.svg" width={1000} height={1000} alt="logo" />
+                <Image src="/logo.svg" width={1000} height={1000} alt="logo" />
                 <h1>Welcome to <span>Konkanut Cove</span></h1>
                 {
                     forgotPassword ? resetEmailSent ? (
@@ -124,12 +124,12 @@ function Auth() {
                             }}
 
                             >
-                                <p onClick={()=>{
+                                <p onClick={() => {
                                     setForgotPassword(!forgotPassword)
                                     setResetEmailSent(!resetEmailSent)
                                     setEmailExistsError(false)
                                     setPasswordIncorrectError(false)
-                                    
+
                                 }} ><IoIosArrowRoundBack />
                                     Back</p>
                                 <p style={{ cursor: 'pointer', color: '#F45158' }}>
