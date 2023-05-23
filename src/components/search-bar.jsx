@@ -18,11 +18,8 @@ const text = [
   "Lorem ipsum",
 ];
 const options = [
-  "Lorem ipsum",
-  "Lorem ipsum",
-  "Lorem ipsum",
-  "Lorem ipsum",
-  "Lorem ipsum",
+  "Hotels",
+  
 ];
 
 export default function SearchBar({

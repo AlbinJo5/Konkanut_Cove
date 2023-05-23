@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <div className="p-10 sm:pt-40 sm:pb-20 px-5 bg-footer w-[100vw] h-100">
       <div className="flex max-sm:flex-col sm:items-end items-center">
-        <Image src="/assets/images/logo.svg" alt="" width="180" height="120" />
+        <Image src="/logo.svg" alt="" width="180" height="120" />
         <div className="ml-5 grow text-gray-500 max-sm:my-4">
           {"\u00A9 All Copyrights Reserved"}
         </div>

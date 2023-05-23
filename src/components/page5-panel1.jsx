@@ -5,7 +5,7 @@ import ImageModal from "./image-modal";
 export default function Page5Panel1({ imageData, count }) {
   const [showModal, setShowModal] = useState(false);
   return (
-    <div >
+    <div>
       <ImageModal
         images={imageData}
         showModal={showModal}
@@ -22,7 +22,7 @@ export default function Page5Panel1({ imageData, count }) {
       <div className="my-4 font-bold">Our Photo gallery on trip</div>
       <ul className="flex">
         <div
-          className="relative h-[300px] lg:h-[250px] rounded-md hover:scale-95 grow sm:min-w-[500px]"
+          className="relative h-[300px] lg:h-[250px] rounded-md hover:scale-95 grow sm:min-w-[350px]"
           onClick={setShowModal}
         >
           <div className="absolute z-10  w-full h-full text-white text-5xl flex justify-center items-center font-medium">
@@ -42,7 +42,14 @@ export default function Page5Panel1({ imageData, count }) {
             className="h-[300px] lg:h-[250px] relative grow rounded-md flex ml-3 max-[900px]:hidden"
             key={index}
           >
-            <Image fill src={image.image} alt="" />
+            <Image
+              fill
+              src={image.image}
+              alt=""
+              style={{
+                objectFit: "cover",
+              }}
+            />
           </li>
         ))}
       </ul>

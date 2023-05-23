@@ -38,35 +38,18 @@ const featureData = [
   },
 ];
 
-export default function Experiences({
-  imageData,
-  count,
-  title,
-  featureData,
-  videoLink,
-}) {
+export default function Experiences() {
   return (
     <Layout>
       <div className="my-12"></div>
-      <div className="w-[150vw]  flex flex-col justify-center items-center align-center">
-        <Page5Panel1 imageData={imageData} count={count} />
+      <div className="w-[100vw]  flex flex-col justify-center items-center align-center">
+        <Page5Panel1 imageData={imageData} count={3} />
         <Page5Panel2
-          title={title}
+          title={"title"}
           featureData={featureData}
-          videoLink={videoLink}
+          videoLink={"https://www.youtube.com/embed/EngW7tLk6R8"}
         />
       </div>
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      imageData,
-      count: 30,
-      featureData,
-      videoLink: "https://www.youtube.com/embed/EngW7tLk6R8",
-    },
-  };
 }
