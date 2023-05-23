@@ -2,6 +2,9 @@ import "@/styles/globals.css";
 import "react-dropdown/style.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/react-dropdown.css";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 import Head from "next/head";
 import { createTheme, NextUIProvider } from "@nextui-org/react"
 import {
@@ -9,6 +12,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import InitialLoading from "@/admin_components/initialLoading";
 const theme = createTheme({
   type: "light", // it could be "light" or "dark"
   theme: {
@@ -54,6 +58,27 @@ const theme = createTheme({
 
 export const queryClient = new QueryClient()
 export default function App({ Component, pageProps }) {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleStart = () => {
+      return setLoading(true);
+    };
+    const handleComplete = () => {
+      return setLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+      router.events.off("routeChangeError", handleComplete);
+    };
+  }, [router.events, router.asPath]);
 
   return (
     <>
@@ -62,6 +87,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <NextUIProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
+          {loading && (
+            <InitialLoading />
+          )}
+
           <Component {...pageProps} />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
