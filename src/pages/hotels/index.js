@@ -11,6 +11,7 @@ import { routes } from '@/routes'
 import { getAllData, getAllSubcollections } from '@/utils/firebase_data_handler'
 import { useQuery } from '@tanstack/react-query'
 import InitialLoading from '@/admin_components/initialLoading'
+import { useEffect } from 'react'
 
 const options = [
     {
@@ -121,6 +122,7 @@ export default function Hotels() {
             },
             type: d.type,
             id: d.id,
+            place: d.place,
 
         }
     })
@@ -185,9 +187,20 @@ export default function Hotels() {
                             <Page4Panel4 {...d} data={d} options={options} key={i} />
                         )
                     } */}
-                    {hotelsFullDataConverted?.filter(x => x.type === type).map((d, i) =>
-                        <Page4Panel4 {...d} options={options} key={i} />
-                    )}
+                    {hotelsFullDataConverted?.filter(x => x.type === type)
+                        .filter(
+                            // check if session storage has value for "location" , if yes then filter based on that else return all
+                            x => {
+                                if (sessionStorage.getItem("location")) {
+                                    return x.place === sessionStorage.getItem("location")
+                                } else {
+                                    return x
+                                }
+                            }
+                        )
+                        .map((d, i) =>
+                            <Page4Panel4 {...d} options={options} key={i} />
+                        )}
                 </ul>
             </div>
         </Layout>
