@@ -34,6 +34,81 @@ const carouselData = [
   },
 ];
 
+const about_sindhuburg = [
+  {
+    image:
+      "/assets/images/homecarousel/about_sindhuburg/about_sindhuburg_1.png",
+  },
+  {
+    image:
+      "/assets/images/homecarousel/about_sindhuburg/about_sindhuburg_1.png",
+  },
+  {
+    image:
+      "/assets/images/homecarousel/about_sindhuburg/about_sindhuburg_1.png",
+  },
+];
+
+const why_sindhuburg = [
+  {
+    image: "/assets/images/homecarousel/why_sindhuburg/why_sindhuburg_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/why_sindhuburg/why_sindhuburg_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/why_sindhuburg/why_sindhuburg_1.png",
+  },
+];
+
+const accommodations = [
+  {
+    image: "/assets/images/homecarousel/accommodations/accommodations_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/accommodations/accommodations_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/accommodations/accommodations_1.png",
+  },
+];
+
+const connectivity = [
+  {
+    image: "/assets/images/homecarousel/connectivity/connectivity_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/connectivity/connectivity_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/connectivity/connectivity_1.png",
+  },
+];
+
+const packages = [
+  {
+    image: "/assets/images/homecarousel/packages/packages_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/packages/packages_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/packages/packages_1.png",
+  },
+];
+
+const places = [
+  {
+    image: "/assets/images/homecarousel/place/place_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/place/place_1.png",
+  },
+  {
+    image: "/assets/images/homecarousel/place/place_1.png",
+  },
+];
+
 function FormModal({ showModal, setShowModal }) {
   const ref = useRef(null);
   const closeModal = (e) => {
@@ -72,11 +147,13 @@ export default function Index() {
             "Sindhudurg is the First Tourism District declared in Maharashtra in the year 1997. Sindhudurg has a 121-kilometer-long coastline.",
             "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is ",
           ],
+          button: "View Package",
+          href: "/",
           alignLeft: false,
         },
         carousel: {
           type: 3,
-          images: carouselData,
+          images: about_sindhuburg,
         },
       },
       {
@@ -87,11 +164,14 @@ export default function Index() {
             "It is famous for Scuba Diving, serene beaches, beautiful temples, historical forts and its delicious cuisine. Sindhudurg is the only official Scuba Diving destination in Maharashtra.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
             "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is",
           ],
+          button: "Discover",
+          href: "/",
+
           alignLeft: true,
         },
         carousel: {
           type: 1,
-          images: carouselData,
+          images: why_sindhuburg,
         },
       },
 
@@ -103,63 +183,73 @@ export default function Index() {
             "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
             "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
           ],
+          button: "View Place",
+          href: "/",
           alignLeft: false,
         },
         carousel: {
           type: 2,
-          images: carouselData,
+          images: places,
         },
       },
 
       {
         desc: {
-          heading: "Places 2",
+          heading: "Accommodations",
           maxWidth: "350px",
           paragraphs: [
             "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
             "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
           ],
+          button: "View Hotels",
+          href: "/",
           alignLeft: false,
         },
         carousel: {
           type: 1,
-          images: carouselData,
+          images: accommodations,
         },
       },
 
       {
         desc: {
-          heading: "Places 3",
+          heading: "Connectivity",
           maxWidth: "350px",
           paragraphs: [
-            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+            "•DIRECT FLIGHTS : MUMBAI - CHIPI AIRPORT (ALLIANCE AIR) MUMBAI - MOPA AIRPORT (INDIGO, GO FIRST, AKASA AIR)",
+            "•TRAINS FROM MUMBAI VISTADOME TRAINS EXPRESS TRAINS (TEJAS EXP, JANSHATABDI EXP, KOKANKANYA EXP)",
+            "•DRIVE: APPROX 10-12 HOURS FROM MUMBAI CHIPI AIRPORT TO MALVAN – 30 MINS MOPA AIRPORT TO MALVAN – 1HR 30MINS",
           ],
+          button: "View Places",
+          href: "/",
           alignLeft: false,
         },
         carousel: {
           type: 1,
-          images: carouselData,
+          images: connectivity,
         },
       },
 
       {
         desc: {
-          heading: "Places 4",
+          heading: "Packages",
           maxWidth: "350px",
           paragraphs: [
             "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
             "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
           ],
+          button: "View Hotels",
+          href: "/",
           alignLeft: false,
         },
         carousel: {
           type: 1,
-          images: carouselData,
+          images: packages,
         },
       },
     ],
   };
+
   const { mainTitle, mainText, widthText, widthTitle, sections } = props;
 
   const [modal, showModal] = useState(false);

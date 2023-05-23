@@ -23,7 +23,7 @@ const DescriptionSmall = ({ sections }) => {
               <div className="flex items-center   max-h-[450px]">
                 <DescriptionComp
                   {...desc}
-                  button={{ name: "View Packages", onClick: () => alert("hi") }}
+                  button={{ name: "View Packages", href:desc.href }}
                   classNames={["ml-5"]}
                   alignLeft={true}
                 />
@@ -44,7 +44,7 @@ const DescriptionLarge = ({ sections }) => {
   const carousel = sections.map(({ carousel }) => carousel);
   return (
     <div className="flex justify-center  items-center">
-      <ul className="flex flex-col mr-10">
+      <ul className="flex flex-col ">
         {sections.map(({ desc, carousel }, i) => {
           const ctype = carousel.type;
           const Carousel =
@@ -53,12 +53,12 @@ const DescriptionLarge = ({ sections }) => {
           if (i % 2 === 0)
             return (
               <Fade bottom key={i}>
-                <li className="flex items-center min-h-[450px] ">
+                <li className="flex items-center min-h-[450px]">
                   <DescriptionComp
                     {...desc}
                     button={{
-                      name: "View Packages",
-                      onClick: () => alert("hi"),
+                      name: desc.button,
+                      href: desc.href,
                     }}
                     classNames={["ml-5"]}
                     alignLeft={true}
@@ -69,7 +69,7 @@ const DescriptionLarge = ({ sections }) => {
           else
             return (
               <Fade bottom key={i}>
-                <li className="flex items-center min-h-[450px]  w-full">
+                <li className="flex items-center min-h-[450px]  ">
                   <Carousel data={carousel.images} />
                 </li>
               </Fade>
@@ -94,8 +94,8 @@ const DescriptionLarge = ({ sections }) => {
                   <DescriptionComp
                     {...desc}
                     button={{
-                      name: "View Packages",
-                      onClick: () => alert("hi"),
+                      name: desc.button,
+                      href: desc.href,
                     }}
                     classNames={["ml-5"]}
                     alignLeft={false}
@@ -118,7 +118,7 @@ const DescriptionLarge = ({ sections }) => {
 };
 
 export default function Description({ sections }) {
-  const isSmall = useMediaQuery(0, Size.sm);
+  const isSmall = useMediaQuery(0, Size.md);
   if (isSmall) {
     return <DescriptionSmall sections={sections} />;
   }

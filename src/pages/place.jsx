@@ -19,7 +19,7 @@ const data = [
   },
   {
     image: "/assets/images/sample.png",
-    heading: "DEVBAG",
+    heading: "TARKARLI",
     title: "GO AND SPEND AN AMAZING WEEKEND IN DEVBAG",
     maxWidth: "650px",
     button: { name: "View Package" },
