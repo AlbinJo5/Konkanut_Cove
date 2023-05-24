@@ -23,7 +23,7 @@ const DescriptionSmall = ({ sections }) => {
               <div className="flex items-center   max-h-[450px]">
                 <DescriptionComp
                   {...desc}
-                  button={{ name: "View Packages", href:desc.href }}
+                  button={{ name: "View Packages", href: desc.href }}
                   classNames={["ml-5"]}
                   alignLeft={true}
                 />
