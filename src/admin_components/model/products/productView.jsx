@@ -4,8 +4,6 @@ import { EyeIcon, IconButton } from "../../icons";
 function ProductView(props) {
 
     const { setVisible, bindings } = useModal();
-    console.log(bindings);
-    console.log(props.data);
     if (props.visibity) {
         setVisible(false);
     }

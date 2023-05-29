@@ -2,6 +2,7 @@ import { Modal, useModal, Button, Text, Tooltip } from "@nextui-org/react";
 import { DeleteIcon, IconButton } from "../../icons";
 import InitialLoading from "@/admin_components/initialLoading";
 import { useState } from "react";
+import { queryClient } from "@/pages/_app";
 
 const ROUTE = '/api/activity';
 
@@ -18,7 +19,7 @@ export default function ActivityDelete(props) {
         setVisible(false);
         fetch(ROUTE + `?id=${id}`, { method: 'DELETE' }).then(res => res.json()).then(res => {
             if (res.status === 200) {
-                props.activityCount();
+                queryClient.invalidateQueries("activities");
                 setIsLoading(false);
             }
         })

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { db, storage } from "@/utils/firebase"
 import { collection, doc, onSnapshot, query, deleteDoc, updateDoc, orderBy, getDoc } from "firebase/firestore"
-import { listAll, ref } from "firebase/storage";
+import { deleteObject, listAll, ref } from "firebase/storage";
 
 const collectionName = "Places";
 
@@ -34,21 +34,6 @@ export default async function (req, res) {
         }
     }
 
-    if (req.method === "GET" && req.query.id) {
-        try {
-            console.log(req.query.id);
-            // let PlaceQuery = query(collection(db, collectionName), orderBy('createdAt'));
-            // onSnapshot(PlaceQuery, (querySnapshot) => {
-            //     let result = querySnapshot.docs.map(doc => ({
-            //         id: doc.id,
-            //         data: doc.data()
-            //     }));
-            //     res.status(200).json({ "status": 200, "message": "Success", "data": result });
-            // })
-        } catch (error) {
-            res.status(500).json({ "status": 500, "message": "Internal Server Error", "error": error });
-        }
-    }
 
     // Update Place API #route api/Places #method PUT
     if (req.method === "PUT") {

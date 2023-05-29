@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { addData } from "@/utils/firebaseDataHandler";
 import { useRouter } from "next/router"
 import InitialLoading from "@/admin_components/initialLoading";
+import { queryClient } from "@/pages/_app";
 
 export default function TransportsAdd(props) {
     const [form, setForm] = useState({
@@ -25,8 +26,8 @@ export default function TransportsAdd(props) {
         setVisible(false);
         await addData(form, images, "Transportations").then(res => {
             if (res.status === 200) {
+                queryClient.invalidateQueries("transports");
                 setIsLoading(false);
-                props.transportCounty();
             }
         })
         setIsLoading(false);

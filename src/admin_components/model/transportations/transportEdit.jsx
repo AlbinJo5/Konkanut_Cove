@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { addData, updateData } from "@/utils/firebaseDataHandler";
 import { useRouter } from "next/router"
 import InitialLoading from "@/admin_components/initialLoading";
+import { queryClient } from "@/pages/_app";
 
 const ROUTE = '/api/transport';
 
@@ -24,9 +25,8 @@ export default function TransportEdit(props) {
         setVisible(false);
         await updateData(data, imagePath, "Transportations", id).then(res => {
             if (res.status === 200) {
-
+                queryClient.invalidateQueries("transports");
                 setIsLoading(false);
-                props.transportCount();
             }
         })
         setIsLoading(false);

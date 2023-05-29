@@ -28,6 +28,8 @@ export default function EnquireModal(props) {
 
         }
 
+        // console.log(data);
+
 
 
         uploadData(data, "Package_Enquiries").then((res) => {

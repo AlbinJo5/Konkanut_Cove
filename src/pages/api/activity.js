@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { db, storage } from "@/utils/firebase"
 import { collection, doc, onSnapshot, query, deleteDoc, updateDoc, orderBy, getDoc } from "firebase/firestore"
-import { listAll, ref } from "firebase/storage";
+import { deleteObject, listAll, ref } from "firebase/storage";
 
 const collectionName = "Activities";
 

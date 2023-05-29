@@ -92,7 +92,7 @@ export default function App({ Component, pageProps }) {
           )}
 
           <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools initialIsOpen={true} />
         </QueryClientProvider>
       </NextUIProvider>
     </>

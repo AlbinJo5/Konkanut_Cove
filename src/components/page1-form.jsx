@@ -13,37 +13,39 @@ const IconText = ({ Icon, text }) => {
 };
 
 export default function Page1Form() {
-
-  const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setloading(true)
+    setloading(true);
     const name = e.target[0].value;
     const phone = e.target[1].value;
     const email = e.target[2].value;
     const message = e.target[3].value;
 
-    uploadData({
-      name,
-      phone,
-      email,
-      message,
-    }, 'Contact').then((res) => {
-      if (res.message === 'success') {
-        alert('Message sent successfully');
-        setloading(false)
-      }
-    })
+    uploadData(
+      {
+        name,
+        phone,
+        email,
+        message,
+      },
+      "Contact"
+    )
+      .then((res) => {
+        if (res.message === "success") {
+          alert("Message sent successfully");
+          setloading(false);
+        }
+      })
       .catch((err) => {
-        alert('Error in sending message');
-        setloading(false)
-      }
-      )
-
+        alert("Error in sending message");
+        setloading(false);
+      });
   };
 
-  const classTextInput = "border-b-1 border-x-0 border-t-0 border-gray-600 focus:ring-0 placeholder:text-gray-300 mb-2";
+  const classTextInput =
+    "border-b-1 border-x-0 border-t-0 border-gray-600 focus:ring-0 placeholder:text-gray-300 mb-2";
   return (
     <div className="flex max-md:flex-col bg-white max-sm:justify-center w-min max-sm:w-full scale-[0.9] md:scale-[0.7] sm:scale-[0.6]">
       <form
@@ -53,6 +55,7 @@ export default function Page1Form() {
         <div className="text-2xl font-bold mb-2 text-center">Send Message</div>
         <div className="grid grid-rows-4 sm:grid-cols-2 sm:grid-rows-3 sm:gap-2">
           <input
+            required
             type="text"
             className={classTextInput + " sm:col-span-2"}
             placeholder="Full Name"
@@ -62,16 +65,23 @@ export default function Page1Form() {
             className={classTextInput}
             placeholder="Mobile No"
           />
-          <input type="text" className={classTextInput} placeholder="Email" />
           <input
+            required
+            type="text"
+            className={classTextInput}
+            placeholder="Email"
+          />
+          <input
+            required
             type="text"
             className={classTextInput + " sm:col-span-2"}
             placeholder="Enter Message"
           />
-          <button type="submit" className="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded">
-            {
-              loading ? 'Sending...' : 'Send'
-            }
+          <button
+            type="submit"
+            className="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+          >
+            {loading ? "Sending..." : "Send"}
           </button>
         </div>
       </form>

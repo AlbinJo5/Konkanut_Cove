@@ -87,21 +87,20 @@ export default function Header({ buttonList, selectedIndex = 0 }) {
           <Image src={"/logo.svg"} width={100} height={80} alt=" " />
         </Link>
       </Navbar.Brand>
-      <Navbar.Toggle showIn="xs" />
 
       <Navbar.Content
         enableCursorHighlight
         activeColor="success"
-        hideIn="xs"
         hoverColor="success"
         variant="default"
       >
-        <Navbar.Link href="#">Features</Navbar.Link>
-        <Navbar.Link isActive href="#">
-          Customers
+        <Navbar.Link href="/packages" hideIn="xs">
+          Packages
         </Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Company</Navbar.Link>
+        <Navbar.Link href="/hotels" hideIn="xs">
+          Hotels
+        </Navbar.Link>
+        <Navbar.Toggle />
       </Navbar.Content>
 
       <Navbar.Collapse

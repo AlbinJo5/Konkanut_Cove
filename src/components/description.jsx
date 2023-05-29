@@ -10,7 +10,7 @@ import ScrollProgress from "./scroll-progress";
 const DescriptionSmall = ({ sections }) => {
   return (
     <div className="flex py-10">
-      <ScrollProgress height="450px" n={sections.length * 2} />
+      {/* <ScrollProgress height="450px" n={sections.length * 2} /> */}
 
       <div className="flex flex-col grow">
         {sections.map(({ desc, carousel }, index) => {
