@@ -32,7 +32,7 @@ export default function Page3Panel3({
         }
         onClick={() => {
           if (selected) return;
-          handleSelect(carType);
+          handleSelect(id, carType);
         }}
       >
         {selected ? "Selected" : "Select"}
