@@ -129,22 +129,16 @@ const Travel = ({
         />
         <p className="mt-1 ml-2">Own Vehicle?</p>
       </div>
+
       <ul className="grid md:grid-cols-3 sm:grid-cols-2 gap-2">
         {transport?.map((t, i) => {
-          //   const findObj = selected?.transportations.find((s) => s.id === t?.id);
-          // check if selected array is empty , if not .find
-          var isSelected = false;
-          // check if ownVehicle is false and prevSelected is available
-          if (!ownVehicle && prevSelectedVehicle?.length > 0) {
-            isSelected = prevSelectedVehicle?.find((s) => s.id === t?.id)
-              ? true
-              : false;
-          } else {
-            isSelected = selected?.transportations?.find((s) => s.id === t?.id)
-              ? true
-              : false;
-          }
-          console.log(isSelected);
+
+          // first check if own vehicle is selected, if yes then check if the vehicle is in the prevSelectedVehicle array or not if yes then select it else not select it
+          // if own vehicle is not selected then check if the vehicle is in the selected array or not if yes then select it else not select it
+          var findObj = ownVehicle
+            ? prevSelectedVehicle?.find((s) => s.id === t?.id)
+            : selected?.transportations.find((s) => s.id === t?.id);
+          var isSelected = findObj ? true : false;
 
           return (
             <li className="my-2" key={i}>
@@ -202,6 +196,7 @@ export default function Index() {
   };
 
   const handleTransportationSelect = (id, title) => {
+    setOwnVehicle(false);
     setSelected((prev) => ({
       ...prev,
       transportations: [
@@ -211,13 +206,13 @@ export default function Index() {
         },
       ],
     }));
-    setOwnVehicle(false);
+
   };
 
   const handleOwnVehicleSelect = (isSelected, prevSelectedVehicle) => {
     // if true
     if (isSelected) {
-      setPrevSelectedVehicle(selected.transportations);
+      setPrevSelectedVehicle(prevSelectedVehicle);
       setSelected((prev) => ({
         ...prev,
         transportations: [],
@@ -385,9 +380,9 @@ export default function Index() {
   return (
     <Layout>
       {packageData.isLoading ||
-      activitiesData.isLoading ||
-      accomodationsData.isLoading ||
-      transportationsData.isLoading ? (
+        activitiesData.isLoading ||
+        accomodationsData.isLoading ||
+        transportationsData.isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <InitialLoading />
         </div>
@@ -452,6 +447,7 @@ export default function Index() {
                           transport={transport}
                           handleOwnVehicleSelect={handleOwnVehicleSelect}
                           prevSelectedVehicle={prevSelectedVehicle}
+                          ownVehicle={ownVehicle}
                         />
                       );
                     default:
