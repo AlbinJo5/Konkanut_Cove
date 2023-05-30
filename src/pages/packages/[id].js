@@ -464,9 +464,7 @@ export default function Index() {
                             Enquire Now , Pay Later
                         </button> */}
                 <EnquireModal
-                  // accomodation={selected.accomodations}
-                  // activity={selected.activity}
-                  // transportations={selected.transportations}
+                  selected={selected}
                   packageDetails={{
                     id: packageData.data?.data?.id,
                     title: packageData.data?.data?.title,
