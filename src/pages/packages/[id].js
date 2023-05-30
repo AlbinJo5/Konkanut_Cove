@@ -334,7 +334,7 @@ export default function Index() {
     .map((a) => {
       return {
         id: a.id,
-        title: a.name,
+        title: a.title,
         image: a.images[0],
         imageWidth: 250,
         imageHeight: 172,
