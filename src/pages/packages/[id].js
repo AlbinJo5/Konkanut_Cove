@@ -469,6 +469,7 @@ export default function Index() {
                     id: packageData.data?.data?.id,
                     title: packageData.data?.data?.title,
                   }}
+                  ownVehicle={ownVehicle}
                 />
               </div>
             </div>
