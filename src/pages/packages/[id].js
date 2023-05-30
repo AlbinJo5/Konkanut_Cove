@@ -360,7 +360,7 @@ export default function Index() {
               (d) =>
                 d.id ===
                 packageData.data?.data?.Accomadations[0]?.accomadationId
-            )?.name,
+            )?.title,
           },
         ],
         transportations: [
