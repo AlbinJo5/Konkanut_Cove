@@ -217,7 +217,7 @@ export default function Index() {
   const handleOwnVehicleSelect = (isSelected, prevSelectedVehicle) => {
     // if true
     if (isSelected) {
-      setPrevSelectedVehicle(selected.transportations);
+      setPrevSelectedVehicle(prevSelectedVehicle);
       setSelected((prev) => ({
         ...prev,
         transportations: [],
