@@ -132,7 +132,6 @@ const Travel = ({
 
       <ul className="grid md:grid-cols-3 sm:grid-cols-2 gap-2">
         {transport?.map((t, i) => {
-
           // first check if own vehicle is selected, if yes then check if the vehicle is in the prevSelectedVehicle array or not if yes then select it else not select it
           // if own vehicle is not selected then check if the vehicle is in the selected array or not if yes then select it else not select it
           var findObj = ownVehicle
@@ -206,7 +205,6 @@ export default function Index() {
         },
       ],
     }));
-
   };
 
   const handleOwnVehicleSelect = (isSelected, prevSelectedVehicle) => {
@@ -380,9 +378,9 @@ export default function Index() {
   return (
     <Layout>
       {packageData.isLoading ||
-        activitiesData.isLoading ||
-        accomodationsData.isLoading ||
-        transportationsData.isLoading ? (
+      activitiesData.isLoading ||
+      accomodationsData.isLoading ||
+      transportationsData.isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <InitialLoading />
         </div>
@@ -410,7 +408,7 @@ export default function Index() {
               ))}
             </ol>
             <div className="flex flex-col w-full items-center">
-              <div className="sm:w-[85%] w-[98%] mt-5">
+              <div className="sm:w-[100%] px-10 w-[98%] h-11 mt-5 bg-gray-300 relative">
                 <ButtonPanel
                   optionList={["Accommodation", "Activities", "Transport"]}
                   options={options}
@@ -422,51 +420,88 @@ export default function Index() {
                   switch (options) {
                     case 0:
                       return (
-                        <Accomodation
-                          selected={selected}
-                          handleSelect={handleAccomodationSelect}
-                          accomodation={accomodation}
-                        />
+                        <>
+                          <Accomodation
+                            selected={selected}
+                            handleSelect={handleAccomodationSelect}
+                            accomodation={accomodation}
+                          />
+                          <div className="mt-10 ml-10  w-[90%] flex justify-between">
+                            <button
+                              className=" flex-end  w-30  mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500"
+                              onClick={() => setOptions(1)}
+                            >
+                              {" "}
+                              Next{" "}
+                            </button>
+                          </div>
+                        </>
                       );
                     case 1:
                       return (
-                        <Activities
-                          activities={activities}
-                          selected={selected}
-                          handleSelect={handleActivitySelect}
-                          image
-                          imageWidth="120"
-                          imageHeight="90"
-                        />
+                        <>
+                          <Activities
+                            activities={activities}
+                            selected={selected}
+                            handleSelect={handleActivitySelect}
+                            image
+                            imageWidth="120"
+                            imageHeight="90"
+                          />
+                          <div className="mt-10 ml-10 w-[90%] flex justify-between">
+                            <button
+                              className=" flex-end w-30   mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500"
+                              onClick={() => setOptions(0)}
+                            >
+                              Previous
+                            </button>
+
+                            <button
+                              className=" flex-end  w-30  mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500"
+                              onClick={() => setOptions(2)}
+                            >
+                              {" "}
+                              Next{" "}
+                            </button>
+                          </div>
+                        </>
                       );
                     case 2:
                       return (
-                        <Travel
-                          selected={selected}
-                          handleSelect={handleTransportationSelect}
-                          transport={transport}
-                          handleOwnVehicleSelect={handleOwnVehicleSelect}
-                          prevSelectedVehicle={prevSelectedVehicle}
-                          ownVehicle={ownVehicle}
-                        />
+                        <>
+                          <Travel
+                            selected={selected}
+                            handleSelect={handleTransportationSelect}
+                            transport={transport}
+                            handleOwnVehicleSelect={handleOwnVehicleSelect}
+                            prevSelectedVehicle={prevSelectedVehicle}
+                            ownVehicle={ownVehicle}
+                          />
+                          <div className="mt-10 ml-10 w-[90%] flex justify-between">
+                            {/* <button className=" flex-end   mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500" >
+                                    Enquire Now , Pay Later
+                                </button> */}
+                            <button
+                              className=" flex-end w-30   mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500"
+                              onClick={() => setOptions(1)}
+                            >
+                              Previous
+                            </button>
+                            <EnquireModal
+                              selected={selected}
+                              packageDetails={{
+                                id: packageData.data?.data?.id,
+                                title: packageData.data?.data?.title,
+                              }}
+                              ownVehicle={ownVehicle}
+                            />
+                          </div>
+                        </>
                       );
                     default:
                       null;
                   }
                 })()}
-              </div>
-              <div className="mt-10 w-[90%] flex justify-end">
-                {/* <button className=" flex-end   mb-5 p-5 rounded-lg py-3 bg-green-600 hover:bg-green-700 text-white font-bold disabled:bg-slate-500" >
-                            Enquire Now , Pay Later
-                        </button> */}
-                <EnquireModal
-                  selected={selected}
-                  packageDetails={{
-                    id: packageData.data?.data?.id,
-                    title: packageData.data?.data?.title,
-                  }}
-                  ownVehicle={ownVehicle}
-                />
               </div>
             </div>
             <div className="absolute bottom-6 right-6"></div>
