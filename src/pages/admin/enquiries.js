@@ -1,7 +1,7 @@
 import Layout from '@/admin_components/layout'
 import React, { useEffect, useState } from 'react'
 import styles from "@/styles/admin_styles/products.module.scss"
-import { Table, Row, Col, Tooltip, User, Button, Input } from "@nextui-org/react";
+import { Table, Row, Col, Tooltip, User, Button, Input, Grid } from "@nextui-org/react";
 import { useRouter } from 'next/router';
 import { ADMIN_ROUTES } from '@/admin_components/core/routes';
 import { useQuery } from '@tanstack/react-query'
@@ -14,7 +14,8 @@ import HotelView from '@/admin_components/model/ENQUIRIES/hotel/hotelView';
 import HotelDelete from '@/admin_components/model/ENQUIRIES/hotel/hotelDelete';
 function Index() {
 
-    const [count, setCount] = useState(0);
+    const [packageSearch, setPackageSearch] = useState("")
+    const [hotelSearch, setHotelSearch] = useState("")
     const route = useRouter();
 
 
@@ -48,8 +49,20 @@ function Index() {
                 }
                 <div className={styles.head} >
                     <h3>Package Enquiries</h3>
-                </div>
 
+                    {/* search bar */}
+
+                    <Grid>
+                        <Input
+                            type="search"
+                            placeholder="Search"
+                            clearable
+                            onChange={(e) => {
+                                setPackageSearch(e.target.value)
+                            }}
+                        />
+                    </Grid>
+                </div>
 
                 <Table
                     bordered
@@ -70,26 +83,39 @@ function Index() {
                     <Table.Body>
                         {
                             // packageEnquiries.data?.map(({ id, data }, i) => (
-                            packageEnquiries.data?.data.map((data, i) => (
-                                <Table.Row key={i + 1}>
-                                    <Table.Cell>{data.id}</Table.Cell>
-                                    <Table.Cell>{data.name}</Table.Cell>
-                                    <Table.Cell>{data.phone}</Table.Cell>
+                            packageEnquiries.data?.data
+                                .filter((data) => {
+                                    if (packageSearch == "") {
+                                        return data
+                                    } else if (
+                                        // name or id or phone
+                                        data.name.toLowerCase().includes(packageSearch.toLowerCase()) ||
+                                        data.id.toLowerCase().includes(packageSearch.toLowerCase()) ||
+                                        data.phone.toLowerCase().includes(packageSearch.toLowerCase())
+                                    ) {
+                                        return data
+                                    }
+                                })
+                                .map((data, i) => (
+                                    <Table.Row key={i + 1}>
+                                        <Table.Cell>{data.id}</Table.Cell>
+                                        <Table.Cell>{data.name}</Table.Cell>
+                                        <Table.Cell>{data.phone}</Table.Cell>
 
-                                    <Table.Cell>
-                                        {/* row / col */}
-                                        <Row justify="center" align="middle">
+                                        <Table.Cell>
+                                            {/* row / col */}
+                                            <Row justify="center" align="middle">
 
-                                            <Col span={12}>
-                                                <PackageView data={data} />
-                                            </Col>
-                                            <Col span={12}>
-                                                <PackageDelete data={data} />
-                                            </Col>
-                                        </Row>
-                                    </Table.Cell>
-                                </Table.Row>
-                            ))
+                                                <Col span={12}>
+                                                    <PackageView data={data} />
+                                                </Col>
+                                                <Col span={12}>
+                                                    <PackageDelete data={data} />
+                                                </Col>
+                                            </Row>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))
                         }
 
                     </Table.Body>
@@ -112,6 +138,18 @@ function Index() {
                 }
                 <div className={styles.head} >
                     <h3>Hotel Enquiries</h3>
+                    {/* search bar */}
+
+                    <Grid>
+                        <Input
+                            type="search"
+                            placeholder="Search"
+                            clearable
+                            onChange={(e) => {
+                                setHotelSearch(e.target.value)
+                            }}
+                        />
+                    </Grid>
                 </div>
 
 
@@ -134,26 +172,39 @@ function Index() {
                     <Table.Body>
                         {
                             // packageEnquiries.data?.map(({ id, data }, i) => (
-                            hotelsEnquiries.data?.data.map((data, i) => (
-                                <Table.Row key={i + 1}>
-                                    <Table.Cell>{data.id}</Table.Cell>
-                                    <Table.Cell>{data.name}</Table.Cell>
-                                    <Table.Cell>{data.phone}</Table.Cell>
+                            hotelsEnquiries.data?.data
+                                .filter((data) => {
+                                    if (hotelSearch == "") {
+                                        return data
+                                    } else if (
+                                        // name or id or phone
+                                        data.name.toLowerCase().includes(hotelSearch.toLowerCase()) ||
+                                        data.id.toLowerCase().includes(hotelSearch.toLowerCase()) ||
+                                        data.phone.toLowerCase().includes(hotelSearch.toLowerCase())
+                                    ) {
+                                        return data
+                                    }
+                                })
+                                .map((data, i) => (
+                                    <Table.Row key={i + 1}>
+                                        <Table.Cell>{data.id}</Table.Cell>
+                                        <Table.Cell>{data.name}</Table.Cell>
+                                        <Table.Cell>{data.phone}</Table.Cell>
 
-                                    <Table.Cell>
-                                        {/* row / col */}
-                                        <Row justify="center" align="middle">
+                                        <Table.Cell>
+                                            {/* row / col */}
+                                            <Row justify="center" align="middle">
 
-                                            <Col span={12}>
-                                                <HotelView data={data} />
-                                            </Col>
-                                            <Col span={12}>
-                                                <HotelDelete data={data} />
-                                            </Col>
-                                        </Row>
-                                    </Table.Cell>
-                                </Table.Row>
-                            ))
+                                                <Col span={12}>
+                                                    <HotelView data={data} />
+                                                </Col>
+                                                <Col span={12}>
+                                                    <HotelDelete data={data} />
+                                                </Col>
+                                            </Row>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))
                         }
 
                     </Table.Body>

@@ -82,15 +82,21 @@ export const ImageGrid = ({
     <>
       <div className="grid sm:grid-rows-2 sm:grid-flow-col sm:gap-4 w-full h-[250px]">
         <div className="row-span-2 col-span-3 relative">
-          <Image
-            style={{
-              objectFit: "cover",
-            }}
-            src={images[0].image}
-            alt="grid pictures"
-            fill
-            className="rounded-md"
-          />
+          {
+            images.length > 1 && (
+              <Image
+                style={{
+                  objectFit: "cover",
+                }}
+                src={images[0].image}
+                alt="grid pictures"
+                fill
+                className="rounded-md"
+              />
+            )
+
+          }
+
           <div className="sm:hidden z-0 absolute w-full h-full flex justify-center items-center text-4xl text-white font-bold">
             {images.length}+
           </div>

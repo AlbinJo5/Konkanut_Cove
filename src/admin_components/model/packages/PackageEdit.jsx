@@ -30,8 +30,6 @@ export default function PackageEdit(props) {
                 // update or add the response to the cache
                 queryClient.setQueryData(['package', props.data.id], (old) => {
                     const oldData = old?.data
-                    console.log(oldData);
-                    console.log(res.data);
                     if (oldData) {
                         return res
                     }
