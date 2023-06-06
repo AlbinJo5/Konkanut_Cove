@@ -112,7 +112,9 @@ export default function Index() {
     mainTitle:
       "Spend Quality Holidays <span key={2} style='color:#22543d;'> With Us.</span>",
     mainText:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types Lorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and typesLorem Ipsum is simply dummy text of the printing and typesetting Lorem Ipsum is simply dummy text of the printing and types",
+      "We are Konkanut Cove and we promote Sindhudurg as an amazing holiday destination. Sindhudurg is famous for its serene and beautiful beaches, temples, historical forts, and its delicious cuisine. ",
+    mainText2:
+      " As Sindhudurg is one of the upcoming travel destinations of Maharashtra. And, the Konkanut Cove team will do their best to make your next Sindhudurg trip one of the best holidays you have ever had.",
     widthTitle: "600px",
     widthText: "800px",
     sections: [
@@ -227,7 +229,8 @@ export default function Index() {
     ],
   };
 
-  const { mainTitle, mainText, widthText, widthTitle, sections } = props;
+  const { mainTitle, mainText, mainText2, widthText, widthTitle, sections } =
+    props;
 
   const [modal, showModal] = useState(false);
   return (
@@ -258,6 +261,8 @@ export default function Index() {
               <MainHeader>
                 <MainTitle width={widthTitle}>{mainTitle}</MainTitle>
                 <MainText width={widthText}>{mainText}</MainText>
+                <br />
+                <MainText width={widthText}>{mainText2}</MainText>
               </MainHeader>
             </div>
           </Fade>

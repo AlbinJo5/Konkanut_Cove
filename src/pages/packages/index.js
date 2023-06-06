@@ -1,10 +1,32 @@
 import InitialLoading from "@/admin_components/initialLoading";
 import CarouselLarge from "@/components/carouselLarge";
 import Layout from "@/components/layout";
+import Page1Form from "@/components/page1-form";
 import { getAllData } from "@/utils/firebase_data_handler";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Fade } from "react-reveal";
+
+function FormModal({ showModal, setShowModal }) {
+  const ref = useRef(null);
+  const closeModal = (e) => {
+    if (ref.current && !ref.current.contains(e.target)) {
+      setShowModal(false);
+    }
+  };
+
+  if (!showModal) return null;
+  return (
+    <div
+      className="fixed z-50 inset-0 flex justify-center items-center px-1 bg-black bg-opacity-25 md:hidden"
+      onClick={closeModal}
+    >
+      <div className="max-sm:w-[100vh]" ref={ref}>
+        <Page1Form />
+      </div>
+    </div>
+  );
+}
 
 export default function Packages() {
   const placesData = useQuery(

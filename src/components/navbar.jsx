@@ -106,6 +106,7 @@ export default function Header({ buttonList, selectedIndex = 0 }) {
       <Navbar.Collapse
         css={{
           background: "White",
+          overflow: "hidden",
         }}
       >
         {collapseItems.map((item, index) => (
@@ -113,6 +114,7 @@ export default function Header({ buttonList, selectedIndex = 0 }) {
             key={index}
             activeColor="success"
             css={{
+              justifyContent: "end",
               color: index === collapseItems.length - 1 ? "$error" : "",
               $$navbarBlurBackgroundColor: "transparent",
               backgroundColor: "transparent",
