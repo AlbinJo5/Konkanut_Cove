@@ -9,6 +9,7 @@ import ImageModal from "./image-modal";
 import EnquireModal from "./modal/enquireModal";
 import { useRouter } from "next/router";
 import HotelModal from "./modal/hotelModal";
+import TermsModal from "./modal/termsModal";
 
 export const Landmarks = ({ landmarks }) => {
   return (
@@ -76,6 +77,7 @@ export const ImageGrid = ({
   name,
   address,
   children,
+  terms,
   noCol = false,
 }) => {
   return (
@@ -123,8 +125,11 @@ export const ImageGrid = ({
       <div
         className={clsx("flex items-start mt-4", { "max-sm:flex-col": !noCol })}
       >
-        <div className="flex flex-col grow">
-          <div className="text-xl font-bold">{name}</div>
+        <div className="flex  flex-col grow">
+          <div className="flex items-center gap-5 max-sm:flex-col " >
+            <div className="text-xl font-bold">{name}</div>
+            <TermsModal terms={terms} />
+          </div>
           <div className="text-sm text-gray-500">{address}</div>
         </div>
         {children}
@@ -230,6 +235,7 @@ export default function Page4Panel1({
   options,
   map,
   ac,
+  terms,
 }) {
   const [showModal, setShowModal] = useState(false);
   // if (images.length<7)throw Error("Not enough images!")
@@ -246,6 +252,7 @@ export default function Page4Panel1({
         images={images}
         name={hotelName}
         address={address}
+        terms={terms}
         setShowModal={setShowModal}
       >
         <HotelModal

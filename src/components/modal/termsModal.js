@@ -10,7 +10,7 @@ function TermsModal(props) {
     return (
         <div>
             <Tooltip
-                content="View"
+                content="Terms and Conditions"
                 color="success"
                 onClick={() => {
                     setVisible(true);
