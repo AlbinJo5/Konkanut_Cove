@@ -73,7 +73,7 @@ function Index() {
                     allowDuplicateSelectionEvents="false"
                 >
                     <Table.Header>
-                        <Table.Column>Id</Table.Column>
+                        <Table.Column>Reference Id</Table.Column>
                         <Table.Column>Name</Table.Column>
                         <Table.Column>Phone</Table.Column>
                         <Table.Column>
@@ -90,7 +90,7 @@ function Index() {
                                     } else if (
                                         // name or id or phone
                                         data.name.toLowerCase().includes(packageSearch.toLowerCase()) ||
-                                        data.id.toLowerCase().includes(packageSearch.toLowerCase()) ||
+                                        data.referenceId.toLowerCase().includes(packageSearch.toLowerCase()) ||
                                         data.phone.toLowerCase().includes(packageSearch.toLowerCase())
                                     ) {
                                         return data
@@ -98,7 +98,7 @@ function Index() {
                                 })
                                 .map((data, i) => (
                                     <Table.Row key={i + 1}>
-                                        <Table.Cell>{data.id}</Table.Cell>
+                                        <Table.Cell>{data.referenceId}</Table.Cell>
                                         <Table.Cell>{data.name}</Table.Cell>
                                         <Table.Cell>{data.phone}</Table.Cell>
 
@@ -162,7 +162,7 @@ function Index() {
                     allowDuplicateSelectionEvents="false"
                 >
                     <Table.Header>
-                        <Table.Column>Id</Table.Column>
+                        <Table.Column>Reference Id</Table.Column>
                         <Table.Column>Name</Table.Column>
                         <Table.Column>Phone</Table.Column>
                         <Table.Column>
@@ -179,7 +179,7 @@ function Index() {
                                     } else if (
                                         // name or id or phone
                                         data.name.toLowerCase().includes(hotelSearch.toLowerCase()) ||
-                                        data.id.toLowerCase().includes(hotelSearch.toLowerCase()) ||
+                                        data.referenceId.toLowerCase().includes(hotelSearch.toLowerCase()) ||
                                         data.phone.toLowerCase().includes(hotelSearch.toLowerCase())
                                     ) {
                                         return data
@@ -187,7 +187,7 @@ function Index() {
                                 })
                                 .map((data, i) => (
                                     <Table.Row key={i + 1}>
-                                        <Table.Cell>{data.id}</Table.Cell>
+                                        <Table.Cell>{data.referenceId}</Table.Cell>
                                         <Table.Cell>{data.name}</Table.Cell>
                                         <Table.Cell>{data.phone}</Table.Cell>
 

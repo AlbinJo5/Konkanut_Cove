@@ -41,7 +41,7 @@ export default function HotelModal(props) {
 
         uploadData(data, "Hotel_Enquiries").then((res) => {
             if (res.message === "success") {
-                setId(res.data.id);
+                setId(res.data.referenceId);
                 alert("Enquiry Submitted Successfully");
                 setLoading(false);
             }
