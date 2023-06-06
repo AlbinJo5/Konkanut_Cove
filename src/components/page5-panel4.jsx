@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import React, { useState } from "react";
 
-export default function Page5Panel4({ images, iwidth = 300, iheight = 500 }) {
+export default function Page5Panel4({ images, caption, iwidth = 300, iheight = 500 }) {
   const isMd = useMediaQuery(0, Size.md);
   const [showModal, setShowModal] = useState(false);
   return (
@@ -14,7 +14,7 @@ export default function Page5Panel4({ images, iwidth = 300, iheight = 500 }) {
           className=" relative h-[300px] lg:h-[250px] sm:min-w-[350px] overflow-hidden"
           key={index}
         >
-          <Image src={image} fill className="object-cover" alt="" key={index} />
+          <Image src={image} fill className="object-cover" alt={caption} key={index} />
         </li>
       ))}
     </ul>
