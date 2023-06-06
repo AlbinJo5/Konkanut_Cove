@@ -72,14 +72,24 @@ export default function Page2Panel({ n = 2, width, height, top = -35, textWidth 
                 <div className="text-lg">{"\u20b9"}{
                     data?.price
                 }</div>
-                <div className="flex mb-4 items-center">
-                    <div className="text-lg text-gray-400 line-through mr-2">{"\u20b9"}
-                        {
-                            data?.price * 1.3
-                        }
-                    </div>
-                    <div className="text-green-600 text-sm font-bold">30% off</div>
-                </div>
+                {
+                    data?.offer ? (
+                        <div className="flex mb-4 items-center">
+                            <div className="text-lg text-gray-400 line-through mr-2">
+                                {"\u20b9"}
+                                {console.log("Original Price:", data?.price)}
+                                {console.log("Offer Percentage:", data?.offer)}
+                                {(Number(data?.price) + (Number(data?.price) * Number(data?.offer) / 100)).toFixed(2)}
+                            </div>
+                            <div className="text-green-600 text-sm font-bold">30% off</div>
+                        </div>
+                    ) : null
+                }
+
+
+
+
+
                 <button className="bg-green-800 hover:bg-green-600 mb-3 text-white font-bold py-2 rounded-sm"
                     onClick={() => {
                         router.push(routes.package_details + data?.id);

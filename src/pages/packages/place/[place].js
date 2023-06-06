@@ -54,7 +54,6 @@ export default function Packages() {
 
   );
 
-  console.log(packagesData.data?.data);
 
 
   return (
@@ -87,7 +86,7 @@ export default function Packages() {
                     <MainHeader>
                       <MainTitle width="600px">{placeData.data?.data.title}</MainTitle>
                       <MainText width="600px">{
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the"
+                        placeData.data?.data.description
                       }</MainText>
                     </MainHeader>
                   </div>
