@@ -54,12 +54,13 @@ export default function PackageEdit(props) {
         setLoading(true);
         const title = e.target[0].value;
         const price = e.target[1].value;
-        const days = e.target[2].value;
-        const nights = e.target[3].value;
-        const place = e.target[4].value;
-        const description = e.target[5].value;
-        const images = e.target[6].files;
-        const terms = e.target[7].value;
+        const offer = e.target[2].value;
+        const days = e.target[3].value;
+        const nights = e.target[4].value;
+        const place = e.target[5].value;
+        const description = e.target[6].value;
+        const images = e.target[7].files;
+        const terms = e.target[8].value;
 
         if (images.length === 0) {
             handleData({
@@ -71,6 +72,7 @@ export default function PackageEdit(props) {
                 place: place,
                 terms: terms,
                 images: props.data.images,
+                offer: offer
             });
         }
 
@@ -87,6 +89,7 @@ export default function PackageEdit(props) {
                     place: place,
                     terms: terms,
                     images: res.data,
+                    offer: offer
                 }
                 handleData(data);
             }
@@ -140,6 +143,17 @@ export default function PackageEdit(props) {
                                     fullWidth={true}
                                     labelPlaceholder="Price"
                                     initialValue={props.data.price}
+                                    type="number"
+                                    color="error" />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Input
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Offer Percentage"
+                                    required
+                                    initialValue={props.data.offer}
+                                    name="offer"
                                     type="number"
                                     color="error" />
                             </Grid>

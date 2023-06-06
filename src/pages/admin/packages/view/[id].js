@@ -257,8 +257,15 @@ function Index() {
                     )
                 })
             }
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 20,
+            }} >
 
-            <Text h4>Price: {pacakage.data?.data?.price}</Text>
+                <Text h4>Price: {pacakage.data?.data?.price}</Text>
+                <Text h5>Offer: {pacakage.data?.data?.offer}%</Text>
+            </div>
             <Text h4>Days: {pacakage.data?.data?.days}</Text>
             <Text h4>Nights: {pacakage.data?.data?.nights}</Text>
 

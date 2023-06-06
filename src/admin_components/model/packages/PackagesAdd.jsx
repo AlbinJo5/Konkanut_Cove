@@ -57,12 +57,13 @@ export default function PackageAdd() {
         setLoading(true);
         const title = e.target[0].value;
         const price = e.target[1].value;
-        const days = e.target[2].value;
-        const nights = e.target[3].value;
-        const place = e.target[4].value;
-        const description = e.target[5].value;
-        const terms = e.target[7].value;
-        const resp = uploadImages(e.target[6].files, "packages");
+        const offer = e.target[2].value;
+        const days = e.target[3].value;
+        const nights = e.target[4].value;
+        const place = e.target[5].value;
+        const description = e.target[6].value;
+        const terms = e.target[8].value;
+        const resp = uploadImages(e.target[7].files, "packages");
         resp.then((res) => {
             const data = {
                 title: title,
@@ -73,6 +74,7 @@ export default function PackageAdd() {
                 place: place,
                 terms: terms,
                 images: res.data,
+                offer: offer
             }
             handleAdd(data);
         }
@@ -126,6 +128,16 @@ export default function PackageAdd() {
                                     fullWidth={true}
                                     labelPlaceholder="Price"
                                     required
+                                    type="number"
+                                    color="error" />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Input
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Offer Percentage"
+                                    required
+                                    name="offer"
                                     type="number"
                                     color="error" />
                             </Grid>
