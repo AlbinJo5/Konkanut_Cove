@@ -1,12 +1,31 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, increment, setDoc, } from "firebase/firestore";
 import { db } from "./firebase";
 export async function uploadData(data, path, id = null) {
-
     try {
-
         // doc ref
         if (id) {
-            await setDoc(doc(db, path, id), data, { merge: true });
+            // Package_Enquiries Hotel_Enquiries
+            if (path === "Package_Enquiries" || path === "Hotel_Enquiries") {
+                const counterRef = doc(db, "Counters", path);
+                const counterDoc = await getDoc(counterRef);
+                const count = counterDoc.exists() ? counterDoc.data().count : 0;
+                const referenceId = path === "Package_Enquiries" ? `PACK#${count + 1}` : `HOT#${count + 1}`;
+                await setDoc(
+                    doc(db, path, id),
+                    {
+                        ...data,
+                        referenceId: referenceId
+                    },
+                    { merge: true }
+                );
+                await set(counterRef, {
+                    count: count + 1
+                }, {
+                    merge: true
+                });
+            } else {
+                await setDoc(doc(db, path, id), data, { merge: true });
+            }
             const docSnap = await getDoc(doc(db, path, id));
             if (docSnap.exists()) {
                 return {
@@ -15,21 +34,38 @@ export async function uploadData(data, path, id = null) {
                         id: docSnap.id,
                         ...docSnap.data()
                     }
-                }
-            }
-            else {
+                };
+            } else {
                 return {
                     message: "error",
                     data: "No such document!"
                 };
             }
-        }
-
-        else {
+        } else {
             const docRef = doc(collection(db, path));
             // add data to docRef
-            await setDoc(docRef, data, { merge: true });
-            // get the document 
+            if (path === "Package_Enquiries" || path === "Hotel_Enquiries") {
+                const counterRef = doc(db, "Counters", path);
+                const counterDoc = await getDoc(counterRef);
+                const count = counterDoc.exists() ? counterDoc.data().count : 0;
+                const referenceId = path === "Package_Enquiries" ? `PACK#${count + 1}` : `HOT#${count + 1}`;
+                await setDoc(
+                    docRef,
+                    {
+                        ...data,
+                        referenceId: referenceId
+                    },
+                    { merge: true }
+                );
+                await setDoc(counterRef, {
+                    count: count + 1
+                }, {
+                    merge: true
+                });
+            } else {
+                await setDoc(docRef, data, { merge: true });
+            }
+            // get the document
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 return {
@@ -38,7 +74,7 @@ export async function uploadData(data, path, id = null) {
                         id: docSnap.id,
                         ...docSnap.data()
                     }
-                }
+                };
             } else {
                 return {
                     message: "error",
@@ -46,16 +82,16 @@ export async function uploadData(data, path, id = null) {
                 };
             }
         }
-
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         return {
             message: "error",
             data: err
-        }
+        };
     }
 }
+
+
 
 export async function updateData(data, path) {
     try {

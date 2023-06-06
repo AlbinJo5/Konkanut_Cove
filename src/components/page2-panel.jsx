@@ -77,8 +77,6 @@ export default function Page2Panel({ n = 2, width, height, top = -35, textWidth 
                         <div className="flex mb-4 items-center">
                             <div className="text-lg text-gray-400 line-through mr-2">
                                 {"\u20b9"}
-                                {console.log("Original Price:", data?.price)}
-                                {console.log("Offer Percentage:", data?.offer)}
                                 {(Number(data?.price) + (Number(data?.price) * Number(data?.offer) / 100)).toFixed(2)}
                             </div>
                             <div className="text-green-600 text-sm font-bold">30% off</div>

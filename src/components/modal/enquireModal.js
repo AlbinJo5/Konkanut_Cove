@@ -32,7 +32,7 @@ export default function EnquireModal(props) {
     uploadData(data, "Package_Enquiries")
       .then((res) => {
         if (res.message === "success") {
-          setId(res.data.id);
+          setId(res.data.referenceId);
           alert("Enquiry Submitted Successfully");
           setLoading(false);
         } else {
