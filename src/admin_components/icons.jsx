@@ -184,6 +184,26 @@ export const AddIcon = ({
     );
 };
 
+export const InfoIcon = ({ fill, size, height, width, ...props }) => {
+    return (
+        <svg
+            width={size || width || 24}
+            height={size || height || 24}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            {...props}
+        >
+            <path
+                d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM11 17H13V7H11V17ZM12 18C12.55 18 13 17.55 13 17C13 16.45 12.55 16 12 16C11.45 16 11 16.45 11 17C11 17.55 11.45 18 12 18ZM12 14C12.55 14 13 13.55 13 13C13 12.45 12.55 12 12 12C11.45 12 11 12.45 11 13C11 13.55 11.45 14 12 14Z"
+                fill={fill}
+            />
+        </svg>
+    );
+};
+
+
+
 
 // IconButton component will be available as part of the core library soon
 export const IconButton = styled('button', {

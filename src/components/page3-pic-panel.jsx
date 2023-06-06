@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import TermsModal from "./modal/termsModal";
 
 export default function Page3PicPanel({
   duration,
@@ -7,6 +8,7 @@ export default function Page3PicPanel({
   imagesRemaining,
   desc,
   startingPrice,
+  terms,
   date,
 }) {
   return (
@@ -60,7 +62,10 @@ export default function Page3PicPanel({
         </div>
         <div className="lg:grow"></div>
         <div className="flex flex-col bg-[#C6FBB4] h-full px-4 py-2 mb-4">
-          <p className="text-green-800 text-sm">Starting from</p>
+          <div className="flex  justify-between items-end max-sm:flex-col " >
+            <p className="text-green-800 text-sm">Starting from</p>
+            <TermsModal terms={terms} />
+          </div>
           <div className="flex items-end max-sm:flex-col">
             <p className="text-green-800 font-bold text-6xl mr-4">
               {"\u20B9" + startingPrice}

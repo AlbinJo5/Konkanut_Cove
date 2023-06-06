@@ -168,13 +168,6 @@ export default function Index() {
   const handleActivitySelect = (id, title) => {
     setSelected((prev) => ({
       ...prev,
-      // activities: prev.activities.includes(id) ? prev.activities.filter(a => a !== id) : [...prev.activities.slice(1), id],
-      // { id:"",title:"" }
-      // activities: [
-      //     ...prev.activities,
-      //     { id, title }
-      // ]
-      // only allow 2 activities and remove the first one
       activities:
         prev.activities.length === 2
           ? [...prev.activities.slice(1), { id, title }]
@@ -275,6 +268,7 @@ export default function Index() {
     imagesRemaining: packageData.data?.data?.images.length - 6,
     desc: packageData.data?.data?.description,
     startingPrice: packageData.data?.data?.price,
+    terms: packageData.data?.data?.terms,
     // skip dates
   };
 
