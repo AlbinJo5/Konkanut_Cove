@@ -286,7 +286,32 @@ function Index() {
 
                 }
             </div>
+            <div style={{
+                marginTop: 20,
+                // scrllable div
+                maxHeight: 100,
+                overflowY: 'scroll',
 
+                border: '1px solid #ccc',
+                borderRadius: 5,
+                padding: 10,
+                marginBottom: 20
+
+
+            }} >
+                <Text h4>Terms and Conditions</Text>
+                {
+                    //  terms and conditions in a scrollable div
+                    pacakage.data?.data?.terms?.split('*').map((item, index) => {
+                        return (
+                            <Text key={index} p>
+                                {item}
+                            </Text>
+                        )
+                    }
+                    )
+                }
+            </div>
 
             {/* Days */}
             <div style={{

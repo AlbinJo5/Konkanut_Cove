@@ -68,6 +68,7 @@ export default function HotelsAdd() {
         const laundary = e.target[12].checked;
         const map = e.target[13].value;
         const cancelTime = e.target[14].value;
+        const terms = e.target[15].value;
 
         const resp = uploadImages(images, "Hotels");
         resp.then(res => {
@@ -88,6 +89,7 @@ export default function HotelsAdd() {
                     map: map,
                     ac: ac,
                     cancelTime: cancelTime,
+                    terms: terms
                 }
                 handleData(data)
             }
@@ -130,6 +132,7 @@ export default function HotelsAdd() {
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
                                 <Input
                                     bordered
+                                    required
                                     fullWidth={true}
                                     placeholder="Name"
                                     color="success" />
@@ -137,13 +140,14 @@ export default function HotelsAdd() {
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
                                 <Input
                                     bordered
+                                    required
                                     fullWidth={true}
                                     placeholder="Address"
                                     color="success" />
                             </Grid>
 
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <select name="Place" style={{
+                                <select name="Place" required style={{
                                     width: "100%",
                                     height: "40px",
                                     borderRadius: "5px",
@@ -161,7 +165,7 @@ export default function HotelsAdd() {
                                 </select>
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <select name="Place" style={{
+                                <select name="Place" required style={{
                                     width: "100%",
                                     height: "40px",
                                     borderRadius: "5px",
@@ -178,6 +182,7 @@ export default function HotelsAdd() {
                                 <Textarea
                                     bordered
                                     fullWidth={true}
+                                    required
                                     placeholder="Description"
                                     color="success" />
                             </Grid>
@@ -185,7 +190,7 @@ export default function HotelsAdd() {
                                 <Checkbox defaultSelected>AC</Checkbox>
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <input type="file" multiple />
+                                <input required type="file" multiple />
                             </Grid>
 
                             <Grid css={{
@@ -207,6 +212,7 @@ export default function HotelsAdd() {
                                     bordered
                                     fullWidth={true}
                                     placeholder="Map Link"
+                                    required
                                     color="success" />
                             </Grid>
 
@@ -219,9 +225,20 @@ export default function HotelsAdd() {
                                 </Text>
                                 <Input
                                     bordered
+                                    required
                                     placeholder="In Hours"
                                     fullWidth={true}
                                     color="success" />
+                            </Grid>
+
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Textarea
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Terms and Conditions"
+                                    color="error"
+                                    required
+                                />
                             </Grid>
 
                         </Grid.Container>

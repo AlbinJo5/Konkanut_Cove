@@ -61,6 +61,7 @@ export default function PackageAdd() {
         const nights = e.target[3].value;
         const place = e.target[4].value;
         const description = e.target[5].value;
+        const terms = e.target[7].value;
         const resp = uploadImages(e.target[6].files, "packages");
         resp.then((res) => {
             const data = {
@@ -70,6 +71,7 @@ export default function PackageAdd() {
                 nights: nights,
                 description: description,
                 place: place,
+                terms: terms,
                 images: res.data,
             }
             handleAdd(data);
@@ -115,7 +117,7 @@ export default function PackageAdd() {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Title"
-
+                                    required
                                     color="error" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -123,6 +125,7 @@ export default function PackageAdd() {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Price"
+                                    required
                                     type="number"
                                     color="error" />
                             </Grid>
@@ -132,6 +135,7 @@ export default function PackageAdd() {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Days"
+                                    required
                                     type="number"
                                     color="error" />
                             </Grid>
@@ -140,11 +144,12 @@ export default function PackageAdd() {
                                     bordered
                                     fullWidth={true}
                                     labelPlaceholder="Nights"
+                                    required
                                     type="number"
                                     color="error" />
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
-                                <select name="place" id="place" style={{
+                                <select name="place" id="place" required style={{
                                     width: "100%",
                                     height: "max-content",
                                     border: "3.5px solid #eaeaea",
@@ -187,10 +192,20 @@ export default function PackageAdd() {
                                     fullWidth={true}
                                     labelPlaceholder="Description"
                                     color="error"
+                                    required
                                 />
                             </Grid>
                             <Grid>
-                                <input type="file" multiple />
+                                <input required type="file" multiple />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Textarea
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Terms and Conditions"
+                                    color="error"
+                                    required
+                                />
                             </Grid>
                         </Grid.Container>
                     </Modal.Body>

@@ -70,6 +70,7 @@ export default function HotelsEdit(props) {
         const laundary = e.target[12].checked;
         const map = e.target[13].value;
         const cancelTime = e.target[14].value;
+        const terms = e.target[15].value;
         if (images.length === 0) {
             handleData({
                 title: title,
@@ -87,6 +88,7 @@ export default function HotelsEdit(props) {
                 map: map,
                 ac: ac,
                 cancelTime: cancelTime,
+                terms: terms
             })
         }
         else {
@@ -110,6 +112,7 @@ export default function HotelsEdit(props) {
                         map: map,
                         ac: ac,
                         cancelTime: cancelTime,
+                        terms: terms
                     }
                     handleData(data)
                 }
@@ -217,7 +220,7 @@ export default function HotelsEdit(props) {
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
                                 <Checkbox defaultSelected={
-                                    props.data?.ac??false
+                                    props.data?.ac ?? false
                                 }>AC</Checkbox>
                             </Grid>
                             <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
@@ -272,6 +275,16 @@ export default function HotelsEdit(props) {
                                     placeholder="In Hours"
                                     initialValue={props.data.cancelTime}
                                     color="success" />
+                            </Grid>
+
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Textarea
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Terms and Conditions"
+                                    color="error"
+                                    initialValue={props.data.terms}
+                                />
                             </Grid>
 
                         </Grid.Container>

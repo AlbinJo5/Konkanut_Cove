@@ -59,6 +59,7 @@ export default function PackageEdit(props) {
         const place = e.target[4].value;
         const description = e.target[5].value;
         const images = e.target[6].files;
+        const terms = e.target[7].value;
 
         if (images.length === 0) {
             handleData({
@@ -68,6 +69,7 @@ export default function PackageEdit(props) {
                 nights: nights,
                 description: description,
                 place: place,
+                terms: terms,
                 images: props.data.images,
             });
         }
@@ -83,6 +85,7 @@ export default function PackageEdit(props) {
                     nights: nights,
                     description: description,
                     place: place,
+                    terms: terms,
                     images: res.data,
                 }
                 handleData(data);
@@ -207,6 +210,15 @@ export default function PackageEdit(props) {
                             </Grid>
                             <Grid>
                                 <input type="file" multiple />
+                            </Grid>
+                            <Grid xs={12} lg={12} md={12} sm={12} xl={12}>
+                                <Textarea
+                                    bordered
+                                    fullWidth={true}
+                                    labelPlaceholder="Terms and Conditions"
+                                    color="error"
+                                    initialValue={props.data.terms}
+                                />
                             </Grid>
                         </Grid.Container>
                     </Modal.Body>
