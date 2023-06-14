@@ -272,7 +272,7 @@ export default function Index() {
     // skip dates
   };
 
-  const travelSteps = packageData.data?.data?.Days.map((d, i) => {
+  const travelSteps = packageData.data?.data?.Days?.map((d, i) => {
     return {
       title: `Day ${i + 1} : ${d.title}`,
       title2: d.subTitle,
@@ -286,9 +286,11 @@ export default function Index() {
 
   const activities = activitiesData.data?.data
     ?.filter((a) =>
-      packageData.data?.data?.Activities.map((a) => a.activityId).includes(a.id)
+      packageData.data?.data?.Activities?.map((a) => a.activityId).includes(
+        a.id
+      )
     )
-    .map((a) => {
+    ?.map((a) => {
       return {
         title: a.title,
         image: a.images[0],
@@ -298,11 +300,11 @@ export default function Index() {
 
   const transport = transportationsData.data?.data
     ?.filter((t) =>
-      packageData.data?.data?.Transportations.map(
+      packageData.data?.data?.Transportations?.map(
         (t) => t.transportationId
       ).includes(t.id)
     )
-    .map((t) => {
+    ?.map((t) => {
       return {
         carType: t.title,
         image: t.images[0],
@@ -314,11 +316,11 @@ export default function Index() {
 
   const accomodation = accomodationsData.data?.data
     ?.filter((a) =>
-      packageData.data?.data?.Accomadations.map(
+      packageData.data?.data?.Accomadations?.map(
         (a) => a.accomadationId
       ).includes(a.id)
     )
-    .map((a) => {
+    ?.map((a) => {
       return {
         id: a.id,
         title: a.title,
@@ -330,10 +332,11 @@ export default function Index() {
 
   useEffect(() => {
     if (packageData.data?.data) {
+      console.log(packageData.data?.data);
       setSelected((prev) => ({
         ...prev,
         // only slelect first 2activity and 1accomodation and 1transportation
-        activities: packageData.data?.data?.Activities.map((a) => {
+        activities: packageData.data?.data?.Activities?.map((a) => {
           return {
             id: a.activityId,
             title: activitiesData.data?.data?.find((d) => d.id === a.activityId)
