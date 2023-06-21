@@ -48,9 +48,9 @@ export default function Page5Panel3({
           height={iheight + ""}
           className="lg:hidden"
         />
-        <div className={"text-3xl font-light text-black mb-5 " + textAlign}>
+        {/* <div className={"text-3xl font-light text-black mb-5 " + textAlign}>
           {title}
-        </div>
+        </div> */}
         {paragraphs.map((para, ind) => (
           <p className={"text-black mb-5 " + textAlign} key={ind}>
             {para}
