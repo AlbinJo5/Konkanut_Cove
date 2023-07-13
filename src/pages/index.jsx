@@ -14,39 +14,42 @@ import Image from "next/image";
 const about_sindhuburg = [
   {
     image:
-      "/assets/images/homecarousel/about_sindhuburg/about_sindhuburg_1.png",
+      "/assets/images/Home/A (1).png",
   },
   {
     image:
-      "/assets/images/homecarousel/about_sindhuburg/about_sindhuburg_1.png",
+      "/assets/images/Home/A (2).png",
   },
   {
     image:
-      "/assets/images/homecarousel/about_sindhuburg/about_sindhuburg_1.png",
+      "/assets/images/Home/A (3).png",
   },
 ];
 
 const why_sindhuburg = [
   {
-    image: "/assets/images/homecarousel/why_sindhuburg/why_sindhuburg_1.png",
+    image: "/assets/images/Home/B (1).png",
   },
   {
-    image: "/assets/images/homecarousel/why_sindhuburg/why_sindhuburg_1.png",
+    image: "/assets/images/Home/B (2).png",
   },
   {
-    image: "/assets/images/homecarousel/why_sindhuburg/why_sindhuburg_1.png",
+    image: "/assets/images/Home/B (3).png",
   },
 ];
 
 const accommodations = [
   {
-    image: "/assets/images/homecarousel/accommodations/accommodations_1.png",
+    image: "/assets/images/Home/C (1).png",
   },
   {
-    image: "/assets/images/homecarousel/accommodations/accommodations_1.png",
+    image: "/assets/images/Home/C (2).png",
   },
   {
-    image: "/assets/images/homecarousel/accommodations/accommodations_1.png",
+    image: "/assets/images/Home/C (3).png",
+  },
+  {
+    image: "/assets/images/Home/C (4).png",
   },
 ];
 
@@ -64,13 +67,16 @@ const connectivity = [
 
 const packages = [
   {
-    image: "/assets/images/homecarousel/packages/packages_1.png",
+    image: "/assets/images/Home/D (1).png",
   },
   {
-    image: "/assets/images/homecarousel/packages/packages_1.png",
+    image: "/assets/images/Home/D (2).png",
   },
   {
-    image: "/assets/images/homecarousel/packages/packages_1.png",
+    image: "/assets/images/Home/D (3).png",
+  },
+  {
+    image: "/assets/images/Home/D (4).png",
   },
 ];
 
@@ -111,10 +117,9 @@ export default function Index() {
   const props = {
     mainTitle:
       "Spend Quality Holidays <span key={2} style='color:#22543d;'> With Us.</span>",
-    mainText:
-      "We are Konkanut Cove and we promote Sindhudurg as an amazing holiday destination. Sindhudurg is famous for its serene and beautiful beaches, temples, historical forts, and its delicious cuisine. ",
     mainText2:
-      " As Sindhudurg is one of the upcoming travel destinations of Maharashtra. And, the Konkanut Cove team will do their best to make your next Sindhudurg trip one of the best holidays you have ever had.",
+      "A new holiday destination is for you to spend an unforgettable vacation with family and friends. Just 1 to 1:30 hours from Goa, Sindhudurg district in Maharashtra is home to world famous beaches like Devbagh, Tarkarli where tourists come from Goa especially for scuba diving. The 121km costalline has many unexplored beaches, as well as many forts including one One can see the sea fort built in the sea which is still impregnable and stands as a testimony of history.",
+    mainText: "",
     widthTitle: "600px",
     widthText: "800px",
     sections: [
@@ -123,35 +128,35 @@ export default function Index() {
           heading: "About Sindhudurg ",
           maxWidth: "350px",
           paragraphs: [
-            "Sindhudurg is the First Tourism District declared in Maharashtra in the year 1997. Sindhudurg has a 121-kilometer-long coastline.",
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is ",
+            "Sindhudurg district in Kokan has been blessed by nature. Sindhudurg is a paradise for tourists from all over the world. Sindhudurg district, full of diversity like Nature, Temples, Culture, Tradition, and Food Culture attracts everyone."
           ],
           button: "View Package",
-          href: "/",
+          href: "/packages",
           alignLeft: false,
         },
         carousel: {
-          type: 3,
+          type: 1,
           images: about_sindhuburg,
         },
+        imageTitle: "Unexplored Beaches",
       },
       {
         desc: {
           heading: "Why Sindhuburg",
           maxWidth: "350px",
           paragraphs: [
-            "It is famous for Scuba Diving, serene beaches, beautiful temples, historical forts and its delicious cuisine. Sindhudurg is the only official Scuba Diving destination in Maharashtra.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,.Lorem Ipsum is",
+            "Sindhudurg has many forts, some of them are built in water, some of them on land, and some of there on mountains. These forts testify to the bravery, Chivalry, and rich history of the Marathas."
           ],
           button: "Discover",
-          href: "/",
+          href: "/packages",
 
-          alignLeft: true,
+          alignLeft: false,
         },
         carousel: {
           type: 1,
           images: why_sindhuburg,
         },
+        imageTitle: "Historical Forts",
       },
 
       {
@@ -159,17 +164,17 @@ export default function Index() {
           heading: "Places ",
           maxWidth: "350px",
           paragraphs: [
-            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+            "Sindhudurg is blessed with numerous beautiful beaches, such as Tarkarli Beach, Malvan Beach, and Devbagh Beach. These beaches offer picturesque views, golden sands, and clear turquoise waters, making them perfect for water sports like snorkeling, scuba diving, and jet skiing. There are some uncrowded beaches where you can sunbathe in peace, enjoy nature while listening to the gentle sound of seawater."
           ],
           button: "View Place",
-          href: "/",
+          href: "/place",
           alignLeft: false,
         },
         carousel: {
           type: 2,
           images: places,
         },
+        imageTitle: "Mangrove Safaris",
       },
 
       {
@@ -177,11 +182,10 @@ export default function Index() {
           heading: "Accommodations",
           maxWidth: "350px",
           paragraphs: [
-            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+            "Sindhudurg is a paradise for adventure enthusiasts. With its abundant marine life, the region offers excellent opportunities for activities like snorkeling and scuba diving. The underwater world of Sindhudurg is known for its vibrant coral reefs, exotic fish species, and shipwrecks, providing a memorable experience for divers of all levels."
           ],
           button: "View Hotels",
-          href: "/",
+          href: "/hotels",
           alignLeft: false,
         },
         carousel: {
@@ -195,12 +199,19 @@ export default function Index() {
           heading: "Connectivity",
           maxWidth: "350px",
           paragraphs: [
-            "•DIRECT FLIGHTS : MUMBAI - CHIPI AIRPORT (ALLIANCE AIR) MUMBAI - MOPA AIRPORT (INDIGO, GO FIRST, AKASA AIR)",
-            "•TRAINS FROM MUMBAI VISTADOME TRAINS EXPRESS TRAINS (TEJAS EXP, JANSHATABDI EXP, KOKANKANYA EXP)",
-            "•DRIVE: APPROX 10-12 HOURS FROM MUMBAI CHIPI AIRPORT TO MALVAN – 30 MINS MOPA AIRPORT TO MALVAN – 1HR 30MINS",
+            "# DIRECT FLIGHTS",
+            " MUMBAI - CHIPI AIRPORT (ALLIANCE AIR)",
+            " MUMBAI - MOPA AIRPORT (INDIGO, GO FIRST, AKASA AIR)",
+            "# TRAINS FROM MUMBAI",
+            " VISTADOME TRAINS ",
+            " EXPRESS TRAINS (TEJAS EXP, JANSHATABDI EXP, KOKANKANYA EXP)",
+            "# DRIVE:",
+            " APPROX 10-12 HOURS FROM MUMBAI",
+            " CHIPI AIRPORT TO MALVAN – 30 MINS",
+            " MOPA AIRPORT TO MALVAN – 1HR 30MINS",
           ],
           button: "View Places",
-          href: "/",
+          href: "/place",
           alignLeft: false,
         },
         carousel: {
@@ -214,11 +225,10 @@ export default function Index() {
           heading: "Packages",
           maxWidth: "350px",
           paragraphs: [
-            "We give you more of what you want and less of what you don’t Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standarddummy text ever since the 1500s.",
-            "Lorem Ipsum has been the industry's standarddummy text ever since the 1500s,.Lorem Ipsum is ",
+            "Sindhudurg boasts a rich cultural heritage and is known for its traditional art forms like Dashavtar, a folk dance-drama. Visitors can witness cultural performances, visit local markets, and interact with the warm and friendly locals, gaining insights into the region's traditions and way of life."
           ],
-          button: "View Hotels",
-          href: "/",
+          button: "View Packages",
+          href: "/packages",
           alignLeft: false,
         },
         carousel: {

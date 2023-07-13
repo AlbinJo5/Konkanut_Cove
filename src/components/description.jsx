@@ -50,7 +50,7 @@ const DescriptionLarge = ({ sections }) => {
           const Carousel =
             ctype === 1 ? Carousel1 : ctype === 2 ? Carousel2 : Carousel3;
 
-          if (i % 2 === 0)
+          if (i % 2 !== 0)
             return (
               <Fade bottom key={i}>
                 <li className="flex items-center min-h-[450px]">
@@ -87,7 +87,7 @@ const DescriptionLarge = ({ sections }) => {
           const Carousel =
             ctype === 1 ? Carousel1 : ctype === 2 ? Carousel2 : Carousel3;
 
-          if (i % 2 !== 0)
+          if (i % 2 === 0)
             return (
               <Fade bottom>
                 <li className="flex items-center min-h-[450px]">
@@ -98,7 +98,7 @@ const DescriptionLarge = ({ sections }) => {
                       href: desc.href,
                     }}
                     classNames={["ml-5"]}
-                    alignLeft={false}
+                    alignLeft={desc.alignLeft}
                   />
                 </li>
               </Fade>

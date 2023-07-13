@@ -25,12 +25,16 @@ export default function DescriptionComp({
           "textxl max-lg:text-2xl sm:text-xl font-bold text-slate-50 mb-5 " +
           textAlign
         }
+
+        style={{
+          fontSize: "clamp(1.5rem, 2vw, 2rem)",
+        }}
       >
         {heading}
       </div>
       {paragraphs.map((para, ind) => (
         <p
-          className={"text-slate-50 max-lg:text-xs mb-5 " + textAlign}
+          className={"text-slate-50 max-lg:text-xs  " + textAlign}
           key={ind}
         >
           {para}
