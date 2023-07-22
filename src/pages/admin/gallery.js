@@ -30,8 +30,22 @@ function Index() {
                     gallery.isLoading && <InitialLoading />
                 }
                 <div className={styles.head} >
-                    <h3>Gallery</h3>
-                    <GalleryAdd />
+                    <div>
+                        <h3>Gallery</h3>
+                        <p>( Add Upto 30 Images )</p>
+                    </div>
+                    {
+                        // only show add button if total images is less than 30
+                        gallery.data?.data?.length < 30 ? (
+                            <div>
+                                <GalleryAdd />
+                            </div>
+                        ) : (
+                            <div>
+                                <p className={styles.error} >You can&apos;t add more than 30 images</p>
+                            </div>
+                        )
+                    }
                 </div>
 
 
@@ -96,6 +110,14 @@ function Index() {
                         onPageChange={(page) => console.log({ page })}
                     />
                 </Table>
+
+                {
+                    gallery.data?.data?.length > 0 && (
+                        <div>
+                            <h6>Total Images: {gallery.data?.data?.length}</h6>
+                        </div>
+                    )
+                }
             </div>
         </Layout>
     )

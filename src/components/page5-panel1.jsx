@@ -46,6 +46,14 @@ export default function Page5Panel1({ imageData, count }) {
           </li>
         ))}
       </ul>
+      <div className="my-4 text-md font-bold">Shashikant Killedar&apos;s words:-</div>
+      <div className="text-sm max-w-[840px]">
+        Killedar Experience in their words: We like Sidhudurg most. Our Kokan is truly rich. The hotel and food were very nice The trip was arranged by Konkakut Cove, and thanks to Konkanut Cove for making my tour unforgettable. I would suggest that if you want to go to Sindhudurg, go with Konkanut Cove
+      </div>
+      <div className="my-4 text-md font-bold">Minago Travels Words:-</div>
+      <div className="text-sm max-w-[840px]">
+        We brought 10 Israelian tourists to Sindhudurg, and they enjoyed it very well. Their mind was touched by the loving sights, culture, people, and nature. Thank you Konkanut Cove Holidays.
+      </div>
     </div>
   );
 }

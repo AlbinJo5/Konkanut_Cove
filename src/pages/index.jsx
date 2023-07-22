@@ -55,13 +55,13 @@ const accommodations = [
 
 const connectivity = [
   {
-    image: "/assets/images/homecarousel/connectivity/connectivity_1.png",
+    image: "/assets/images/Home/E (1).png",
   },
   {
-    image: "/assets/images/homecarousel/connectivity/connectivity_1.png",
+    image: "/assets/images/Home/E (2).png",
   },
   {
-    image: "/assets/images/homecarousel/connectivity/connectivity_1.png",
+    image: "/assets/images/Home/E (3).png",
   },
 ];
 
@@ -132,7 +132,7 @@ export default function Index() {
           ],
           button: "View Package",
           href: "/packages",
-          alignLeft: false,
+          alignLeft: true,
         },
         carousel: {
           type: 1,
@@ -168,7 +168,7 @@ export default function Index() {
           ],
           button: "View Place",
           href: "/place",
-          alignLeft: false,
+          alignLeft: true,
         },
         carousel: {
           type: 2,
@@ -212,7 +212,7 @@ export default function Index() {
           ],
           button: "View Places",
           href: "/place",
-          alignLeft: false,
+          alignLeft: true,
         },
         carousel: {
           type: 1,

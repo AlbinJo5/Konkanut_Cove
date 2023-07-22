@@ -45,7 +45,7 @@ export default function Experiences() {
       <div className="w-[100vw]  flex flex-col justify-center items-center align-center">
         <Page5Panel1 imageData={imageData} count={3} />
         <Page5Panel2
-          title={"title"}
+          title={"Why Konkanut Cove?"}
           featureData={featureData}
           videoLink={"https://www.youtube.com/embed/EngW7tLk6R8"}
         />

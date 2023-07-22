@@ -25,7 +25,7 @@ const DescriptionSmall = ({ sections }) => {
                   {...desc}
                   button={{ name: "View Packages", href: desc.href }}
                   classNames={["ml-5"]}
-                  alignLeft={true}
+                  alignLeft={desc.alignLeft}
                 />
               </div>
               <div className="flex items-center min-h-[450px]  w-full">
@@ -61,7 +61,7 @@ const DescriptionLarge = ({ sections }) => {
                       href: desc.href,
                     }}
                     classNames={["ml-5"]}
-                    alignLeft={true}
+                    alignLeft={desc.alignLeft}
                   />
                 </li>
               </Fade>
